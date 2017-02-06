@@ -1,7 +1,7 @@
 # DIARE
 
 Heroku URL: https://diare.herokuapp.com/
-
+BugTrackingURL: https://github.com/SirAlternate/DIARE/issues
 
 Team members:
 Erik Saulnier,
