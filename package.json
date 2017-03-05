@@ -4,12 +4,15 @@
   "description": "Digital Interpretation of Analog Rapid-logging Entries",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/SirAlternate/DIARE.git"
   },
   "author": "Erik Saulnier, Natasha Ragubir, Erica Braunchsweig, Solomon Mori, Graigor Pierre-Noel",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^9.0.0"
+  }
 }
