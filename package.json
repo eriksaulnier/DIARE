@@ -1,9 +1,10 @@
 {
   "name": "diare",
   "version": "1.0.0",
-  "description": "Digital Interpretation of Analog Rapid-logging Entries",
-  "main": "index.js",
+  "description": "Digital Interpretation of Analog Rapid-logging Entries server.",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "standard"
   },
   "repository": {
@@ -12,6 +13,10 @@
   },
   "author": "Erik Saulnier, Natasha Ragubir, Erica Braunchsweig, Solomon Mori, Graigor Pierre-Noel",
   "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.1",
+    "mongodb": "^2.2.24"
+  },
   "devDependencies": {
     "standard": "^9.0.0"
   }
