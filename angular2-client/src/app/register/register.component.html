@@ -5,7 +5,7 @@
          <h2 mdl-card-title-text>Register</h2>
        </mdl-card-title>
        <mdl-card-supporting-text>
-         <form [formGroup]="registrationForm"  *ngIf="active"  (ngSubmit)="onSubmit()">
+         <form [formGroup]="registrationForm"  (ngSubmit)="onSubmit()">
            <div class="form-group">
              <mdl-textfield
                label="Email Address *"

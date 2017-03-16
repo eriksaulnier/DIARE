@@ -16,7 +16,6 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 export class RegisterComponent implements OnInit {
   user = new User;
   public registrationForm: FormGroup;
-  submitted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,8 +37,6 @@ export class RegisterComponent implements OnInit {
             console.log(error._body);
         });
   }
-
-  active = true;
 
   ngOnInit(): void {
     this.buildForm();
