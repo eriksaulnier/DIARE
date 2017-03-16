@@ -1,0 +1,5 @@
+{
+    "connectionString": "mongodb://admin1:password123@ds129610.mlab.com:29610/diare_mongo",
+    "apiUrl": "http://localhost:4000",
+    "secret": "Professor Plotka is the best, and Group 5 should get an A on their project"
+}
