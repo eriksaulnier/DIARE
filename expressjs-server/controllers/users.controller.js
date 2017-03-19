@@ -1,7 +1,7 @@
 var config = require('../config.json');
 var express = require('express');
 var router = express.Router();
-var usersService = require('services/users.service');
+var usersService = require('../services/users.service');
 
 // routes
 router.post('/authenticate', authenticate);
