@@ -6,13 +6,14 @@ var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
 
-var port = 4000;
+var port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Use JWT authentication to secure the API
+// The paths in the following array do not require the user to have a token
 app.use(expressJwt({ secret: config.secret }).unless({ path:
   [
     '/users/authenticate',
@@ -30,14 +31,9 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
 // routes
 app.use('/', require('./controllers/angular.controller'));
 app.use('/users', require('./controllers/users.controller'));
-/*
-//Serve index.html file
-app.get('/', function (req, res, next) {
-  res.sendFile(__dirname + '/dist/index.html');
-});
-*/
+
 //Serve static files from dist directory
-app.use(express.static('dist'));
+app.use(express.static('expressjs-server/dist'));
 
 // start server
 var server = app.listen(port, function () {
