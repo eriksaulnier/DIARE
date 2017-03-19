@@ -1,3 +1,4 @@
 export class AppConfig {
-    public readonly apiURL = 'http://localhost:4000';
+    public readonly apiURL = 'https://diare.herokuapp.com';
+    public readonly devURL = 'http://localhost:4000';
 };
