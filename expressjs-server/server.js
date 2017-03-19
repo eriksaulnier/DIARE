@@ -4,7 +4,7 @@ var app = express();
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
-var config = require('config.json');
+var config = require('./config.json');
 
 var port = process.env.PORT || 4000;
 
