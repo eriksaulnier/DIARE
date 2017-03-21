@@ -40,6 +40,10 @@
            <button mdl-button mdl-button-type="raised" mdl-colored="accent" type="submit" [disabled]="!loginForm.valid" mdl-ripple>Submit</button>
          </form>
        </mdl-card-supporting-text>
+       
+       <mdl-card-actions mdl-card-border>
+          <a routerLink="/register" routerLinkActive="active">New user? Register here.</a>
+       </mdl-card-actions>
      </mdl-card>
   </div>
 </div>
