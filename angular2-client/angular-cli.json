@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.24",
+    "version": "1.0.0-rc.4",
     "name": "angular2-client"
   },
   "apps": [
@@ -18,9 +18,17 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css",
+        "../node_modules/bootstrap-material-design/dist/css/ripples.min.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/bootstrap-material-design/dist/js/material.min.js",
+        "../node_modules/bootstrap-material-design/dist/js/ripples.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
