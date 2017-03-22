@@ -11,5 +11,5 @@ router.get('/register', sendIndex);
 module.exports = router;
 
 function sendIndex(req, res, next) {
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../../angular2-client/dist/index.html'));
 }

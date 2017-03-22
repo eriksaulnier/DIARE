@@ -25,7 +25,9 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     /\/vendor.*/,
     /\/styles.*/,
     /\/inline.*/,
-    /\/main.*/
+    /\/main.*/,
+    /\/scripts.*/,
+    /\/glyphicons*/,
   ] }));
 
 // routes
@@ -33,7 +35,7 @@ app.use('/', require('./controllers/angular.controller'));
 app.use('/users', require('./controllers/users.controller'));
 
 //Serve static files from dist directory
-app.use(express.static('expressjs-server/dist'));
+app.use(express.static('angular2-client/dist'));
 
 // start server
 var server = app.listen(port, function () {
