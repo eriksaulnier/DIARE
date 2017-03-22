@@ -1,4 +1,5 @@
 
+<!--
 <div mdl-shadow="2">
    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
 
@@ -6,8 +7,8 @@
          <mdl-layout-header-row>
             <mdl-layout-title>{{ title }}</mdl-layout-title>
             <mdl-layout-spacer></mdl-layout-spacer>
-            <!-- Navigation Links.  Hidden for small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+            <nav class="mdl-navigation mdl-layoutlarge-screen-only">
                <a class="mdl-navigation__link" >Link</a>
                <a class="mdl-navigation__link" >Link</a>
                <a class="mdl-navigation__link" >Link</a>
@@ -28,4 +29,38 @@
           <router-outlet></router-outlet>
       </mdl-layout-content>
    </mdl-layout>
+</div>
+-->
+<div class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <!-- Mobile screen navigation button -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="javascript:void(0)" class="navbar-brand">{{ title }}</a>
+    </div>
+
+    <!-- Items in Navbar -->
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="search-li">
+          <form class="navbar-form">
+            <div class="form-group form-group-lg">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="material-icons white-icon">search</i></span>
+                <input type="text" class="form-control col-sm-8" id="search-bar" placeholder="Search">
+              </div>
+            </div>
+          </form>
+        </li>
+        <li class="active"><a href="javascript:void(0)">Active Link</a></li>
+        <li><a href="javascript:void(0)">Link</a></li>
+        <li><a href="javascript:void(0)">Link</a></li>
+      </ul>
+    </div>
+  </div>
 </div>

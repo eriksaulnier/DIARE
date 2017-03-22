@@ -1,3 +1,11 @@
 .gridSpecs {
   width: 100%;
 }
+
+.white-icon {
+  color: white;
+}
+
+#search-li {
+  margin-right: 30px;
+}
