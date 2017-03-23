@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   buildForm(): void {
     this.loginForm = this.fb.group({
       'email': ['', [emailValidator, Validators.required]],
-      'password': ['', [Validators.minLength(8), Validators.required]]
+      'password': ['', [Validators.required]]
     });
 
     this.loginForm.valueChanges
@@ -83,7 +83,6 @@ export class LoginComponent implements OnInit {
 
     },
     'password': {
-      'minlength':          'Password must be at least 8 characters long.',
       'required':           'Password is required.'
     }
   };

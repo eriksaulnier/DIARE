@@ -27,7 +27,9 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     /\/inline.*/,
     /\/main.*/,
     /\/scripts.*/,
-    /\/glyphicons*/,
+    /\/material.*/,
+    /\/ripples.*/,
+
   ] }));
 
 // routes

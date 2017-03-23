@@ -1,21 +1,5 @@
-.formInputError {
-  color: #C70039;
-  font-size: .9em;
-  margin-top: -12px;
-  padding-top: -12px;
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-.regCard {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.regDiv {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
+.center-register {
+  padding-top: 30px;
+  float: none;
+  margin: 0 auto;
 }

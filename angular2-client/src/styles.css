@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.formInputError {
+  color: #C70039;
+  font-size: .9em;
+  margin-top: 0px;
+  padding-top: 0px;
+}
