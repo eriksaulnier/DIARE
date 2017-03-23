@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^2.4.10",
     "@angular/platform-browser-dynamic": "^2.4.10",
     "@angular/router": "^3.4.10",
-    "angular2-mdl": "^2.13.2",
     "bootstrap": "^3.3.7",
     "bootstrap-material-design": "^0.5.10",
     "core-js": "^2.4.1",
