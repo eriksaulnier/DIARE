@@ -1,49 +1,50 @@
-<div class="mdl-grid">
-  <div class="mdl-cell--4-col loginDiv">
-    <mdl-card mdl-shadow="2" class="loginCard">
-       <mdl-card-title>
-         <h2 mdl-card-title-text>Login</h2>
-       </mdl-card-title>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 center-login">
 
-       <mdl-card-supporting-text>
-         <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()">
-           <div class="form-group">
-             <mdl-textfield
-               label="Email Address *"
-               name="email"
-               type="text"
-               class="form-control"
-               formControlName="email"
-               floating-label
-             ></mdl-textfield>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Login</h3>
+        </div>
 
-             <div *ngIf="formErrors.email" class="formInputError">
-               {{ formErrors.email }}
-             </div>
-           </div>
+        <div class="panel-body">
+          <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()">
 
-           <div class="form-group">
-             <mdl-textfield
-               label="Password *"
-               name="password"
-               type="password"
-               class="form-control"
-               formControlName="password"
-               floating-label
-             ></mdl-textfield>
+            <!-- Email Input **************************************************************************************************-->
+            <div class="form-group label-floating">
+              <label for="email" class="control-label">Email Address *</label>
 
-             <div *ngIf="formErrors.password" class="formInputError">
-               {{ formErrors.password }}
-             </div>
-           </div>
+              <input name="email" type="text" class="form-control" formControlName="email" id="email">
 
-           <button mdl-button mdl-button-type="raised" mdl-colored="accent" type="submit" [disabled]="!loginForm.valid" mdl-ripple>Submit</button>
-         </form>
-       </mdl-card-supporting-text>
-       
-       <mdl-card-actions mdl-card-border>
-          <a routerLink="/register" routerLinkActive="active">New user? Register here.</a>
-       </mdl-card-actions>
-     </mdl-card>
+              <div *ngIf="formErrors.email" class="formInputError">
+                {{ formErrors.email }}
+              </div>
+            </div>
+            <!-- Password Input ***********************************************************************************************-->
+            <div class="form-group label-floating">
+              <label for="password" class="control-label">Password *</label>
+
+              <input name="password" type="password" class="form-control" formControlName="password" id="password">
+
+              <div *ngIf="formErrors.password" class="formInputError">
+                {{ formErrors.password }}
+              </div>
+            </div>
+            <!-- Submit Button ************************************************************************************************-->
+            <div class="text-center">
+              <button class="btn btn-raised btn-primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- New User Footer **********************************************************************************************-->
+        <div class="panel-footer">
+          <div class="text-center">
+            <a routerLink="/register" routerLinkActive="active" class="btn btn-primary">New user? Register here.</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

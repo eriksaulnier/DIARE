@@ -1,21 +1,16 @@
 .formInputError {
   color: #C70039;
   font-size: .9em;
-  margin-top: -12px;
-  padding-top: -12px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.center-login {
+  padding-top: 30px;
+  float: none;
+  margin: 0 auto;
 }
 
 .form-group {
   margin-bottom: 10px;
-}
-
-.loginCard {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.loginDiv {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
 }
