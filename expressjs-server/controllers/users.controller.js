@@ -6,7 +6,7 @@ var usersService = require('../services/users.service');
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
-/*
+/* whats this?
 router.get('/', getAll);
 router.get('/current', getCurrent);
 router.put('/:_id', update);
