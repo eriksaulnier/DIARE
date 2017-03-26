@@ -7,13 +7,13 @@ import { AppComponent }         from './app.component';
 import { AppRoutingModule }     from './app-routing.module';
 import { AppConfig }            from './app.config';
 
-import { HomepageComponent } from './homepage/homepage.component';
-import { LoginComponent } from './homepage/login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UserJournalComponent } from './user-journal-list/user-journal/user-journal.component';
-import { UserJournalListComponent } from './user-journal-list/user-journal-list.component';
-import { AddJournalComponent } from './user-journal-list/add-journal/add-journal.component';
-import { JournalsComponent }    from './journals/journals.component'
+import { HomepageComponent }      from './homepage/homepage.component';
+import { LoginComponent }         from './homepage/login/login.component';
+import { RegisterComponent }      from './register/register.component';
+
+import { JournalsPageComponent }  from './journals-page/journals-page.component';
+import { AddJournalComponent }    from './journals-page/add-journal/add-journal.component';
+import { UserJournalComponent }   from './journals-page/user-journal/user-journal.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,9 @@ import { JournalsComponent }    from './journals/journals.component'
     HomepageComponent,
     LoginComponent,
     RegisterComponent,
-    UserJournalComponent,
-    UserJournalListComponent,
+    JournalsPageComponent,
     AddJournalComponent,
-    JournalsComponent
+    UserJournalComponent
   ],
   imports: [
     BrowserModule,
