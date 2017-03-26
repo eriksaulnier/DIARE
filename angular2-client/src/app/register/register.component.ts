@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User }    from '../_models/user';
 import { UserService } from '../_services/index';
 
@@ -19,19 +20,22 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   onSubmit() {
     this.user.email = this.registrationForm.value.email1;
     this.user.password = this.registrationForm.value.password1;
     this.user.admin = false;
-    this.registrationForm.reset();
 
     this.userService.create(this.user)
     .subscribe(
         data => {
+            this.registrationForm.reset();
             console.log("Registration successful!");
+            this.router.navigate(['/home']);
         },
         error => {
             console.log(error._body);
