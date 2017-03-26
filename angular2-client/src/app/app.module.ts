@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserJournalComponent } from './user-journal-list/user-journal/user-journal.component';
 import { UserJournalListComponent } from './user-journal-list/user-journal-list.component';
 import { AddJournalComponent } from './user-journal-list/add-journal/add-journal.component';
+import { JournalsComponent }    from './journals/journals.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddJournalComponent } from './user-journal-list/add-journal/add-journal
     UserJournalComponent,
     UserJournalListComponent,
     AddJournalComponent
+    JournalsComponent
   ],
   imports: [
     BrowserModule,

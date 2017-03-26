@@ -9,6 +9,7 @@ router.get('/home', sendIndex);
 router.get('/register', sendIndex);
 router.get('/journal', sendIndex);
 //router.get('/')
+router.get('/journals', sendIndex);
 
 module.exports = router;
 
