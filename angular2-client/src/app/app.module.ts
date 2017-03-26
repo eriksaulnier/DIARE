@@ -23,7 +23,7 @@ import { JournalsComponent }    from './journals/journals.component'
     RegisterComponent,
     UserJournalComponent,
     UserJournalListComponent,
-    AddJournalComponent
+    AddJournalComponent,
     JournalsComponent
   ],
   imports: [
