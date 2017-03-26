@@ -20,6 +20,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     '/users/register',
     '/',
     '/home',
+    '/journal',
     '/register',
     '/favicon.ico',
     /\/vendor.*/,
@@ -37,7 +38,8 @@ app.use('/', require('./controllers/angular.controller'));
 app.use('/users', require('./controllers/users.controller'));
 
 //Serve static files from dist directory
-app.use(express.static('angular2-client/dist'));
+
+app.use(express.static('./../angular2-client/dist'));
 
 // start server
 var server = app.listen(port, function () {

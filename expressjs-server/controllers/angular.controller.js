@@ -7,6 +7,8 @@ var router = express.Router();
 router.get('/', sendIndex)
 router.get('/home', sendIndex);
 router.get('/register', sendIndex);
+router.get('/journal', sendIndex);
+//router.get('/')
 
 module.exports = router;
 

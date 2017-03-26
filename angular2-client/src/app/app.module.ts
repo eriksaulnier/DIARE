@@ -10,13 +10,19 @@ import { AppConfig }            from './app.config';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './homepage/login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserJournalComponent } from './user-journal-list/user-journal/user-journal.component';
+import { UserJournalListComponent } from './user-journal-list/user-journal-list.component';
+import { AddJournalComponent } from './user-journal-list/add-journal/add-journal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserJournalComponent,
+    UserJournalListComponent,
+    AddJournalComponent
   ],
   imports: [
     BrowserModule,
