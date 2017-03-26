@@ -1,0 +1,12 @@
+<div *ngIf="userObject">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>User ID:</strong> {{ userObject._id }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ userObject.email }}</li>
+    <li class="list-group-item"><strong>Admin:</strong> {{ userObject.admin }}</li>
+    <li class="list-group-item"><strong>Auth Token:</strong> {{ userObject.token }}</li>
+  </ul>
+</div>
+
+<div *ngIf="userObject == null">
+  User is not logged in.
+</div>

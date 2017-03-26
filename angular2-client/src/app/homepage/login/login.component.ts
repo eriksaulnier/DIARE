@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           console.log("Login successful");
-          console.log(localStorage.getItem('currentUser'));
         },
         error => {
           this.loginForm.reset();
