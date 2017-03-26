@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 // Use JWT authentication to secure the API
 // The paths in the following array do not require the user to have a token
+
 app.use(expressJwt({ secret: config.secret }).unless({ path:
   [
     '/users/authenticate',
@@ -21,6 +22,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     '/',
     '/home',
     '/register',
+    '/journals',
     '/favicon.ico',
     /\/vendor.*/,
     /\/styles.*/,
@@ -37,7 +39,7 @@ app.use('/', require('./controllers/angular.controller'));
 app.use('/users', require('./controllers/users.controller'));
 
 //Serve static files from dist directory
-app.use(express.static('angular2-client/dist'));
+app.use(express.static(__dirname + '/../angular2-client/dist'));
 
 // start server
 var server = app.listen(port, function () {
