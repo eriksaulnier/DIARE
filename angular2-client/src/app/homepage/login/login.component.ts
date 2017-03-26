@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User }    from '../../_models/user';
 import { UserService } from '../../_services/index';
 
@@ -18,16 +19,21 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
+  //------------------------------------------------------------------------------------------------------------------------------
   ngOnInit(): void {
     // reset login status
     this.userService.logout();
 
+    //create login form
     this.buildForm();
   }
-
+  //------------------------------------------------------------------------------------------------------------------------------
+  //Build the login form
   buildForm(): void {
     this.loginForm = this.fb.group({
       'email': ['', [emailValidator, Validators.required]],
@@ -39,7 +45,8 @@ export class LoginComponent implements OnInit {
 
     this.onValueChanged();
   }
-
+  //------------------------------------------------------------------------------------------------------------------------------
+  //Validate form if any form values changed
   onValueChanged(data?: any) {
     if (!this.loginForm) { return; }
     const form = this.loginForm;
@@ -57,19 +64,21 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
+  //------------------------------------------------------------------------------------------------------------------------------
+  //Submit login data to backend, act accordingly for success or failure response
   onSubmit() {
     this.userService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         data => {
           console.log("Login successful");
+           this.router.navigate(['/journals']);
         },
         error => {
           this.loginForm.reset();
           console.log("Login failed:  " + error._body);
         });
   }
-
+  //------------------------------------------------------------------------------------------------------------------------------
   formErrors = {
     'email': '',
     'password': ''
