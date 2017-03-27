@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     .subscribe(
         data => {
             this.registrationForm.reset();
-            console.log("Registration successful!");
+
             this.router.navigate(['/home']);
         },
         error => {
