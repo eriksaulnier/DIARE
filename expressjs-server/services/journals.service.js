@@ -36,12 +36,11 @@ function createJournal (userID, title, content) {
     return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-function deleteJournal (userID, journalID) {
+function deleteJournal (journalID) {
     var deferred = Q.defer();
 
     try {
         db.journals.deleteOne({
-            userID: userID,
             _id: journalID
         });
     } catch (e) {
