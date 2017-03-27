@@ -19,7 +19,7 @@ service.delete = _delete;
 */
 
 module.exports = service;
-
+//-------------------------------------------------------------------------------------------------------------------------------
 function authenticate(email, password) {
   var deferred = Q.defer();
 
@@ -41,7 +41,7 @@ function authenticate(email, password) {
   });
   return deferred.promise;
 }
-
+//--------------------------------------------------------------------------------------------------------------------------------
 function create(userParam) {
   var deferred = Q.defer();
 

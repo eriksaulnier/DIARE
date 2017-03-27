@@ -11,9 +11,10 @@ var service = {};
 
 service.createJournal = createJournal;
 service.deleteJournal = deleteJournal;
+service.getAllJournals = getAllJournals;
 
 module.exports = service;
-
+//--------------------------------------------------------------------------------------------------------------------------------
 function createJournal (userID, title, content) {
     var deferred = Q.defer();
     var createdJournal;
@@ -34,7 +35,7 @@ function createJournal (userID, title, content) {
 
     return deferred.promise;
 }
-
+//--------------------------------------------------------------------------------------------------------------------------------
 function deleteJournal (userID, journalID) {
     var deferred = Q.defer();
 
@@ -50,3 +51,18 @@ function deleteJournal (userID, journalID) {
 
     return deferred.promise;
 }
+//--------------------------------------------------------------------------------------------------------------------------------
+//Get all journals that are tied to a certain userID
+function getAllJournals (userID) {
+  var deferred = Q.defer();
+
+  db.users.find({userID: userID}).toArray(function (err, journals) {
+    if (err) deferred.reject(err.name + ': ' + err.message);
+
+    deferred.resolve(journals);
+});
+
+return deferred.promise;
+
+}
+//--------------------------------------------------------------------------------------------------------------------------------

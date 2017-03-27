@@ -19,6 +19,9 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
   [
     '/users/authenticate',
     '/users/register',
+    '/journals/create',
+    '/journals/delete',
+    '/jounals/getAll',
     '/',
     '/home',
     '/journal',
