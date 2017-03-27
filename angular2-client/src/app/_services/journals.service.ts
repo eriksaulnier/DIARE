@@ -13,8 +13,11 @@ export class JournalsService {
   //will return either an error or the id of the newly created journal in the format {id: journalID}
 
   create(userid: string, title: string) {
-    var result = this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt());
-    return result;
+    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt())
+      .map((response: Response) => {
+        let data = response.json();
+        return data;
+      });
   }
   //------------------------------------------------------------------------------------------------------------------------------
   //Creates request header with JWT token - needed so that you can hit protected api routes

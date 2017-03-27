@@ -19,16 +19,11 @@ function createJournal (userID, title) {
     var deferred = Q.defer();
     var createdJournal;
 
-    try {
-        createdJournal = db.journals.insertOne({
-                userID: userID,
-                title: title
-            }
-        );
-    } catch (e) {
-        deferred.reject("Error: " + e.errmsg);
-    }
-    deferred.resolve(createdJournal);
+    db.journals.insert({ userID: userID, title: title}, function(error, doc) {
+      if (error) deferred.reject(error.name + ': ' + error.message);
+
+      deferred.resolve({id: doc.ops[0]._id});
+    });
 
     return deferred.promise;
 }
@@ -56,9 +51,9 @@ function getAllJournals (userID) {
     if (err) deferred.reject(err.name + ': ' + err.message);
 
     deferred.resolve(journals);
-});
+  });
 
-return deferred.promise;
+  return deferred.promise;
 
 }
 //--------------------------------------------------------------------------------------------------------------------------------

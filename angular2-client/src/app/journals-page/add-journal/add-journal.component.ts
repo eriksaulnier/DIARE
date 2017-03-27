@@ -20,7 +20,7 @@ export class AddJournalComponent {
     this.journalsService.create(userid, newTitle)
       .subscribe(
         data => {
-           console.log(data);
+          console.log(data.id);
         },
         error => {
           console.log("Adding journal failed:  " + error._body);
