@@ -70,11 +70,9 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         data => {
-          console.log("Login successful");
            this.router.navigate(['/journals']);
         },
         error => {
-          this.loginForm.reset();
           console.log("Login failed:  " + error._body);
         });
   }

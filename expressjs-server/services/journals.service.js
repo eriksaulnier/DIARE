@@ -28,9 +28,7 @@ function createJournal (userID, title) {
     } catch (e) {
         deferred.reject("Error: " + e.errmsg);
     }
-    deferred.resolve({
-        id: createdJournal.insertedId
-    });
+    deferred.resolve(createdJournal);
 
     return deferred.promise;
 }

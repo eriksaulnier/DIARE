@@ -1,22 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { JournalsService } from '../../_services/index';
 
 @Component({
   selector: 'add-journal',
   templateUrl: './add-journal.component.html',
-  styleUrls: ['./add-journal.component.css']
+  styleUrls: ['./add-journal.component.css'],
+  providers: [JournalsService]
 })
-export class AddJournalComponent implements OnInit {
+export class AddJournalComponent {
 
-  constructor() { }
+  constructor(
+    private journalsService: JournalsService,
+  ) { }
 
-  add_journal(title: HTMLInputElement): boolean {
-  	console.log('Adding journal title: ${title.value}');
+  addJournal(newTitle: string) {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    console.log('Adding user id: ${currentUser._id}');
-  	return false;
-  }
+    var userid = currentUser._id;
 
-  ngOnInit() {
+    this.journalsService.create(userid, newTitle)
+      .subscribe(
+        data => {
+           console.log(data);
+        },
+        error => {
+          console.log("Adding journal failed:  " + error._body);
+        });
   }
-
 }

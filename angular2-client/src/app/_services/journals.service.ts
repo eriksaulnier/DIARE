@@ -10,11 +10,10 @@ export class JournalsService {
   constructor(private http: Http, private config: AppConfig) { }
   //------------------------------------------------------------------------------------------------------------------------------
   //Creates new journal
-  //data object must contain id field with user's id and title field with journal's title
   //will return either an error or the id of the newly created journal in the format {id: journalID}
 
-  create(data: any) {
-    var result = this.http.post(this.config.apiURL + '/journals/create', data, this.jwt());
+  create(userid: string, title: string) {
+    var result = this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt());
     return result;
   }
   //------------------------------------------------------------------------------------------------------------------------------

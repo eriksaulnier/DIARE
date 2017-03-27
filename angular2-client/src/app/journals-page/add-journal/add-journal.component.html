@@ -1,10 +1,10 @@
 <form>
 	<div class="form-group label-floating is-empty">
-		<label for="title" class="control-label" #new_title>Journal Title</label>
-		<input type="string" name="title" class="form-control">
+		<label for="title" class="control-label" >Journal Title</label>
+		<input type="string" name="title" class="form-control" #newTitle>
 	</div>
 
-	<button class="btn btn-raised btn-primary" (click)="add_journal(new_title)">
+	<button class="btn btn-raised btn-primary" (click)="addJournal(newTitle.value)">
 		Create Journal
 	</button>
 </form>
