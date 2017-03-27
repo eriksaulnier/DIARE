@@ -8,12 +8,13 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 				</button>
-        <a href="javascript:void(0)" class="navbar-brand">{{ title }}</a>
+        <a routerLink="/journals" routerLinkActive="active" class="navbar-brand" *ngIf="userLoggedIn()">{{ title }}</a>
+        <a routerLink="/home" routerLinkActive="active" class="navbar-brand" *ngIf="userLoggedOut()">{{ title }}</a>
       </div>
 
       <!-- Items in Navbar -->
       <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" *ngIf="userLoggedIn()">
           <li id="search-li">
             <form class="navbar-form">
               <div class="form-group form-group-lg">
@@ -24,9 +25,20 @@
               </div>
             </form>
           </li>
-          <li class="active"><a href="javascript:void(0)">Active Link</a></li>
-          <li><a href="javascript:void(0)">Link</a></li>
-          <li><a href="javascript:void(0)">Link</a></li>
+          <li class="active"><a routerLink="/journals" routerLinkActive="active">Journals</a></li>
+          <li><a href="javascript:void(0)">About</a></li>
+
+          <li class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+              User Account<b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu" id="dropdownMenu1">
+              <li><a routerLink="/home" routerLinkActive="active">Logout</a></li>
+              <li><a href="javascript:void(0)">Account Settings</a></li>
+            </ul>
+          </li>
+
         </ul>
       </div>
     </div>

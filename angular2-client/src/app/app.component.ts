@@ -7,4 +7,23 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DIARE';
+
+  userLoggedIn() {
+    if (localStorage.getItem('currentUser')) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  userLoggedOut() {
+    if (!(localStorage.getItem('currentUser'))) {
+      return true;
+    }
+
+    else {
+      return false;
+    }
+  }
 }
