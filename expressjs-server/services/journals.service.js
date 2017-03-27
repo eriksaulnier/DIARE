@@ -22,7 +22,7 @@ function createJournal (userID, title) {
     db.journals.insert({ userID: userID, title: title}, function(error, doc) {
       if (error) deferred.reject(error.name + ': ' + error.message);
 
-      deferred.resolve({id: doc.ops[0]._id});
+      deferred.resolve({id: doc.ops[0]._id, message: 'Journal successfully added to database.'});
     });
 
     return deferred.promise;
@@ -47,7 +47,7 @@ function deleteJournal (journalID) {
 function getAllJournals (userID) {
   var deferred = Q.defer();
 
-  db.users.find({userID: userID}).toArray(function (err, journals) {
+  db.journals.find({userID: userID}).toArray(function (err, journals) {
     if (err) deferred.reject(err.name + ': ' + err.message);
 
     deferred.resolve(journals);
