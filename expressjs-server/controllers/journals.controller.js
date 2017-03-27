@@ -39,9 +39,10 @@ function deleteJournal (req, res) {
 // Send all journals tied to certain user ID
 function getAllJournals (req, res) {
   journalsService.getAllJournals(req.params.userID)
-      // send back array of journal objects that are tied to userID
-      res.send(result);
-    })
+      .then(function (result) {
+        // send back array of journal objects that are tied to userID
+        res.send(result);
+      })
     .catch(function (err) {
       // getting all journals failed
       res.status(400).send(err);
