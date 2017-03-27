@@ -1,8 +1,16 @@
-<add-journal></add-journal>
+<aside class="sidebar">
+	<div class="sidebar-container">
+		<h1>My Journals</h1>
+		<ul>
+			<user-journal
+				*ngFor="let individual_journal_name of journals"
+				[journal] = "individual_journal_name">
+			</user-journal>
+		</ul>
 
-<ul>
-	<user-journal
-	*ngFor="let individual_journal_name of journals"
-	[journal] = "individual_journal_name">
-	</user-journal>
-</ul>
+		<add-journal></add-journal>
+	</div>
+	<div class="sidebar-footer">
+		<p>Some sort of footer message</p>
+	</div>
+</aside>

@@ -38,6 +38,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
 // routes
 app.use('/', require('./controllers/angular.controller'));
 app.use('/users', require('./controllers/users.controller'));
+app.use('/journals', require('./controllers/journals.controller'));
 
 //Serve static files from dist directory
 app.use(express.static(__dirname + '/../angular2-client/dist'));

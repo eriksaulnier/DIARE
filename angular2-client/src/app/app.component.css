@@ -1,5 +1,5 @@
-.gridSpecs {
-  width: 100%;
+:host .navbar {
+	margin-bottom: 0;
 }
 
 .white-icon {

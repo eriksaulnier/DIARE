@@ -1,12 +1,10 @@
- <form>	
-	<div class = "form-group label-floating">
-		<label for="title" class="" #new_title>Title:</label>
-		<input type="string" name="title">
+<form>
+	<div class="form-group label-floating is-empty">
+		<label for="title" class="control-label" #new_title>Journal Title</label>
+		<input type="string" name="title" class="form-control">
 	</div>
 
-	<button (click)="add_journal(new_title)"
-			class = "">
-		Submit journal		
+	<button class="btn btn-raised btn-primary" (click)="add_journal(new_title)">
+		Create Journal
 	</button>
 </form>
-
