@@ -1,0 +1,12 @@
+:host form {
+	padding-top: 5px;
+	text-align: center;
+}
+
+:host form .form-group {
+	text-align: left;
+}
+
+:host form .form-group input {
+	color: #fff;
+}

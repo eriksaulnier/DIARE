@@ -1,35 +1,37 @@
-<div class="navbar navbar-default">
-  <div class="container-fluid">
+<header class="header">
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Mobile screen navigation button -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+				</button>
+        <a href="javascript:void(0)" class="navbar-brand">{{ title }}</a>
+      </div>
 
-    <!-- Mobile screen navigation button -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="javascript:void(0)" class="navbar-brand">{{ title }}</a>
-    </div>
-
-    <!-- Items in Navbar -->
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li id="search-li">
-          <form class="navbar-form">
-            <div class="form-group form-group-lg">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="material-icons white-icon">search</i></span>
-                <input type="text" class="form-control col-sm-8" id="search-bar" placeholder="Search">
+      <!-- Items in Navbar -->
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li id="search-li">
+            <form class="navbar-form">
+              <div class="form-group form-group-lg">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="material-icons white-icon">search</i></span>
+                  <input type="text" class="form-control col-sm-8" id="search-bar" placeholder="Search">
+                </div>
               </div>
-            </div>
-          </form>
-        </li>
-        <li class="active"><a href="javascript:void(0)">Active Link</a></li>
-        <li><a href="javascript:void(0)">Link</a></li>
-        <li><a href="javascript:void(0)">Link</a></li>
-      </ul>
+            </form>
+          </li>
+          <li class="active"><a href="javascript:void(0)">Active Link</a></li>
+          <li><a href="javascript:void(0)">Link</a></li>
+          <li><a href="javascript:void(0)">Link</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+</header>
+
 <!-- Needed in order for Angular2 Routing to work. ****************************************************************************-->
 <router-outlet></router-outlet>
