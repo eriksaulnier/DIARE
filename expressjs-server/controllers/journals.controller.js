@@ -12,7 +12,7 @@ router.get('/getAll/:userID',     getAllJournals);
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
 function createJournal (req, res) {
-    journalsService.createJournal(req.body.id, req.body.title, req.body.content)
+    journalsService.createJournal(req.body.id, req.body.title)
         .then(function (result) {
             // send back the id for the journal
             res.send(result);

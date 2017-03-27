@@ -15,15 +15,14 @@ service.getAllJournals = getAllJournals;
 
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
-function createJournal (userID, title, content) {
+function createJournal (userID, title) {
     var deferred = Q.defer();
     var createdJournal;
 
     try {
         createdJournal = db.journals.insertOne({
                 userID: userID,
-                title: title,
-                content: content
+                title: title
             }
         );
     } catch (e) {

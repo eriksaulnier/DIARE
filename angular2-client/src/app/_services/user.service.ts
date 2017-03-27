@@ -11,6 +11,7 @@ export class UserService {
   constructor(private http: Http, private config: AppConfig) { }
 
   //------------------------------------------------------------------------------------------------------------------------------
+  //Logs user into website
   login(username: string, password: string) {
     return this.http.post(this.config.apiURL + '/users/authenticate', { username: username, password: password })
       .map((response: Response) => {
@@ -23,15 +24,18 @@ export class UserService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  //Logs user out of website
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  //Creates new user account
   create(user: User) {
     return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  //Creates request header with JWT token
   private jwt() {
     // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
