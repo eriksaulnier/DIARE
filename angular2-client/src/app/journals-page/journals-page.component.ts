@@ -12,14 +12,26 @@ export class JournalsPageComponent implements OnInit {
 
   constructor(
     private journalsService: JournalsService,
-  ) { this.journals = ['Mindfulness', 'Work', 'CSGO']; }
+  ) { }
 
-  //Runs functions as soon as the page starts to load
+  // Runs functions as soon as the page starts to load
   ngOnInit() {
+		// Subscribe to the journalService emitter - currently just used for sending
+		// update messages to the component when things are changed
+		this.journalsService.emitter$.subscribe(
+			message => {
+				// console.log(message);
+				if (message == 'update')
+					this.fetchJournalList();
+			}
+		)
+
+		// Get the current user's journals
     this.getJournals();
   }
 
-  //Function to get all journals tied to a userid
+	// ---------------------------------------------------------------------------
+  // Gets all journals tied to a userid
   getJournals() {
     let user = JSON.parse(localStorage.getItem('currentUser'));
     let userid = user._id;
@@ -27,11 +39,17 @@ export class JournalsPageComponent implements OnInit {
     this.journalsService.getAllJournals(userid)
       .subscribe(
         data => {
-					this.journals = JSON.parse(localStorage.getItem('userJournals'));
-          console.log(this.journals);
+					console.log(this.journals);
         },
         error => {
           console.log("Getting journals failed:  " + error._body);
         });
   }
+
+	// ---------------------------------------------------------------------------
+  // Updates our journals variable based on localstorage
+	private fetchJournalList() {
+		this.journals = JSON.parse(localStorage.getItem('userJournals'));
+		// console.log('journal list updated');
+	}
 }

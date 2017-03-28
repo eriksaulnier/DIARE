@@ -9,4 +9,5 @@
 
 :host form .form-group input {
 	color: #fff;
+	padding: 0 5px;
 }

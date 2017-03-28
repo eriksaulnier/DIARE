@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongo = require('mongoskin');
+var ObjectId = require('mongodb').ObjectID;
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('journals');
 
@@ -31,14 +32,11 @@ function createJournal (userID, title) {
 function deleteJournal (journalID) {
     var deferred = Q.defer();
 
-    try {
-        db.journals.deleteOne({
-            _id: journalID
-        });
-    } catch (e) {
-        deferred.reject("Error: " + e.errmsg);
-    }
-    deferred.resolve();
+		db.journals.remove({_id: ObjectId(journalID)}, function(error, doc) {
+			if (error) deferred.reject(error.name + ': ' + error.message);
+
+			deferred.resolve({message: 'Journal successfully removed from database.'});
+		});
 
     return deferred.promise;
 }
