@@ -1,8 +1,8 @@
 var config =      require('../config.json');
 var Q =           require('q');
-var ObjectId =    require('mongodb').ObjectID;
 var mongo =       require('mongoskin');
 var db =          mongo.db(config.connectionString, { native_parser: true });
+var ObjectId =    require('mongodb').ObjectID;
 db.bind('journals');
 
 var service = {};

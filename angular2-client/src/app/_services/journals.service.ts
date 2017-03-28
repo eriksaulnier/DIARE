@@ -31,8 +31,8 @@ export class JournalsService {
   // Deletes journal with specified id
   // Will return either an error or {message: string talking about how deleting journal was successful}
 
-	delete(id: string,) {
-    return this.http.delete(this.config.apiURL + '/journals/delete/'+id, this.jwt())
+	delete(id: string) {
+    return this.http.delete(this.config.apiURL + '/journals/delete/'+ id, this.jwt())
       .map((response: Response) => {
         return response;
       });

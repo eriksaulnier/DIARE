@@ -30,7 +30,7 @@ function deleteJournal (req, res) {
     journalsService.deleteJournal(req.params._id)
         .then(function (result) {
             // send back success message
-            res.sendStatus(result);
+            res.send(result);
         })
         .catch(function (err) {
             // send back error message
