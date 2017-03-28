@@ -27,8 +27,13 @@ export class JournalsPageComponent implements OnInit {
     this.journalsService.getAllJournals(userid)
       .subscribe(
         data => {
-					this.journals = JSON.parse(localStorage.getItem('userJournals'));
-          console.log(this.journals);
+          //data has successfully loaded into local storage, do whatever you want with it now, I'm just printing to console
+					this.journals = [];
+					let journals = JSON.parse(localStorage.getItem('userJournals'));
+					for (var i = 0; i < journals.size(); i++) {
+						let journal = journals[i];
+						journals.append(journal);
+					}
         },
         error => {
           console.log("Getting journals failed:  " + error._body);
