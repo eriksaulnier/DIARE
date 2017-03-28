@@ -21,8 +21,8 @@ webpackJsonp([0,4],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConfig; });
 var AppConfig = (function () {
     function AppConfig() {
-        this.devURL = 'https://diare.herokuapp.com';
-        this.apiURL = 'http://localhost:4000';
+        this.apiURL = 'https://diare.herokuapp.com';
+        this.devURL = 'http://localhost:4000';
     }
     return AppConfig;
 }());
@@ -115,11 +115,12 @@ var JournalsPageComponent = (function () {
     // ---------------------------------------------------------------------------
     // Gets all journals tied to a userid
     JournalsPageComponent.prototype.getJournals = function () {
+        var _this = this;
         var user = JSON.parse(localStorage.getItem('currentUser'));
         var userid = user._id;
         this.journalsService.getAllJournals(userid)
             .subscribe(function (data) {
-            // console.log(this.journals);
+            console.log(_this.journals);
         }, function (error) {
             console.log("Getting journals failed:  " + error._body);
         });
@@ -823,7 +824,7 @@ var AddJournalComponent = (function () {
         this.journalsService.getAllJournals(this.userid)
             .subscribe(function (data) {
             // output updated local storage
-            // console.log(JSON.parse(localStorage.getItem('userJournals')));
+            console.log(JSON.parse(localStorage.getItem('userJournals')));
         }, function (error) {
             console.log("Getting journals failed:  " + error._body);
         });
@@ -893,7 +894,7 @@ var UserJournalComponent = (function () {
         this.journalsService.getAllJournals(this.userid)
             .subscribe(function (data) {
             // output updated local storage
-            // console.log(JSON.parse(localStorage.getItem('userJournals')));
+            console.log(JSON.parse(localStorage.getItem('userJournals')));
         }, function (error) {
             console.log("Getting journals failed:  " + error._body);
         });
