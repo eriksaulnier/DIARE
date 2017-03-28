@@ -1,21 +1,19 @@
-var config = require('../config.json');
-var _ = require('lodash');
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcryptjs');
-var Q = require('q');
-var mongo = require('mongoskin');
-var ObjectId = require('mongodb').ObjectID;
-var db = mongo.db(config.connectionString, { native_parser: true });
+var config =      require('../config.json');
+var Q =           require('q');
+var ObjectId =    require('mongodb').ObjectID;
+var mongo =       require('mongoskin');
+var db =          mongo.db(config.connectionString, { native_parser: true });
 db.bind('journals');
 
 var service = {};
-
 service.createJournal = createJournal;
 service.deleteJournal = deleteJournal;
 service.getAllJournals = getAllJournals;
-
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
+// Creates a new journal in the journals collection. Journal contains user's id, journal id, journal title.
+// Returns journal's id and a success message on success, or an error message on failure
+
 function createJournal (userID, title) {
     var deferred = Q.defer();
     var createdJournal;
@@ -29,6 +27,9 @@ function createJournal (userID, title) {
     return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
+// Deletes a journal from the journals collection.
+// Returns a success message on success, and an error message on failure
+
 function deleteJournal (journalID) {
     var deferred = Q.defer();
 
@@ -41,7 +42,9 @@ function deleteJournal (journalID) {
     return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-//Get all journals that are tied to a certain userID
+// Gets all journals that are tied to a certain userID.
+// Returns an array of journal objects on success, and an error message on failure
+
 function getAllJournals (userID) {
   var deferred = Q.defer();
 
@@ -52,6 +55,5 @@ function getAllJournals (userID) {
   });
 
   return deferred.promise;
-
 }
 //--------------------------------------------------------------------------------------------------------------------------------

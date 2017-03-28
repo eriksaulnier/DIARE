@@ -16,46 +16,67 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-
+  //------------------------------------------------------------------------------------------------------------------------------
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
-
   //------------------------------------------------------------------------------------------------------------------------------
+  //Run when the page initializes
+
   ngOnInit(): void {
     // reset login status
     this.userService.logout();
 
-    //create login form
+
     this.buildForm();
   }
   //------------------------------------------------------------------------------------------------------------------------------
-  //Build the login form
+  // Create the login form
+
   buildForm(): void {
     this.loginForm = this.fb.group({
-      'email': ['', [emailValidator, Validators.required]],
+      'email':    ['', [emailValidator, Validators.required]],
       'password': ['', [Validators.required]]
     });
 
+    // Handle changes to form data
     this.loginForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
   }
   //------------------------------------------------------------------------------------------------------------------------------
-  //Validate form if any form values changed
+  // Submit the login data. Either take user to journals page on success, or handle error
+
+  onSubmit() {
+    this.userService.login(this.loginForm.value.email, this.loginForm.value.password)
+      .subscribe(
+        data => {
+          // On successful login, clear form and take user to journals page
+          this.loginForm.reset();
+          this.router.navigate(['/journals']);
+        },
+        error => {
+          // On error, print to console
+          console.log("Login failed:  " + error._body);
+        });
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  //Validate form when any of the form data changes
+
   onValueChanged(data?: any) {
     if (!this.loginForm) { return; }
     const form = this.loginForm;
 
     for (const field in this.formErrors) {
-      // clear any previous error messages
+      // clear any previous validation messages
       this.formErrors[field] = '';
       const control = form.get(field);
 
+      // if form data isn't valid, output appropriate validation messages
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
@@ -65,18 +86,8 @@ export class LoginComponent implements OnInit {
     }
   }
   //------------------------------------------------------------------------------------------------------------------------------
-  //Submit login data to backend, act accordingly for success or failure response
-  onSubmit() {
-    this.userService.login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(
-        data => {
-           this.router.navigate(['/journals']);
-        },
-        error => {
-          console.log("Login failed:  " + error._body);
-        });
-  }
-  //------------------------------------------------------------------------------------------------------------------------------
+  // Data used to output validation messages to the form when form data is invalid
+
   formErrors = {
     'email': '',
     'password': ''

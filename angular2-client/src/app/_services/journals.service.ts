@@ -29,7 +29,7 @@ export class JournalsService {
   }
 	//------------------------------------------------------------------------------------------------------------------------------
   // Deletes journal with specified id
-  // Will return either an error or {message: string talking about how adding journal was successful}
+  // Will return either an error or {message: string talking about how deleting journal was successful}
 
 	delete(id: string,) {
     return this.http.delete(this.config.apiURL + '/journals/delete/'+id, this.jwt())
@@ -55,7 +55,7 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
-  //Creates request header with JWT token - needed so that you can hit protected api routes
+  // Creates request header with JWT token - needed so that you can hit protected api routes
 
   private jwt() {
     // create authorization header with jwt token

@@ -17,13 +17,38 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 export class RegisterComponent implements OnInit {
   user = new User;
   public registrationForm: FormGroup;
-
+  //------------------------------------------------------------------------------------------------------------------------------
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
+  //------------------------------------------------------------------------------------------------------------------------------
+  // Run when the page initializes
+
+  ngOnInit(): void {
+    this.buildForm();
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  // Create the registration form
+
+  buildForm(): void {
+    this.registrationForm = this.fb.group({
+      'email1':     ['', [emailValidator, Validators.required]],
+      'email2':     ['', [emailValidator, Validators.required]],
+      'password1':  ['', [Validators.minLength(8), Validators.required]],
+      'password2':  ['', [Validators.minLength(8), Validators.required]]
+    });
+
+    // Handle changes to form data
+    this.registrationForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged();
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  // Submit the registration data. Either take user to login page on success, or handle error
 
   onSubmit() {
     this.user.email = this.registrationForm.value.email1;
@@ -32,43 +57,29 @@ export class RegisterComponent implements OnInit {
 
     this.userService.create(this.user)
     .subscribe(
-        data => {
-            this.registrationForm.reset();
-
-            this.router.navigate(['/home']);
-        },
-        error => {
-            console.log(error._body);
-        });
+      data => {
+        // On successful registration, clear form and take user to login page
+        this.registrationForm.reset();
+        this.router.navigate(['/home']);
+      },
+      error => {
+        // On error, print to console
+        console.log(error._body);
+      });
   }
-
-  ngOnInit(): void {
-    this.buildForm();
-  }
-
-  buildForm(): void {
-    this.registrationForm = this.fb.group({
-      'email1': ['', [emailValidator, Validators.required]],
-      'email2': ['', [emailValidator, Validators.required]],
-      'password1': ['', [Validators.minLength(8), Validators.required]],
-      'password2': ['', [Validators.minLength(8), Validators.required]]
-    });
-
-    this.registrationForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged();
-  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  // Validate form when any of the form data changes
 
   onValueChanged(data?: any) {
     if (!this.registrationForm) { return; }
     const form = this.registrationForm;
 
     for (const field in this.formErrors) {
-      // clear any previous error messages
+      // clear any previous validation messages
       this.formErrors[field] = '';
       const control = form.get(field);
 
+      // if form data isn't valid, output appropriate validation messages
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
         for (const key in control.errors) {
@@ -77,6 +88,8 @@ export class RegisterComponent implements OnInit {
       }
     }
   }
+  //------------------------------------------------------------------------------------------------------------------------------
+  // Data used to output validation messages to the form when form data is invalid
 
   formErrors = {
     'email1': '',

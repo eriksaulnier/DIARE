@@ -11,6 +11,7 @@ router.get('/journals', sendIndex);
 
 module.exports = router;
 
+//If a user hits any of the routes listed above, send them back the index file and let Angular handle the routes
 function sendIndex(req, res, next) {
   res.sendFile(path.resolve(__dirname + '/../../angular2-client/dist/index.html'));
 }
