@@ -99,7 +99,7 @@ var JournalsPageComponent = (function () {
     function JournalsPageComponent(journalsService) {
         this.journalsService = journalsService;
         this.sidebarState = 'out';
-        this.sidebarToggleIcon = 'keyboard_arrow_right';
+        this.sidebarToggleIcon = 'keyboard_arrow_left';
         this.sidebarWidth = 250;
     }
     // Runs functions as soon as the page starts to load

@@ -18,7 +18,7 @@ import { JournalsService } from '../_services/index';
 export class JournalsPageComponent implements OnInit {
 	journals: string[];
 	sidebarState: string = 'out';
-	sidebarToggleIcon: string = 'keyboard_arrow_right';
+	sidebarToggleIcon: string = 'keyboard_arrow_left';
 	sidebarWidth: number = 250;
 
   constructor(
