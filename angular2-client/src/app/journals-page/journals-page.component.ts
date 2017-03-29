@@ -9,7 +9,7 @@ import { JournalsService } from '../_services/index';
 	animations: [
 		// Sidebar slide in-out animation
 		trigger('slideInOut', [
-			state('in', style({'margin-left': -250})),
+			state('in', style({'margin-left': -280})),
 			state('out', style({'margin-left': 0})),
 			transition('in <=> out', animate('0.3s ease-out'))
 		])
@@ -19,7 +19,6 @@ export class JournalsPageComponent implements OnInit {
 	journals: string[];
 	sidebarState: string = 'out';
 	sidebarToggleIcon: string = 'keyboard_arrow_left';
-	sidebarWidth: number = 250;
 
   constructor(
     private journalsService: JournalsService
@@ -74,11 +73,8 @@ export class JournalsPageComponent implements OnInit {
 	onResize(event) {
 		// Change sidebar based on current window width
 		if (event.target.innerWidth > 768) {
-			this.sidebarWidth = 350;
 			this.sidebarState = 'out';
 			this.sidebarToggleIcon = 'keyboard_arrow_left';
-		} else {
-			this.sidebarWidth = 250;
 		}
 	}
 }

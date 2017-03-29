@@ -22,7 +22,7 @@
 :host .sidebar {
 	position: relative;
 	display: block;
-	width: 250px;
+	width: 280px;
 	height: 100%;
 	padding: 0 15px;
 	background-color: #343a40;
@@ -60,15 +60,15 @@
 :host .sidebar .sidebar-toggle {
 	position: absolute;
 	top: 0;
-	right: -35px;
-	width: 35px;
-	height: 35px;
-	line-height: 35px;
+	right: -45px;
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
 	color: lightgrey;
 	text-align: center;
 	background-color: #464b50;
 }
 
 :host .sidebar .sidebar-toggle i {
-	font-size: 20px;
+	font-size: 30px;
 }

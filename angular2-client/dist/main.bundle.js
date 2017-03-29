@@ -100,7 +100,6 @@ var JournalsPageComponent = (function () {
         this.journalsService = journalsService;
         this.sidebarState = 'out';
         this.sidebarToggleIcon = 'keyboard_arrow_left';
-        this.sidebarWidth = 250;
     }
     // Runs functions as soon as the page starts to load
     JournalsPageComponent.prototype.ngOnInit = function () {
@@ -143,12 +142,8 @@ var JournalsPageComponent = (function () {
     JournalsPageComponent.prototype.onResize = function (event) {
         // Change sidebar based on current window width
         if (event.target.innerWidth > 768) {
-            this.sidebarWidth = 350;
             this.sidebarState = 'out';
             this.sidebarToggleIcon = 'keyboard_arrow_left';
-        }
-        else {
-            this.sidebarWidth = 250;
         }
     };
     return JournalsPageComponent;
@@ -162,7 +157,7 @@ JournalsPageComponent = __decorate([
         animations: [
             // Sidebar slide in-out animation
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* trigger */])('slideInOut', [
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* state */])('in', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* style */])({ 'margin-left': -250 })),
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* state */])('in', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* style */])({ 'margin-left': -280 })),
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* state */])('out', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* style */])({ 'margin-left': 0 })),
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* transition */])('in <=> out', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* animate */])('0.3s ease-out'))
             ])
@@ -1127,7 +1122,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, ":host {\r\n\tposition: absolute;\r\n\ttop: 50px;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\tdisplay: block;\r\n}\r\n\r\n@media only screen and (min-width : 768px) {\r\n\t:host {\r\n\t\ttop: 57px;\r\n\t}\r\n}\r\n\r\n@media only screen and (min-width : 1200px) {\r\n\t:host {\r\n\t\ttop: 63px;\r\n\t}\r\n}\r\n\r\n:host .sidebar {\r\n\tposition: relative;\r\n\tdisplay: block;\r\n\twidth: 250px;\r\n\theight: 100%;\r\n\tpadding: 0 15px;\r\n\tbackground-color: #343a40;\r\n\t-webkit-transition: ease-out 0.5s width;\r\n\ttransition: ease-out 0.5s width;\r\n}\r\n\r\n@media only screen and (min-width : 992px) {\r\n\t:host .sidebar {\r\n\t\twidth: 350px;\r\n\t}\r\n}\r\n\r\n:host .sidebar h1 {\r\n\tpadding-top: 20px;\r\n\tpadding-bottom: 12px;\r\n\tmargin: 0;\r\n\tfont-size: 22px;\r\n\tcolor: white;\r\n}\r\n\r\n:host .sidebar ul {\r\n\tpadding: 0;\r\n}\r\n\r\n:host .sidebar .sidebar-footer {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\tfont-size: 15px;\r\n\tcolor: white;\r\n\ttext-align: center;\r\n}\r\n\r\n:host .sidebar .sidebar-toggle {\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tright: -35px;\r\n\twidth: 35px;\r\n\theight: 35px;\r\n\tline-height: 35px;\r\n\tcolor: lightgrey;\r\n\ttext-align: center;\r\n\tbackground-color: #464b50;\r\n}\r\n\r\n:host .sidebar .sidebar-toggle i {\r\n\tfont-size: 20px;\r\n}\r\n", ""]);
+exports.push([module.i, ":host {\r\n\tposition: absolute;\r\n\ttop: 50px;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\tdisplay: block;\r\n}\r\n\r\n@media only screen and (min-width : 768px) {\r\n\t:host {\r\n\t\ttop: 57px;\r\n\t}\r\n}\r\n\r\n@media only screen and (min-width : 1200px) {\r\n\t:host {\r\n\t\ttop: 63px;\r\n\t}\r\n}\r\n\r\n:host .sidebar {\r\n\tposition: relative;\r\n\tdisplay: block;\r\n\twidth: 280px;\r\n\theight: 100%;\r\n\tpadding: 0 15px;\r\n\tbackground-color: #343a40;\r\n\t-webkit-transition: ease-out 0.5s width;\r\n\ttransition: ease-out 0.5s width;\r\n}\r\n\r\n@media only screen and (min-width : 992px) {\r\n\t:host .sidebar {\r\n\t\twidth: 350px;\r\n\t}\r\n}\r\n\r\n:host .sidebar h1 {\r\n\tpadding-top: 20px;\r\n\tpadding-bottom: 12px;\r\n\tmargin: 0;\r\n\tfont-size: 22px;\r\n\tcolor: white;\r\n}\r\n\r\n:host .sidebar ul {\r\n\tpadding: 0;\r\n}\r\n\r\n:host .sidebar .sidebar-footer {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\tfont-size: 15px;\r\n\tcolor: white;\r\n\ttext-align: center;\r\n}\r\n\r\n:host .sidebar .sidebar-toggle {\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tright: -45px;\r\n\twidth: 45px;\r\n\theight: 45px;\r\n\tline-height: 45px;\r\n\tcolor: lightgrey;\r\n\ttext-align: center;\r\n\tbackground-color: #464b50;\r\n}\r\n\r\n:host .sidebar .sidebar-toggle i {\r\n\tfont-size: 30px;\r\n}\r\n", ""]);
 
 // exports
 
