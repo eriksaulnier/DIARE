@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" (window:resize)="onResize($event)" [@slideInOut]="sidebarState">
 	<div class="sidebar-container">
 		<h1>My Journals</h1>
 		<ul>
@@ -13,4 +13,5 @@
 	<div class="sidebar-footer">
 		<p>Some sort of footer message</p>
 	</div>
+	<a class="sidebar-toggle hidden-sm hidden-md hidden-lg hidden-xl" href="javascript:void(0)" (click)="toggleSidebar()"><i class="material-icons">{{sidebarToggleIcon}}</i></a>
 </aside>

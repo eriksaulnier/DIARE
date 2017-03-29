@@ -1,17 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, animate, transition } from '@angular/core';
 import { JournalsService } from '../_services/index';
 
 @Component({
   selector: 'journals-page',
   templateUrl: './journals-page.component.html',
   styleUrls: ['./journals-page.component.css'],
-  providers: [JournalsService]
+  providers: [JournalsService],
+	animations: [
+		// Sidebar slide in-out animation
+		trigger('slideInOut', [
+			state('in', style({'margin-left': -250})),
+			state('out', style({'margin-left': 0})),
+			transition('in <=> out', animate('0.3s ease-out'))
+		])
+	]
 })
 export class JournalsPageComponent implements OnInit {
 	journals: string[];
+	sidebarState: string = 'out';
+	sidebarToggleIcon: string = 'keyboard_arrow_right';
+	sidebarWidth: number = 250;
 
   constructor(
-    private journalsService: JournalsService,
+    private journalsService: JournalsService
   ) { }
 
   // Runs functions as soon as the page starts to load
@@ -51,5 +62,23 @@ export class JournalsPageComponent implements OnInit {
 	private fetchJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 		// console.log('journal list updated');
+	}
+
+	// Toggles the sidebar visiblity on mobile
+	toggleSidebar() {
+		this.sidebarState = (this.sidebarState === 'out') ? 'in' : 'out';
+		this.sidebarToggleIcon = (this.sidebarState === 'out') ? 'keyboard_arrow_left' : 'keyboard_arrow_right';
+	}
+
+	// Window on resize event
+	onResize(event) {
+		// Change sidebar based on current window width
+		if (event.target.innerWidth > 768) {
+			this.sidebarWidth = 350;
+			this.sidebarState = 'out';
+			this.sidebarToggleIcon = 'keyboard_arrow_left';
+		} else {
+			this.sidebarWidth = 250;
+		}
 	}
 }
