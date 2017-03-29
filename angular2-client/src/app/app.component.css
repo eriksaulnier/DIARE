@@ -1,5 +1,6 @@
 :host .navbar {
 	margin-bottom: 0;
+	z-index: 20;
 }
 
 .white-icon {

@@ -1050,7 +1050,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, ":host .navbar {\r\n\tmargin-bottom: 0;\r\n}\r\n\r\n.white-icon {\r\n  color: #d7efec;\r\n}\r\n\r\n#search-li {\r\n  margin-right: 30px;\r\n}\r\n", ""]);
+exports.push([module.i, ":host .navbar {\r\n\tmargin-bottom: 0;\r\n\tz-index: 20;\r\n}\r\n\r\n.white-icon {\r\n  color: #d7efec;\r\n}\r\n\r\n#search-li {\r\n  margin-right: 30px;\r\n}\r\n", ""]);
 
 // exports
 
