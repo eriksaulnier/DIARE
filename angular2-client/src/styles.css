@@ -1,7 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+	width: 100%;
+	background-color: white;
+}
+
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	margin-top: -20px;
+	margin-left: -100px;
+	line-height: 40px;
+	color: #3baba1;
+	text-align: center;
+}
+
+.loading p {
+	padding: 0;
+	font-size: 20px;
+	font-weight: 400;
+}
+
 .formInputError {
-  color: #C70039;
-  font-size: .9em;
-  margin-top: 0px;
   padding-top: 0px;
+  margin-top: 0px;
+  font-size: .9em;
+  color: #C70039;
 }

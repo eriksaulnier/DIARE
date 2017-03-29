@@ -478,7 +478,7 @@ exports = module.exports = __webpack_require__(24)();
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n.formInputError {\r\n  color: #C70039;\r\n  font-size: .9em;\r\n  margin-top: 0px;\r\n  padding-top: 0px;\r\n}\r\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\nbody {\r\n\twidth: 100%;\r\n\tbackground-color: white;\r\n}\r\n\r\n.loading {\r\n\tposition: absolute;\r\n\ttop: 50%;\r\n\tleft: 50%;\r\n\twidth: 200px;\r\n\tmargin-top: -20px;\r\n\tmargin-left: -100px;\r\n\tline-height: 40px;\r\n\tcolor: #3baba1;\r\n\ttext-align: center;\r\n}\r\n\r\n.loading p {\n\tpadding: 0;\r\r\n\tfont-size: 20px;\r\n\tfont-weight: 400;\r\n}\r\n\r\n.formInputError {\n  padding-top: 0px;\r\n  margin-top: 0px;\r\n  font-size: .9em;\r\r\n  color: #C70039;\r\n}\r\n", ""]);
 
 // exports
 
