@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { Journal } from '../../_models/index';
 import { JournalsService } from '../../_services/index';
+import { Journal } from '../../_models/index';
 
 @Component({
   selector: 'user-journal',
@@ -8,29 +8,36 @@ import { JournalsService } from '../../_services/index';
   styleUrls: ['./user-journal.component.css']
 })
 export class UserJournalComponent implements OnInit {
+	private userid: string;
+
 	@Input() journal: Journal;
-	public user = JSON.parse(localStorage.getItem('currentUser'));
-  public userid = this.user._id;
 
   constructor(
 		private journalsService: JournalsService,
-	) { }
+	) {
+		// Fetch the current userid and update variable
+		let user = JSON.parse(localStorage.getItem('currentUser'));
+		this.userid = user._id;
+	}
 
+	// ---------------------------------------------------------------------------
+  // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
 
   }
 
 	// ---------------------------------------------------------------------------
-  // Deletes the specified journal if user id's match up
+  // Deletes the current journal
 	deleteJournal() {
-		// Make sure userID's match up
+		// First make sure the current user is the same one that owns this journal
 		if (this.userid != this.journal.userID)
 			return;
 
-		// Tell the service to delete the journal
+		// Tell the journalsService to select this journal
     this.journalsService.delete(this.journal._id)
       .subscribe(
         data => {
+					console.log("Successfully deleted journal " + this.journal._id);
 					this.getJournals();
         },
         error => {
@@ -39,13 +46,12 @@ export class UserJournalComponent implements OnInit {
   }
 
 	// ---------------------------------------------------------------------------
-  // Gets all journals tied to the current userid
-	getJournals() {
-    this.journalsService.getAllJournals(this.userid)
+  // Gets all of the journals tied to a specified userID
+  getJournals(userID: string = this.userid) {
+    this.journalsService.getAllJournals(userID)
       .subscribe(
         data => {
-          // output updated local storage
-          console.log(JSON.parse(localStorage.getItem('userJournals')));
+					console.log("Successfully fetched journals for user " + userID);
         },
         error => {
           console.log("Getting journals failed:  " + error._body);

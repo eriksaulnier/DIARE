@@ -7,29 +7,32 @@ import { JournalsService } from '../../_services/index';
   styleUrls: ['./add-journal.component.css']
 })
 export class AddJournalComponent {
-  public user = JSON.parse(localStorage.getItem('currentUser'));
-  public userid = this.user._id;
+	private userid: string;
 
   constructor(
     private journalsService: JournalsService,
-  ) { }
+  ) {
+		// Fetch the current userid and update variable
+		let user = JSON.parse(localStorage.getItem('currentUser'));
+		this.userid = user._id;
+	}
 
   // ---------------------------------------------------------------------------
   // Adds journal to database, tied to user's id
   addJournal(titleInput: HTMLInputElement) {
+		// Make sure the title input value is not empty
 		let value = titleInput.value;
 		if (value == '')
 			return;
 
+		// Tell the journalsService to create a new journal with the designated name
     this.journalsService.create(this.userid, value)
       .subscribe(
         data => {
-					// Clear input field
-					titleInput.value = null;
+					console.log("Successfully created new journal " + data.id);
 
-					// Log new journal id
-          console.log(data.message);
-          console.log("ID of new journal:  " + data.id);
+					// Reset title input field
+					titleInput.value = null;
 
           // update journals in local storage
           this.getJournals();
@@ -39,14 +42,13 @@ export class AddJournalComponent {
         });
   }
 
-  // ---------------------------------------------------------------------------
-  // Gets all journals tied to a userid
-  getJournals() {
-    this.journalsService.getAllJournals(this.userid)
+	// ---------------------------------------------------------------------------
+  // Gets all of the journals tied to a specified userID
+  getJournals(userID: string = this.userid) {
+    this.journalsService.getAllJournals(userID)
       .subscribe(
         data => {
-          // output updated local storage
-          console.log(JSON.parse(localStorage.getItem('userJournals')));
+					console.log("Successfully fetched journals for user " + userID);
         },
         error => {
           console.log("Getting journals failed:  " + error._body);

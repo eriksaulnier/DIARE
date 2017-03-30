@@ -9,7 +9,7 @@ import { AppConfig } from '../app.config';
 @Injectable()
 export class JournalsService {
 	private emitterSource: Subject<string> = new Subject();
-	emitter$ = this.emitterSource.asObservable();
+	emitter = this.emitterSource.asObservable();
 
   constructor(
 		private http: Http,

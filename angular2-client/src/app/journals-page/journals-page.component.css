@@ -1,19 +1,21 @@
 :host {
 	position: absolute;
-	top: 50px;
+	top: 57px;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	display: block;
 }
 
-@media only screen and (min-width : 768px) {
+/* Mobile */
+@media only screen and (max-width : 767px) {
 	:host {
-		top: 57px;
+		top: 50px;
 	}
 }
 
-@media only screen and (min-width : 1200px) {
+/* Extra large screens */
+@media only screen and (min-width : 1199px) {
 	:host {
 		top: 63px;
 	}
@@ -22,16 +24,17 @@
 :host .sidebar {
 	position: relative;
 	display: block;
-	width: 280px;
+	width: 350px;
 	height: 100%;
 	padding: 0 15px;
 	background-color: #343a40;
 	transition: ease-out 0.5s width;
 }
 
-@media only screen and (min-width : 992px) {
+/* Tablets and down */
+@media (max-width: 991px) {
 	:host .sidebar {
-		width: 350px;
+		width: 280px;
 	}
 }
 

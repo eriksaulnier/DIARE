@@ -1,5 +1,6 @@
 import { Component, OnInit, trigger, state, style, animate, transition } from '@angular/core';
 import { JournalsService } from '../_services/index';
+import { Journal } from '../_models/index';
 
 @Component({
   selector: 'journals-page',
@@ -16,40 +17,46 @@ import { JournalsService } from '../_services/index';
 	]
 })
 export class JournalsPageComponent implements OnInit {
-	journals: string[];
-	sidebarState: string = 'out';
-	sidebarToggleIcon: string = 'keyboard_arrow_left';
+	private userid: string;
+	journals: Journal[];
+	sidebar = {
+		state: 'out',
+		currentIcon: 'keyboard_arrow_left',
+		icons: {
+			in: 'keyboard_arrow_right',
+			out: 'keyboard_arrow_left'
+		}
+	}
 
   constructor(
     private journalsService: JournalsService
-  ) { }
+  ) {
+		// Fetch the current userid and update variable
+		let user = JSON.parse(localStorage.getItem('currentUser'));
+		this.userid = user._id;
 
-  // Runs functions as soon as the page starts to load
-  ngOnInit() {
-		// Subscribe to the journalService emitter - currently just used for sending
-		// update messages to the component when things are changed
-		this.journalsService.emitter$.subscribe(
-			message => {
-				// console.log(message);
-				if (message == 'update')
-					this.fetchJournalList();
-			}
+		// Subscribe to the journalService emitter so we can get global update
+		// messages
+		this.journalsService.emitter.subscribe(
+			message => { this.messageRecieved(message) }
 		)
+	}
 
-		// Get the current user's journals
+	// ---------------------------------------------------------------------------
+  // Runs functions as soon as the page starts to load. but after the constructor
+  ngOnInit() {
+		// Fetch all of the user's journals
     this.getJournals();
   }
 
 	// ---------------------------------------------------------------------------
-  // Gets all journals tied to a userid
-  getJournals() {
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    let userid = user._id;
-
-    this.journalsService.getAllJournals(userid)
+  // Gets all of the journals tied to a specified userID, if no id is specified
+	// it will fetch the current user's journals by default.
+  getJournals(userID: string = this.userid) {
+    this.journalsService.getAllJournals(userID)
       .subscribe(
         data => {
-					console.log(this.journals);
+					console.log("Successfully fetched journals for user " + userID);
         },
         error => {
           console.log("Getting journals failed:  " + error._body);
@@ -57,24 +64,38 @@ export class JournalsPageComponent implements OnInit {
   }
 
 	// ---------------------------------------------------------------------------
-  // Updates our journals variable based on localstorage
-	private fetchJournalList() {
-		this.journals = JSON.parse(localStorage.getItem('userJournals'));
-		// console.log('journal list updated');
+	// Toggles the sidebar visibility when the client is able to hide it
+	// (sliding it in or out based on button click)
+	toggleSidebarVisibility() {
+		// Toggle the state between 'in' and 'out'
+		this.sidebar.state = (this.sidebar.state === 'out') ? 'in' : 'out';
+
+		// Update current button icon
+		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
 
-	// Toggles the sidebar visiblity on mobile
-	toggleSidebar() {
-		this.sidebarState = (this.sidebarState === 'out') ? 'in' : 'out';
-		this.sidebarToggleIcon = (this.sidebarState === 'out') ? 'keyboard_arrow_left' : 'keyboard_arrow_right';
-	}
-
-	// Window on resize event
+	// ---------------------------------------------------------------------------
+	// Triggered on resize event from window, used for checking if sidebar should
+	// be toggle-able or not
 	onResize(event) {
-		// Change sidebar based on current window width
 		if (event.target.innerWidth > 768) {
-			this.sidebarState = 'out';
-			this.sidebarToggleIcon = 'keyboard_arrow_left';
+			// Set sidebar back to to default state
+			this.sidebar.state = 'out';
+			this.sidebar.currentIcon = this.sidebar.icons['out'];
 		}
+	}
+
+	// ---------------------------------------------------------------------------
+	// Handles recieving and routing messages from the journalsService
+	messageRecieved(message: string) {
+		if (message == 'update')
+			this.updateJournalList();
+	}
+
+	// ---------------------------------------------------------------------------
+	// Updates the current list of journals based on local storage, called when we
+	// get an update method from the journalsService
+	private updateJournalList() {
+		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
 }
