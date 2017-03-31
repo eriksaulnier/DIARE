@@ -21,7 +21,7 @@ export class AddJournalComponent {
   // Adds journal to database, tied to user's id
   addJournal(titleInput: HTMLInputElement) {
 		// Make sure the title input value is not empty
-		let value = titleInput.value;
+		let value = titleInput.value.replace(/\s+$/, '');
 		if (value == '')
 			return;
 
