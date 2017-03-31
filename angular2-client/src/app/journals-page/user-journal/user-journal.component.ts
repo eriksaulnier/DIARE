@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService } from '../../_services/index';
+import { JournalsService, DialogService } from '../../_services/index';
 import { Journal } from '../../_models/index';
 
 @Component({
@@ -14,6 +14,7 @@ export class UserJournalComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
+		private dialogService: DialogService
 	) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -44,6 +45,17 @@ export class UserJournalComponent implements OnInit {
 					console.log("Deleting journal failed:  " + error._body);
         });
   }
+
+
+	confirmDeleteJournal() {
+		this.dialogService.createDialog(
+			"Confirm Delete",
+			"Are you sure you want to delete <b>" + this.journal.title + "</b>?",
+			"Cancel",
+			"Yes, delete the journal",
+			this.deleteJournal.bind(this)
+		);
+	}
 
 	// ---------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID
