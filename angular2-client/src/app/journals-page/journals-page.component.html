@@ -4,7 +4,7 @@
 		<ul>
 			<user-journal
 				*ngFor="let individual_journal of journals"
-				[journal] = "individual_journal">
+				[journal]="individual_journal">
 			</user-journal>
 		</ul>
 
@@ -15,3 +15,4 @@
 	</div>
 	<a class="sidebar-toggle hidden-sm hidden-md hidden-lg hidden-xl" href="javascript:void(0)" (click)="toggleSidebarVisibility()"><i class="material-icons">{{sidebar.currentIcon}}</i></a>
 </aside>
+<dialog-popup></dialog-popup>

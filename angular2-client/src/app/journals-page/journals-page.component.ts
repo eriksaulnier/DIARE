@@ -1,12 +1,12 @@
 import { Component, OnInit, trigger, state, style, animate, transition } from '@angular/core';
-import { JournalsService } from '../_services/index';
+import { JournalsService, DialogService } from '../_services/index';
 import { Journal } from '../_models/index';
 
 @Component({
   selector: 'journals-page',
   templateUrl: './journals-page.component.html',
   styleUrls: ['./journals-page.component.css'],
-  providers: [JournalsService],
+  providers: [JournalsService, DialogService],
 	animations: [
 		// Sidebar slide in-out animation
 		trigger('slideInOut', [
@@ -29,7 +29,8 @@ export class JournalsPageComponent implements OnInit {
 	}
 
   constructor(
-    private journalsService: JournalsService
+		private journalsService: JournalsService,
+    private dialogService: DialogService
   ) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));

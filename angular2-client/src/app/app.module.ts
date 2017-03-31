@@ -14,6 +14,7 @@ import { RegisterComponent }      from './register/register.component';
 import { JournalsPageComponent }  from './journals-page/journals-page.component';
 import { AddJournalComponent }    from './journals-page/add-journal/add-journal.component';
 import { UserJournalComponent }   from './journals-page/user-journal/user-journal.component';
+import { DialogPopupComponent } from './journals-page/dialog-popup/dialog-popup.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserJournalComponent }   from './journals-page/user-journal/user-journa
     RegisterComponent,
     JournalsPageComponent,
     AddJournalComponent,
-    UserJournalComponent
+    UserJournalComponent,
+    DialogPopupComponent
   ],
   imports: [
     BrowserModule,
