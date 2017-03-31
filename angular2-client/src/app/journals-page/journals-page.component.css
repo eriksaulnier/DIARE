@@ -44,6 +44,14 @@
 	margin: 0;
 	font-size: 22px;
 	color: white;
+	transition: ease-out 0.5s font-size;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+	:host .sidebar h1 {
+		font-size: 18px;
+	}
 }
 
 :host .sidebar ul {
