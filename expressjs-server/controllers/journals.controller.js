@@ -7,7 +7,7 @@ var journalsService = require('../services/journals.service');
 router.post('/create',            createJournal);
 router.delete('/delete/:_id',     deleteJournal);
 router.get('/getAll/:userID',     getAllJournals);
-router.put('/:_id/:newTitle',     updateTitle);
+router.put('/:_id',              updateTitle);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------

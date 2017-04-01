@@ -59,7 +59,7 @@ export class JournalsService {
 	// Will return either an error or {message: string talking about how updating journal title was successful}
 
 	updateTitle(journalid: string, newTitle: string) {
-		return this.http.put(this.api.devURL + '/journals/' + journalid,  {newTitle: newTitle}, this.jwt())
+		return this.http.put(this.config.apiURL + '/journals/' + journalid,  {newTitle: newTitle}, this.jwt())
 			.map((response: Response) => {
 				let data = response.json();
 				return data;
