@@ -6,9 +6,10 @@ var ObjectId =    require('mongodb').ObjectID;
 db.bind('journals');
 
 var service = {};
-service.createJournal = createJournal;
-service.deleteJournal = deleteJournal;
-service.getAllJournals = getAllJournals;
+service.createJournal     = createJournal;
+service.deleteJournal     = deleteJournal;
+service.getAllJournals    = getAllJournals;
+service.updateTitle       = updateTitle;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
 // Creates a new journal in the journals collection. Journal contains user's id, journal id, journal title.
@@ -57,3 +58,17 @@ function getAllJournals (userID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
+// Update the title of a journal
+// Returns success message on success, error message on failure
+
+function updateTitle(_id, newTitle) {
+  var deferred = Q.defer();
+
+  db.journals.update( { _id: ObjectId(_id)}, { $set: {title: newTitle} }, function (err, doc) {
+    if (err) deferred.reject(err.name + ': ' + err.message);
+
+    deferred.resolve({message: 'Journal title successfully updated.'});
+  });
+
+  return deferred.promise;
+}

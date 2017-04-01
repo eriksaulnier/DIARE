@@ -55,6 +55,17 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
+	// Updates the title of a journal
+	// Will return either an error or {message: string talking about how updating journal title was successful}
+
+	updateTitle(journalid: string, newTitle: string) {
+		return this.http.put(this.api.devURL + '/journals/' + journalid,  {newTitle: newTitle}, this.jwt())
+			.map((response: Response) => {
+				let data = response.json();
+				return data;
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes
 
   private jwt() {
