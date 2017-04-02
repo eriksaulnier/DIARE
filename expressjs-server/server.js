@@ -30,15 +30,14 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     /\/main.*/,
     /\/scripts.*/,
     /\/material.*/,
-    /\/ripples.*/,
-
+    /\/ripples.*/
   ] }));
 //--------------------------------------------------------------------------------------------------------------------------------
 // routes
 app.use('/',          require('./controllers/angular.controller'));
 app.use('/users',     require('./controllers/users.controller'));
 app.use('/journals',  require('./controllers/journals.controller'));
-// app.use('/pages',     require('./controllers/pages.controller'));
+app.use('/pages',     require('./controllers/pages.controller'));
 
 //Serve static files from dist directory
 app.use(express.static(__dirname + '/../angular2-client/dist'));

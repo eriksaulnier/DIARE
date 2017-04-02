@@ -7,7 +7,7 @@ var journalsService = require('../services/journals.service');
 router.post('/create',            createJournal);
 router.delete('/delete/:_id',     deleteJournal);
 router.get('/getAll/:userID',     getAllJournals);
-router.put('/:_id',              updateTitle);
+router.put('/:_id',               updateJournal);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -53,10 +53,10 @@ function getAllJournals (req, res) {
     });
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Update title of the journal
+// Update a journal
 
-function updateTitle(req, res) {
-  journalsService.updateTitle(req.params._id, req.body.newTitle)
+function updateJournal(req, res) {
+  journalsService.updateJournal(req.params._id, req.body)
         .then(function (result) {
             // send back success message
             res.send(result);

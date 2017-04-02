@@ -21,7 +21,8 @@ export class JournalsService {
   // Will return either an error or {id: journalID, message: string talking about how adding journal was successful}
 
   create(userid: string, title: string) {
-    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt())
+		var datetime = new Date();
+    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title, created: datetime}, this.jwt())
       .map((response: Response) => {
         let data = response.json();
         return data;
@@ -55,11 +56,12 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
-	// Updates the title of a journal
+	// Updates a journal object
+	// data should be an object where each field is a field you want to update in the journal object, ex: data = {title: 'New Title'}
 	// Will return either an error or {message: string talking about how updating journal title was successful}
 
-	updateTitle(journalid: string, newTitle: string) {
-		return this.http.put(this.config.apiURL + '/journals/' + journalid,  {newTitle: newTitle}, this.jwt())
+	updateJournal(journalID: string, data: any) {
+		return this.http.put(this.config.apiURL + '/journals/' + journalID, data, this.jwt())
 			.map((response: Response) => {
 				let data = response.json();
 				return data;

@@ -9,7 +9,7 @@ var service = {};
 service.createJournal     = createJournal;
 service.deleteJournal     = deleteJournal;
 service.getAllJournals    = getAllJournals;
-service.updateTitle       = updateTitle;
+service.updateJournal     = updateJournal;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
 // Creates a new journal in the journals collection. Journal contains user's id, journal id, journal title.
@@ -58,16 +58,17 @@ function getAllJournals (userID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Update the title of a journal
+// Updates a journal
 // Returns success message on success, error message on failure
 
-function updateTitle(_id, newTitle) {
+function updateJournal(_id, data) {
   var deferred = Q.defer();
+  data.modified = new Date();
 
-  db.journals.update( { _id: ObjectId(_id)}, { $set: {title: newTitle} }, function (err, doc) {
+  db.journals.update( { _id: ObjectId(_id)}, { $set: data }, function (err, doc) {
     if (err) deferred.reject(err.name + ': ' + err.message);
 
-    deferred.resolve({message: 'Journal title successfully updated.'});
+    deferred.resolve({message: 'Journal successfully updated.'});
   });
 
   return deferred.promise;
