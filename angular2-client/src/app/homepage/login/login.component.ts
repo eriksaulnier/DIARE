@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     // reset login status
     this.userService.logout();
 
-
     this.buildForm();
   }
   //------------------------------------------------------------------------------------------------------------------------------

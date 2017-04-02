@@ -8,8 +8,8 @@ var db =        mongo.db(config.connectionString, { native_parser: true });
 db.bind('users');
 
 var service = {};
-service.authenticate = authenticate;
-service.create = create;
+service.authenticate    = authenticate;
+service.create          = create;
 /*
 service.getAll = getAll;
 service.getById = getById;
