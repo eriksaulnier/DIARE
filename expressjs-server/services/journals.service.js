@@ -17,9 +17,9 @@ module.exports = service;
 
 function createJournal (userID, title) {
     var deferred = Q.defer();
-    var createdJournal;
+    var created = new Date();
 
-    db.journals.insert({ userID: userID, title: title}, function(error, doc) {
+    db.journals.insert({ userID: userID, title: title, created: created, modified: created}, function(error, doc) {
       if (error) deferred.reject(error.name + ': ' + error.message);
 
       deferred.resolve({id: doc.ops[0]._id, message: 'Journal successfully added to database.'});
