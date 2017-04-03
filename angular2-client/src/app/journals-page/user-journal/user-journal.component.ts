@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService, DialogService } from '../../_services/index';
+import { JournalsService, DialogService, FormService} from '../../_services/index';
 import { Journal } from '../../_models/index';
 
 @Component({
@@ -14,7 +14,8 @@ export class UserJournalComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private formService: FormService
 	) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -55,6 +56,18 @@ export class UserJournalComponent implements OnInit {
 			"Yes, delete the journal",
 			this.deleteJournal.bind(this)
 		);
+	}
+
+
+	// ---------------------------------------------------------------------------
+	//Edits the current Journal Title
+	editJournalTitle(){
+	  this.formService.createForm(
+	  		"Enter New Title",
+	  		"",
+	  		"Cancel",
+			"Submit"
+	  );
 	}
 
 	// ---------------------------------------------------------------------------
