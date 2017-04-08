@@ -57,15 +57,17 @@ export class JournalsService {
   }
   //------------------------------------------------------------------------------------------------------------------------------
 	// Updates a journal object
-	// data should be an object where each field is a field you want to update in the journal object, ex: data = {title: 'New Title'}
+	// data should be an object where data = {title: 'New Title'}
 	// Will return either an error or {message: string talking about how updating journal title was successful}
 
 	updateJournal(journalID: string, data: any) {
-		return this.http.put(this.config.apiURL + '/journals/' + journalID, data, this.jwt())
-			.map((response: Response) => {
-				let data = response.json();
-				return data;
-			});
+		if (data.title) {
+			return this.http.put(this.config.apiURL + '/journals/' + journalID, data, this.jwt())
+				.map((response: Response) => {
+					let data = response.json();
+					return data;
+				});
+		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes

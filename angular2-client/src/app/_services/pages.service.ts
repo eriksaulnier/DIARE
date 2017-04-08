@@ -18,15 +18,17 @@ export class PagesService {
 
   //------------------------------------------------------------------------------------------------------------------------------
   // Updates a page object
-	// data should be an object where each field is a field you want to update in the page object, ex: data = {title: 'New Title'}
+	// data should be an object where data = {title: 'New Title'}
   // Will return either an error or {message: string talking about how updating page was successful}
 
   updatePage(pageID: string, data: any) {
-    return this.http.put(this.config.apiURL + '/pages/' + pageID,  data, this.jwt())
-      .map((response: Response) => {
-        let data = response.json();
-        return data;
-      });
+		if (data.title) {
+			return this.http.put(this.config.apiURL + '/pages/' + pageID,  data, this.jwt())
+				.map((response: Response) => {
+					let data = response.json();
+					return data;
+				});
+		}
   }
   //------------------------------------------------------------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes

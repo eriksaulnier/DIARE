@@ -3,31 +3,75 @@ var Q =           require('q');
 var mongo =       require('mongoskin');
 var db =          mongo.db(config.connectionString, { native_parser: true });
 var ObjectId =    require('mongodb').ObjectID;
-db.bind('pages');
+db.bind('journals');
 
 var service = {};
 /*
-service.createPage        = createPage;
-service.deletePage        = deletePage;
 service.getAllPages       = getAllPages;
 */
-service.updatePage       = updatePage;
+service.createPage        = createPage;
+service.deletePage        = deletePage;
+service.updatePage        = updatePage;
 module.exports = service;
+//--------------------------------------------------------------------------------------------------------------------------------
+// Create a page within a journal
+// Returns a success message on success, error message on error
 
+function createPage(journalID, title) {
+  var deferred = Q.defer();
+  var date = new Date();
+
+  db.journals.findOneAndUpdate(
+    { _id: ObjectId(journalID) },
+    {
+      $addToSet:  { pages: { _id: ObjectId(), created: date, modified: date, title: title, bullets: [] } },
+      $set:       { modified: date }
+    },
+    { returnNewDocument: true },
+    function (err, newPage) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+      deferred.resolve({message: 'Page successfully added.'});
+    }
+  );
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Deletes a page from a journal
+// Returns success message on success, error message on failure
+
+function deletePage(journalID, pageID) {
+  var deferred = Q.defer();
+  var date = new Date();
+
+  db.journals.update(
+    { _id: ObjectId(journalID) },
+    {
+      $pull:  { pages : { "_id": ObjectId(pageID) } },
+      $set:   { modified: date }
+    },
+    function (err, doc) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+        deferred.resolve({message: 'Page successfully deleted.'});
+    }
+  );
+}
 //--------------------------------------------------------------------------------------------------------------------------------
 // Update a page
 // Returns success message on success, error message on failure
 
-function updatePage(_id, data) {
+function updatePage(journalID, pageID, title) {
   var deferred = Q.defer();
-  data.modified = new Date();
+  var date = new Date();
 
-  db.pages.update( { _id: ObjectId(_id)}, { $set: data }, function (err, doc) {
-    if (err) deferred.reject(err.name + ': ' + err.message);
-
-    deferred.resolve({message: 'Page successfully updated.'});
-  });
-
+  db.journals.update(
+    { _id: ObjectId(_id), "pages._id": ObjectId(pageID)},
+    { $set:
+      {"pages.$.title": title, modified: date}
+    },
+    function (err, doc) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+      deferred.resolve({message: 'Page successfully updated.'});
+    }
+  );
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
