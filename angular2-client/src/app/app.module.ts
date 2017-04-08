@@ -16,6 +16,8 @@ import { AddJournalComponent }    from './journals-page/add-journal/add-journal.
 import { UserJournalComponent }   from './journals-page/user-journal/user-journal.component';
 import { DialogPopupComponent } from './journals-page/dialog-popup/dialog-popup.component';
 import { FormPopupComponent } from './journals-page/form-popup/form-popup.component';
+import { JournalPagesComponent } from './journals-page/user-journal/journal-pages/journal-pages.component';
+import { PageComponent } from './journals-page/user-journal/journal-pages/page/page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FormPopupComponent } from './journals-page/form-popup/form-popup.compon
     AddJournalComponent,
     UserJournalComponent,
     DialogPopupComponent,
-    FormPopupComponent
+    FormPopupComponent,
+    JournalPagesComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,

@@ -82,4 +82,19 @@ export class UserJournalComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
+
+
+// ---------------------------------------------------------------------------
+//adds a page to the current journalpage
+//  addPage(){
+  // First make sure the current user is the same one that owns this journal
+//	if (this.userid != this.journal.userID)
+//		return;
+//	pages = this.journal.pages;
+//	highest_page = pages[pages.length];
+//	pages.push()
+
+  //}
+
+
 }
