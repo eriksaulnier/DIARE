@@ -10,10 +10,16 @@ import { User } from '../_models/index';
 export class UserService {
   constructor(private http: Http, private config: AppConfig) { }
 
+	//------------------------------------------------------------------------------------------------------------------------------
+  // Creates new user account
+  // Returns success status on success or error message on failure
+  create(user: User) {
+    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
+  }
+
   //------------------------------------------------------------------------------------------------------------------------------
   // Logs user into website
   // Will return an error or load a user object into currentUser local storage item
-
   login(username: string, password: string) {
     return this.http.post(this.config.apiURL + '/users/authenticate', { username: username, password: password })
       .map((response: Response) => {
@@ -25,24 +31,27 @@ export class UserService {
         }
       });
   }
+
   //------------------------------------------------------------------------------------------------------------------------------
   // Logs user out of website
   // Will not return anything
-
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
-  //------------------------------------------------------------------------------------------------------------------------------
-  // Creates new user account
-  // Returns success status on success or error message on failure
-  
-  create(user: User) {
-    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
-  }
+
+	//------------------------------------------------------------------------------------------------------------------------------
+	// Checks if user is currently logged into the website
+	// Will return true or false depending on if the user is logged in
+	isLoggedIn() {
+		if (localStorage.getItem('currentUser'))
+			return true;
+		else
+			return false;
+	}
+
   //------------------------------------------------------------------------------------------------------------------------------
   //Creates request header with JWT token -- needed so that you can hit protected api routes
-
   private jwt() {
     // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -51,5 +60,4 @@ export class UserService {
       return new RequestOptions({ headers: headers });
     }
   }
-  //------------------------------------------------------------------------------------------------------------------------------
 }
