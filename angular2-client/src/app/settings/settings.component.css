@@ -6,7 +6,7 @@
 
 :host .back {
 	display: block;
-	margin-bottom: 60px;
+	margin-bottom: 50px;
 	font-size: 16px;
 	line-height: 20px;
 }
@@ -17,9 +17,5 @@
 }
 
 :host .section {
-	margin-bottom: 50px;
-}
-
-:host .section h2 {
-
+	margin-bottom: 40px;
 }
