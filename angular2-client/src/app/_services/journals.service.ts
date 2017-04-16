@@ -39,8 +39,25 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
+	// Gets a journal object tied to a journal id
+	// Will load a journal object into currentJournal local storage item and emit message to update journal
+
+	getJournal(journalid: string) {
+		return this.http.get(this.config.apiURL + '/journals/' + journalid, this.jwt())
+			.map((response: Response) => {
+				let data = response.json();
+				if (data) {
+					// store journal object in local storage
+					localStorage.setItem('currentJournal', JSON.stringify(data));
+
+					// emit update message
+					this.emitterSource.next('updateJournal');
+				}
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
   // Gets all journals tied to a user id
-  // Will load an array of journal objects into userJournals local storage item and tell journal to update
+  // Will load an array of journal objects into userJournals local storage item and emit message to update
 
   getAllJournals(userid: string) {
     return this.http.get(this.config.apiURL + '/journals/getAll/' + userid, this.jwt())

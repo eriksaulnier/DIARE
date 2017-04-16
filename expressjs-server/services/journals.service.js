@@ -9,6 +9,7 @@ var service = {};
 service.createJournal     = createJournal;
 service.deleteJournal     = deleteJournal;
 service.updateJournal     = updateJournal;
+service.getJournal        = getJournal;
 service.getAllJournals    = getAllJournals;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -62,6 +63,19 @@ function updateJournal(journalID, data) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
+// Get a journal with a certain journalID
+// Returns journal object on success, error message on failure
+function getJournal (journalID) {
+  var deferred = Q.defer();
+
+  db.journals.findOne({ _id: ObjectId(journalID) }, function (err, journal) {
+    if (err) deferred.reject(err.name + ': ' + err.message);
+    deferred.resolve(journal);
+  });
+
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
 // Gets all journals that are tied to a certain userID.
 // Returns an array of journal objects on success, and an error message on failure
 
@@ -69,7 +83,9 @@ function getAllJournals (userID) {
   var deferred = Q.defer();
 
   db.journals.find(
-    {userID: userID}).toArray(function (err, journals) {
+    {userID: userID},
+    {userID: 1, title: 1, modified: 1}
+  ).sort({modified: -1}).toArray(function (err, journals) {
       if (err) deferred.reject(err.name + ': ' + err.message);
       deferred.resolve(journals);
     }

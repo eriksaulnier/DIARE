@@ -6,6 +6,7 @@ var journalsService = require('../services/journals.service');
 // routes
 router.post('/create',            createJournal);
 router.delete('/delete/:_id',     deleteJournal);
+router.get('/:_id',               getJournal);
 router.get('/getAll/:userID',     getAllJournals);
 router.put('/:_id',               updateJournal);
 
@@ -37,6 +38,20 @@ function deleteJournal (req, res) {
             // send back error message
             res.status(400).send(err);
         });
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get a journal with a given journal id
+
+function getJournal (req, res) {
+  journalsService.getJournal(req.params.journalID)
+    .then(function (result) {
+      //send back journal objects
+      res.send(result);
+    });
+    .catch(function (err) {
+      //send back error message
+      res.status(400).send(err);
+    });
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Get all journals with a given user id
