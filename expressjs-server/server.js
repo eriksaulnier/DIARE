@@ -23,6 +23,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     '/home',
     '/register',
     '/journals',
+    '/settings',
     '/favicon.ico',
     /\/vendor.*/,
     /\/styles.*/,
