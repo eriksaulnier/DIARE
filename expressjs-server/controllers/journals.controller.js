@@ -47,7 +47,7 @@ function getJournal (req, res) {
     .then(function (result) {
       //send back journal objects
       res.send(result);
-    });
+    })
     .catch(function (err) {
       //send back error message
       res.status(400).send(err);
