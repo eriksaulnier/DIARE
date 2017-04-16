@@ -21,8 +21,7 @@ export class JournalsService {
   // Will return either an error or {id: journalID, message: string talking about how adding journal was successful}
 
   create(userid: string, title: string) {
-		var datetime = new Date();
-    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title, created: datetime}, this.jwt())
+    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt())
       .map((response: Response) => {
         let data = response.json();
         return data;

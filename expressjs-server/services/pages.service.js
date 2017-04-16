@@ -6,9 +6,6 @@ var ObjectId =    require('mongodb').ObjectID;
 db.bind('journals');
 
 var service = {};
-/*
-service.getAllPages       = getAllPages;
-*/
 service.createPage        = createPage;
 service.deletePage        = deletePage;
 service.updatePage        = updatePage;
@@ -65,7 +62,7 @@ function updatePage(journalID, pageID, title) {
   db.journals.update(
     { _id: ObjectId(_id), "pages._id": ObjectId(pageID)},
     { $set:
-      {"pages.$.title": title, modified: date}
+      {"pages.$.title": title, "pages.$.modified": date, modified: date}
     },
     function (err, doc) {
       if (err) deferred.reject(err.name + ': ' + err.message);

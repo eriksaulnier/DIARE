@@ -45,26 +45,9 @@ function deleteJournal (journalID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Updates a journal
-// Returns success message on success, error message on failure
-
-function updateJournal(journalID, data) {
-  var deferred = Q.defer();
-  date = new Date();
-
-  db.journals.update(
-    { _id: ObjectId(journalID)},
-    { $set: {title: data.title, modified: date} },
-    function (err, doc) {
-      if (err) deferred.reject(err.name + ': ' + err.message);
-      deferred.resolve({message: 'Journal successfully updated.'});
-    }
-  );
-  return deferred.promise;
-}
-//--------------------------------------------------------------------------------------------------------------------------------
 // Get a journal with a certain journalID
 // Returns journal object on success, error message on failure
+
 function getJournal (journalID) {
   var deferred = Q.defer();
 
@@ -88,6 +71,24 @@ function getAllJournals (userID) {
   ).sort({modified: -1}).toArray(function (err, journals) {
       if (err) deferred.reject(err.name + ': ' + err.message);
       deferred.resolve(journals);
+    }
+  );
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Updates a journal
+// Returns success message on success, error message on failure
+
+function updateJournal(journalID, data) {
+  var deferred = Q.defer();
+  date = new Date();
+
+  db.journals.update(
+    { _id: ObjectId(journalID)},
+    { $set: {title: data.title, modified: date} },
+    function (err, doc) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+      deferred.resolve({message: 'Journal successfully updated.'});
     }
   );
   return deferred.promise;

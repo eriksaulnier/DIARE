@@ -43,7 +43,7 @@ function deleteJournal (req, res) {
 // Get a journal with a given journal id
 
 function getJournal (req, res) {
-  journalsService.getJournal(req.params.journalID)
+  journalsService.getJournal(req.params._id)
     .then(function (result) {
       //send back journal objects
       res.send(result);
