@@ -1,18 +1,18 @@
 import { NgModule }               from '@angular/core';
 import { RouterModule, Routes }   from '@angular/router';
 
-import { AuthGuard }							from './_services/authguard.service';
-import { UserService } 						from './_services/user.service';
+import { AuthGuard }							from './_guards/auth.guard';
+
 import { HomepageComponent }      from './homepage/homepage.component';
 import { RegisterComponent }      from './register/register.component';
 import { SettingsComponent } 			from './settings/settings.component';
 import { JournalsPageComponent }  from './journals-page/journals-page.component';
 
 const appRoutes: Routes = [
-	{ path: 'home', component: HomepageComponent },
-	{ path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'journals', component: JournalsPageComponent, canActivate: [AuthGuard] },
+	{ path: 'home', 					component: HomepageComponent },
+	{ path: 'register', 			component: RegisterComponent },
+  { path: 'settings', 			component: SettingsComponent, 			canActivate: [AuthGuard] },
+  { path: 'journals', 			component: JournalsPageComponent, 	canActivate: [AuthGuard] },
 	{ path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
@@ -24,8 +24,7 @@ const appRoutes: Routes = [
     RouterModule
   ],
 	providers: [
-		AuthGuard,
-		UserService
+		AuthGuard
 	]
 })
 export class AppRoutingModule {}

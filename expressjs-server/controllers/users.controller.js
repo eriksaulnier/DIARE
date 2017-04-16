@@ -6,10 +6,8 @@ var usersService =  require('../services/users.service');
 // routes
 router.post('/authenticate',    authenticate);
 router.post('/register',        register);
-/* Routes that will likely be added in the near future
-router.put('/:_id', update);
-router.delete('/:_id', _delete);
-*/
+//router.put('/:_id',             update);
+router.delete('/:_id',          deleteUser);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -45,3 +43,19 @@ function register(req, res) {
       res.status(400).send(err);
     });
 }
+//--------------------------------------------------------------------------------------------------------------------------------
+// Updates user email address or password
+
+//--------------------------------------------------------------------------------------------------------------------------------
+// Deletes user's account
+
+function deleteUser(req, res) {
+  usersService.deleteUser(req.params._id)
+    .then(function (result) {
+      res.send(result);
+    })
+    .catch(function (err) {
+      res.status(400).send(err);
+    });
+}
+//--------------------------------------------------------------------------------------------------------------------------------

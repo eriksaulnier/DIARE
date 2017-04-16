@@ -45,6 +45,22 @@ function deleteJournal (journalID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
+// Delete all journals with a given userID from the journals collection
+// Returns a success message on success, error message on failure
+
+function deleteAllJournals (userID) {
+  var deferred = Q.defer();
+
+	db.journals.remove(
+    { userID: ObjectId(userID) },
+    function(error, doc) {
+      if (error) deferred.reject(error.name + ': ' + error.message);
+      deferred.resolve({message: 'All journals successfully removed from database.'});
+    }
+  );
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
 // Get a journal with a certain journalID
 // Returns journal object on success, error message on failure
 

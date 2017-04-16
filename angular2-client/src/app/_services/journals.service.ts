@@ -38,6 +38,16 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
+	// Deletes all journals with specified user id
+	// Will return either an error or {message: string talking about how deleting all journals was successful}
+
+	deleteAll(userid: string) {
+		return this.http.delete(this.config.apiURL + '/journals/deleteAll/'+ userid, this.jwt())
+			.map((response: Response) => {
+				return response;
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
 	// Gets a journal object tied to a journal id
 	// Will load a journal object into currentJournal local storage item and emit message to update journal
 

@@ -4,11 +4,12 @@ var router = express.Router();
 var journalsService = require('../services/journals.service');
 
 // routes
-router.post('/create',            createJournal);
-router.delete('/delete/:_id',     deleteJournal);
-router.get('/:_id',               getJournal);
-router.get('/getAll/:userID',     getAllJournals);
-router.put('/:_id',               updateJournal);
+router.post('/create',                createJournal);
+router.delete('/delete/:_id',         deleteJournal);
+router.delete('/deleteAll/:userid',   deleteAllJournals);
+router.get('/:_id',                   getJournal);
+router.get('/getAll/:userID',         getAllJournals);
+router.put('/:_id',                   updateJournal);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -30,6 +31,20 @@ function createJournal (req, res) {
 
 function deleteJournal (req, res) {
     journalsService.deleteJournal(req.params._id)
+        .then(function (result) {
+            // send back success message
+            res.send(result);
+        })
+        .catch(function (err) {
+            // send back error message
+            res.status(400).send(err);
+        });
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Delete all journals with given user ID from the journals collection
+
+function deleteAllJournals (req, res) {
+    journalsService.deleteAllJournals(req.params.userid)
         .then(function (result) {
             // send back success message
             res.send(result);
