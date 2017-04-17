@@ -35,6 +35,9 @@ export class FormPopupComponent {
 		    if (value == '')
 				return;
 			this.callback(value);
+
+			// Reset title input field
+			titleInput.value = null;
 		}
 	}
 }
