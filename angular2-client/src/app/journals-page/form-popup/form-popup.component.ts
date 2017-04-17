@@ -27,11 +27,14 @@ export class FormPopupComponent {
 			}
 		)
 	}
-
 	// ---------------------------------------------------------------------------
 	// Function called when the accept button is clicked
-	onClick() {
-		if (this.callback)
-			this.callback();
+	onClick(titleInput: HTMLInputElement) {
+		if (this.callback){
+			let value = titleInput.value.replace(/\s+$/, '');
+		    if (value == '')
+				return;
+			this.callback(value);
+		}
 	}
 }
