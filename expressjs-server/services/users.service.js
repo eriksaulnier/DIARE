@@ -5,17 +5,14 @@ var bcrypt =    require('bcryptjs');
 var Q =         require('q');
 var mongo =     require('mongoskin');
 var db =        mongo.db(config.connectionString, { native_parser: true });
+var ObjectId =  require('mongodb').ObjectID;
 db.bind('users');
 
 var service = {};
 service.authenticate    = authenticate;
 service.create          = create;
-/*
-service.getAll = getAll;
-service.getById = getById;
-service.update = update;
-service.delete = _delete;
-*/
+//service.update          = update;
+service.deleteUser      = deleteUser;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
 // Checks whether or not login information that user provided is correct.
@@ -79,3 +76,21 @@ function create(userParam) {
     }
     return deferred.promise;
 }
+//--------------------------------------------------------------------------------------------------------------------------------
+// Deletes user account from database
+// Returns success message on success, error message on failure
+
+function deleteUser(_id) {
+  var deferred = Q.defer();
+
+  db.users.remove(
+      { _id: ObjectID(_id) },
+      function (err) {
+          if (err) deferred.reject(err.name + ': ' + err.message);
+
+          deferred.resolve({message: 'User account successfully removed.'});
+      });
+
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------

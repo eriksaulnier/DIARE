@@ -1,0 +1,64 @@
+<div class="container">
+	<a class="back" routerLink="/journals" routerLinkActive="active"><i class="material-icons">keyboard_backspace</i> Back to Journals</a>
+	<div class="section">
+		<h3>Change Email</h3>
+		<form [formGroup]="changeEmailForm"  (ngSubmit)="emailFormSubmitted()" action="">
+			<!-- New Email Input ************************************************************************************************-->
+			<div class="form-group label-floating">
+				<label for="newEmail" class="control-label">New Email Address *</label>
+				<input name="newEmail" type="email" class="form-control" formControlName="newEmail" id="newEmail">
+				<div *ngIf="formErrors.newEmail" class="formInputError">
+					{{ formErrors.newEmail }}
+				</div>
+			</div>
+
+			<!-- New Email Confirm Input ****************************************************************************************-->
+			<div class="form-group label-floating">
+				<label for="newEmail2" class="control-label">Confirm New Email Address *</label>
+				<input name="newEmail2" type="email" class="form-control" formControlName="newEmail2" id="newEmail2">
+				<div *ngIf="formErrors.newEmail2" class="formInputError">
+					{{ formErrors.newEmail2 }}
+				</div>
+			</div>
+
+			<!-- Submit Button *************************************************************************************************-->
+			<button class="btn btn-raised" type="submit">Update Email</button>
+		</form>
+	</div>
+	<div class="section">
+		<h3>Change Password</h3>
+		<form [formGroup]="changePswdForm"  (ngSubmit)="pswdFormSubmitted()" action="">
+			<!-- Current Password Input ****************************************************************************************-->
+			<div class="form-group label-floating">
+				<label for="curPswd" class="control-label">Current Password *</label>
+				<input name="curPswd" type="password" class="form-control" formControlName="curPswd" id="curPswd">
+			</div>
+
+			<!-- New Password Input *******************************************************************************************-->
+			<div class="form-group label-floating">
+				<label for="newPswd" class="control-label">New Password *</label>
+				<input name="newPswd" type="password" class="form-control" formControlName="newPswd" id="newPswd">
+				<div *ngIf="formErrors.newPswd" class="formInputError">
+					{{ formErrors.newPswd }}
+				</div>
+			</div>
+
+			<!-- New Password Confirm Input ************************************************************************************-->
+			<div class="form-group label-floating">
+				<label for="newPswd2" class="control-label">Confirm New Password *</label>
+				<input name="newPswd2" type="password" class="form-control" formControlName="newPswd2" id="newPswd2">
+				<div *ngIf="formErrors.newPswd2" class="formInputError">
+					{{ formErrors.newPswd2 }}
+				</div>
+			</div>
+
+			<!-- Submit Button ************************************************************************************************-->
+			<button class="btn btn-raised" type="submit">Update Password</button>
+		</form>
+	</div>
+	<div class="section">
+		<h3 style="color: #f44336">Delete Account</h3>
+		<a href="javascript:void(0)" class="btn btn-raised btn-danger" (click)="confirmDeleteAccount()">Delete your account</a>
+	</div>
+</div>
+<dialog-popup></dialog-popup>

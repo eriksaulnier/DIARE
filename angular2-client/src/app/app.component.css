@@ -1,12 +1,82 @@
 :host .navbar {
+	min-height: 57px;
 	margin-bottom: 0;
 	z-index: 20;
 }
 
-.white-icon {
-  color: #d7efec;
+:host .navbar .navbar-header {
+	height: 57px;
 }
 
-#search-li {
-  margin-right: 30px;
+:host .navbar .navbar-brand {
+	height: 57px;
+	padding: 0 0 0 15px;
+	font-size: 26px;
+	line-height: 57px;
+}
+
+:host .navbar .navbar-nav li a {
+	height: 57px;
+	padding: 0 15px;
+	font-size: 16px;
+	line-height: 57px;
+}
+
+:host .navbar .navbar-nav li i {
+	margin-right: 5px;
+	font-size: 22px;
+}
+
+:host .navbar .navbar-nav li:last-child a {
+	padding: 0 0 0 15px;
+}
+
+:host .navbar .navbar-nav #search-li {
+	padding: 0;
+  margin-right: 15px;
+	font-size: 16px;
+}
+
+:host .navbar .navbar-nav #search-li i {
+	color: #fff;
+	font-size: 22px;
+}
+
+:host .navbar .navbar-nav #search-li input#search-bar {
+	margin: 5.5px 0;
+	font-size: 16px;
+}
+
+/* Mobile */
+@media only screen and (max-width : 767px) {
+	:host .navbar {
+		min-height: 50px;
+	}
+
+	:host .navbar .navbar-header {
+		height: 50px;
+	}
+
+	:host .navbar .navbar-brand,
+	:host .navbar .navbar-nav li a {
+		height: 50px;
+		line-height: 50px;
+	}
+}
+
+/* Extra large screens */
+@media only screen and (min-width : 1199px) {
+	:host .navbar {
+		min-height: 63px;
+	}
+
+	:host .navbar .navbar-header {
+		height: 63px;
+	}
+
+	:host .navbar .navbar-brand,
+	:host .navbar .navbar-nav li a {
+		height: 63px;
+		line-height: 63px;
+	}
 }

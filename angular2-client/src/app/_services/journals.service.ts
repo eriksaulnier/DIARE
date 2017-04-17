@@ -21,8 +21,7 @@ export class JournalsService {
   // Will return either an error or {id: journalID, message: string talking about how adding journal was successful}
 
   create(userid: string, title: string) {
-		var datetime = new Date();
-    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title, created: datetime}, this.jwt())
+    return this.http.post(this.config.apiURL + '/journals/create', {id: userid, title: title}, this.jwt())
       .map((response: Response) => {
         let data = response.json();
         return data;
@@ -39,8 +38,35 @@ export class JournalsService {
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------
+	// Deletes all journals with specified user id
+	// Will return either an error or {message: string talking about how deleting all journals was successful}
+
+	deleteAll(userid: string) {
+		return this.http.delete(this.config.apiURL + '/journals/deleteAll/'+ userid, this.jwt())
+			.map((response: Response) => {
+				return response;
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
+	// Gets a journal object tied to a journal id
+	// Will load a journal object into currentJournal local storage item and emit message to update journal
+
+	getJournal(journalid: string) {
+		return this.http.get(this.config.apiURL + '/journals/' + journalid, this.jwt())
+			.map((response: Response) => {
+				let data = response.json();
+				if (data) {
+					// store journal object in local storage
+					localStorage.setItem('currentJournal', JSON.stringify(data));
+
+					// emit update message
+					this.emitterSource.next('updateJournal');
+				}
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
   // Gets all journals tied to a user id
-  // Will load an array of journal objects into userJournals local storage item and tell journal to update
+  // Will load an array of journal objects into userJournals local storage item and emit message to update
 
   getAllJournals(userid: string) {
     return this.http.get(this.config.apiURL + '/journals/getAll/' + userid, this.jwt())

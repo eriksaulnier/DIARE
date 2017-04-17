@@ -1,0 +1,21 @@
+:host .container {
+	max-width: 600px;
+	margin: 20px auto 0;
+	padding: 0 15px;
+}
+
+:host .back {
+	display: block;
+	margin-bottom: 50px;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+:host .back i {
+	font-size: 20px;
+	line-height: 20px;
+}
+
+:host .section {
+	margin-bottom: 40px;
+}

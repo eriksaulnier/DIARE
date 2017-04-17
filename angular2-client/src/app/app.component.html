@@ -8,18 +8,18 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 				</button>
-        <a routerLink="/journals" routerLinkActive="active" class="navbar-brand" *ngIf="userLoggedIn()">{{ title }}</a>
-        <a routerLink="/home" routerLinkActive="active" class="navbar-brand" *ngIf="userLoggedOut()">{{ title }}</a>
+        <a routerLink="/journals" routerLinkActive="active" class="navbar-brand" *ngIf="isLoggedIn()">{{ title }}</a>
+        <a routerLink="/home" routerLinkActive="active" class="navbar-brand" *ngIf="!isLoggedIn()">{{ title }}</a>
       </div>
 
       <!-- Items in Navbar -->
       <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav navbar-right" *ngIf="userLoggedIn()">
+        <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()">
           <li id="search-li">
             <form class="navbar-form">
               <div class="form-group form-group-lg">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="material-icons white-icon">search</i></span>
+                  <span class="input-group-addon"><i class="material-icons">search</i></span>
                   <input type="text" class="form-control col-sm-8" id="search-bar" placeholder="Search">
                 </div>
               </div>
@@ -30,12 +30,12 @@
 
           <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
-              User Account<b class="caret"></b>
+            Account <i class="material-icons">arrow_drop_down</i>
             </a>
 
             <ul class="dropdown-menu" id="dropdownMenu1">
-              <li><a routerLink="/home" routerLinkActive="active">Logout</a></li>
-              <li><a href="javascript:void(0)">Account Settings</a></li>
+							<li><a routerLink="/settings" routerLinkActive="active"><i class="material-icons">settings</i> Settings</a></li>
+              <li><a routerLink="/home" routerLinkActive="active"><i class="material-icons">exit_to_app</i> Logout</a></li>
             </ul>
           </li>
 

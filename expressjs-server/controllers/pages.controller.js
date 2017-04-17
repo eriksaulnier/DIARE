@@ -7,7 +7,6 @@ var pagesService =      require('../services/pages.service');
 router.post('/create',                              createPage);
 router.delete('/delete/:journal_id/:page_id',       deletePage);
 router.put('/:journal_id/:page_id',                 updatePage);
-//router.get('/getAll/:journalID',     getAllPages);
 module.exports = router;
 
 //--------------------------------------------------------------------------------------------------------------------------------

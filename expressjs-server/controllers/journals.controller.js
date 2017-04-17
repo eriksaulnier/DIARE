@@ -4,10 +4,12 @@ var router = express.Router();
 var journalsService = require('../services/journals.service');
 
 // routes
-router.post('/create',            createJournal);
-router.delete('/delete/:_id',     deleteJournal);
-router.get('/getAll/:userID',     getAllJournals);
-router.put('/:_id',               updateJournal);
+router.post('/create',                createJournal);
+router.delete('/delete/:_id',         deleteJournal);
+router.delete('/deleteAll/:userid',   deleteAllJournals);
+router.get('/:_id',                   getJournal);
+router.get('/getAll/:userID',         getAllJournals);
+router.put('/:_id',                   updateJournal);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -37,6 +39,34 @@ function deleteJournal (req, res) {
             // send back error message
             res.status(400).send(err);
         });
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Delete all journals with given user ID from the journals collection
+
+function deleteAllJournals (req, res) {
+    journalsService.deleteAllJournals(req.params.userid)
+        .then(function (result) {
+            // send back success message
+            res.send(result);
+        })
+        .catch(function (err) {
+            // send back error message
+            res.status(400).send(err);
+        });
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get a journal with a given journal id
+
+function getJournal (req, res) {
+  journalsService.getJournal(req.params._id)
+    .then(function (result) {
+      //send back journal objects
+      res.send(result);
+    })
+    .catch(function (err) {
+      //send back error message
+      res.status(400).send(err);
+    });
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Get all journals with a given user id

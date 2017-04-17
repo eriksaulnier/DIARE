@@ -10,6 +10,13 @@ import { User } from '../_models/index';
 export class UserService {
   constructor(private http: Http, private config: AppConfig) { }
 
+	//------------------------------------------------------------------------------------------------------------------------------
+  // Creates new user account
+  // Returns success status on success or error message on failure
+
+  create(user: User) {
+    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
+  }
   //------------------------------------------------------------------------------------------------------------------------------
   // Logs user into website
   // Will return an error or load a user object into currentUser local storage item
@@ -34,11 +41,14 @@ export class UserService {
     localStorage.removeItem('currentUser');
   }
   //------------------------------------------------------------------------------------------------------------------------------
-  // Creates new user account
-  // Returns success status on success or error message on failure
-  
-  create(user: User) {
-    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
+  // Deletes user account with specified id
+  // Will return either an error or {message: string talking about how deleting user was successful}
+
+  delete(id: string) {
+    return this.http.delete(this.config.apiURL + '/users/delete/'+ id, this.jwt())
+      .map((response: Response) => {
+        return response;
+      });
   }
   //------------------------------------------------------------------------------------------------------------------------------
   //Creates request header with JWT token -- needed so that you can hit protected api routes
@@ -51,5 +61,4 @@ export class UserService {
       return new RequestOptions({ headers: headers });
     }
   }
-  //------------------------------------------------------------------------------------------------------------------------------
 }
