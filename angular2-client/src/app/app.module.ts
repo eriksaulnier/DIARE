@@ -14,7 +14,6 @@ import { RegisterComponent }      from './register/register.component';
 import { JournalsPageComponent }  from './journals-page/journals-page.component';
 import { AddJournalComponent }    from './journals-page/add-journal/add-journal.component';
 import { UserJournalComponent }   from './journals-page/user-journal/user-journal.component';
-<<<<<<< HEAD
 import { DialogPopupComponent } from './journals-page/dialog-popup/dialog-popup.component';
 import { FormPopupComponent } from './journals-page/form-popup/form-popup.component';
 import { JournalPagesComponent } from './journals-page/user-journal/journal-pages/journal-pages.component';
@@ -22,11 +21,7 @@ import { PageComponent } from './journals-page/user-journal/journal-pages/page/p
 import { PageDisplayComponent } from './journals-page/page-display/page-display.component';
 import { PageToolbarComponent } from './journals-page/page-toolbar/page-toolbar.component';
 import { AddPageComponent } from './journals-page/page-toolbar/add-page/add-page.component';
-=======
-import { DialogPopupComponent } 	from './journals-page/dialog-popup/dialog-popup.component';
-import { FormPopupComponent } 		from './journals-page/form-popup/form-popup.component';
-import { SettingsComponent } 			from './settings/settings.component';
->>>>>>> origin/master
+import { SettingsComponent }      from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +38,7 @@ import { SettingsComponent } 			from './settings/settings.component';
     PageComponent,
     PageDisplayComponent,
     PageToolbarComponent,
-    AddPageComponent
+    AddPageComponent,
     SettingsComponent
   ],
   imports: [
