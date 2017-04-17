@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AddPageComponent } from './add-page/add-page.component';
 
 @Component({
-  selector: 'app-page-toolbar',
+  selector: 'page-toolbar',
   templateUrl: './page-toolbar.component.html',
   styleUrls: ['./page-toolbar.component.css']
 })
