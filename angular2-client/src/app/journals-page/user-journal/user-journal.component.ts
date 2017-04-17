@@ -60,13 +60,33 @@ export class UserJournalComponent implements OnInit {
 
 
 	// ---------------------------------------------------------------------------
+	
+	updateTitle(value: string){
+		// First make sure the current user is the same one that owns this journal
+		//alert to check if newTitle value is = to value
+		//alert(value)
+		if (this.userid != this.journal.userID)
+			return;
+
+	  this.journalsService.updateJournal(this.journal._id, value)
+      .subscribe(
+        data => {
+					console.log("Successfully updated journal title.");
+					this.getJournals();
+        },
+        error => {
+					console.log("Updating journal title failed:  " + error._body);
+        });
+	}	
+
 	//Edits the current Journal Title
 	editJournalTitle(){
 	  this.formService.createForm(
 	  		"Enter New Title",
 	  		"",
 	  		"Cancel",
-			"Submit"
+			"Submit",
+			this.updateTitle.bind(this)
 	  );
 	}
 
