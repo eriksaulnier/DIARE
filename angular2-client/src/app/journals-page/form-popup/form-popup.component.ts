@@ -40,4 +40,9 @@ export class FormPopupComponent {
 			titleInput.value = null;
 		}
 	}
+
+	cancelClick(titleInput: HTMLInputElement){
+		// Reset title input field
+			titleInput.value = null;
+	}
 }

@@ -12,7 +12,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{content.cancelBtn}}</button>
+        <button type="button" class="btn btn-default" (click)="cancelClick(newTitle)" data-dismiss="modal">{{content.cancelBtn}}</button>
         <button type="button" class="btn btn-primary" (click)="onClick(newTitle)" data-dismiss="modal">{{content.acceptBtn}}</button>
       </div>
     </div>
