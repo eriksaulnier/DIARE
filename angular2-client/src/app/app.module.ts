@@ -23,7 +23,6 @@ import { PageComponent } from './journals-page/user-journal/journal-pages/page/p
 import { PageDisplayComponent } from './journals-page/page-display/page-display.component';
 import { PageToolbarComponent } from './journals-page/page-toolbar/page-toolbar.component';
 import { AddPageComponent } from './journals-page/page-toolbar/add-page/add-page.component';
-import { SettingsComponent }      from './settings/settings.component';
 
 
 @NgModule({
@@ -38,12 +37,12 @@ import { SettingsComponent }      from './settings/settings.component';
     AddJournalComponent,
     UserJournalComponent,
     DialogPopupComponent,
+    JournalPagesComponent,
     FormPopupComponent,
     PageComponent,
     PageDisplayComponent,
     PageToolbarComponent,
-    AddPageComponent,
-    SettingsComponent
+    AddPageComponent
   ],
   imports: [
     BrowserModule,
