@@ -4,10 +4,10 @@ var router =        express.Router();
 var usersService =  require('../services/users.service');
 
 // routes
-router.post('/authenticate',    authenticate);
-router.post('/register',        register);
-//router.put('/:_id',             update);
-router.delete('/delete/:_id',          deleteUser);
+router.post('/authenticate',          authenticate);
+router.post('/register',              register);
+router.put('/:_id',                   update);
+router.delete('/delete/:_id',         deleteUser);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -46,6 +46,23 @@ function register(req, res) {
 //--------------------------------------------------------------------------------------------------------------------------------
 // Updates user email address or password
 
+function update(req, res) {
+  usersService.update(req.params._id, req.body)
+    .then(function (result) {
+      if (result) {
+        //update succeeded, send back success message
+        res.send(result);
+      }
+      else {
+        //update failed because user entered wrong password, send back error message
+        res.status(401).send('Current password is incorrect.');
+      }
+    })
+    .catch(function (err) {
+      //send back error message
+      res.status(400).send(err);
+    });
+}
 //--------------------------------------------------------------------------------------------------------------------------------
 // Deletes user's account
 
