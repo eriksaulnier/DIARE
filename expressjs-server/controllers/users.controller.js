@@ -34,9 +34,9 @@ function authenticate(req, res) {
 
 function register(req, res) {
   usersService.create(req.body)
-    .then(function () {
-      // Send back success status
-      res.sendStatus(200);
+    .then(function (result) {
+      // Send back new user object
+      res.send(result);
     })
     .catch(function (err) {
       // Send back error message

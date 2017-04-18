@@ -42,7 +42,7 @@ function authenticate(email, password) {
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Creates a new user in the users collection. User contains id, email, hashed password, whether the user is an admin or not
-// Returns success status on success, error message on failure
+// Returns new user object on success, error message on failure
 
 function create(userParam) {
   var deferred = Q.defer();
@@ -67,11 +67,16 @@ function create(userParam) {
       // Add hashed password to user object
       user.hash = bcrypt.hashSync(userParam.password, 10);
 
-      // Insert user object into users collection in DB
-      db.users.insert(user, function (err, doc) {
+      // Insert user object into users collection in DB, return user object
+      db.users.insertOne(user, function (err, doc) {
           if (err) deferred.reject(err.name + ': ' + err.message);
 
-          deferred.resolve();
+          deferred.resolve({
+            _id:    doc.insertedId,
+            email:  user.email,
+            admin:  user.admin,
+            token:  jwt.sign({ sub: doc.insertedId }, config.secret)
+          });
         });
     }
     return deferred.promise;

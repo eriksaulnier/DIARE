@@ -3,20 +3,22 @@ import { NgModule }                           from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule }                         from '@angular/http';
 
-import { AppComponent }         from './app.component';
-import { AppRoutingModule }     from './app-routing.module';
-import { AppConfig }            from './app.config';
+import { AppComponent }                       from './app.component';
+import { AppRoutingModule }                   from './app-routing.module';
+import { AppConfig }                          from './app.config';
 
-import { HomepageComponent }      from './homepage/homepage.component';
-import { LoginComponent }         from './homepage/login/login.component';
-import { RegisterComponent }      from './register/register.component';
+import { HomepageComponent }                  from './homepage/homepage.component';
+import { LoginComponent }                     from './homepage/login/login.component';
+import { RegisterComponent }                  from './register/register.component';
+import { AboutComponent }                     from './about/about.component';
+import { SettingsComponent } 			            from './settings/settings.component';
 
-import { JournalsPageComponent }  from './journals-page/journals-page.component';
-import { AddJournalComponent }    from './journals-page/add-journal/add-journal.component';
-import { UserJournalComponent }   from './journals-page/user-journal/user-journal.component';
-import { DialogPopupComponent } 	from './journals-page/dialog-popup/dialog-popup.component';
-import { FormPopupComponent } 		from './journals-page/form-popup/form-popup.component';
-import { SettingsComponent } 			from './settings/settings.component';
+
+import { JournalsPageComponent }              from './journals-page/journals-page.component';
+import { AddJournalComponent }                from './journals-page/add-journal/add-journal.component';
+import { UserJournalComponent }               from './journals-page/user-journal/user-journal.component';
+import { DialogPopupComponent } 	            from './journals-page/dialog-popup/dialog-popup.component';
+import { FormPopupComponent } 		            from './journals-page/form-popup/form-popup.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,13 @@ import { SettingsComponent } 			from './settings/settings.component';
     HomepageComponent,
     LoginComponent,
     RegisterComponent,
+    AboutComponent,
+    SettingsComponent,
     JournalsPageComponent,
     AddJournalComponent,
     UserJournalComponent,
     DialogPopupComponent,
-    FormPopupComponent,
-    SettingsComponent
+    FormPopupComponent
   ],
   imports: [
     BrowserModule,

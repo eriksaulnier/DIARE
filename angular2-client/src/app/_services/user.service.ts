@@ -15,7 +15,17 @@ export class UserService {
   // Returns success status on success or error message on failure
 
   create(user: User) {
-    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt());
+    return this.http.post(this.config.apiURL + '/users/register', user, this.jwt())
+      .map((response: Response) => {
+        let user = response.json();
+
+        // registration successful if there's a jwt token in the response
+        if (user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+
+        return user;
+      });
   }
   //------------------------------------------------------------------------------------------------------------------------------
   // Logs user into website
@@ -30,6 +40,8 @@ export class UserService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
         }
+
+        return user;
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------

@@ -60,9 +60,9 @@ export class RegisterComponent implements OnInit {
     this.userService.create(this.user)
     .subscribe(
       data => {
-        // On successful registration, clear form and take user to login page
+        // On successful registration, clear form and take user to about page
         this.registrationForm.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/about']);
       },
       error => {
         // On error, print to console
