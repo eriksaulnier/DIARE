@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PagesService} from '../../_services/index';
+import { Page} from '../../_models/index';
 
 @Component({
   selector: 'page-display',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-display.component.css']
 })
 export class PageDisplayComponent implements OnInit {
-
+	@Input() page: Page;
   constructor() { }
 
   ngOnInit() {

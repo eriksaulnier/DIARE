@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Page } from '../../../_models/index';
 
 @Component({
@@ -8,7 +8,7 @@ import { Page } from '../../../_models/index';
 })
 export class JournalPagesComponent implements OnInit {
 	
-	pages: Page[];
+	@Input() pages: Page[];
 
   constructor() { }
 

@@ -5,13 +5,31 @@ import { Page} from '../../../../_models/index';
 @Component({
   selector: 'page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.css']
+  styleUrls: ['./page.component.css'],
 })
 export class PageComponent implements OnInit {
 	@Input() page: Page;
-  constructor() { }
+
+  constructor(
+		private pagesService: PagesService,
+	) {
+		
+	}
+
 
   ngOnInit() {
   }
+
+
+
+// ---------------------------------------------------------------------------
+//adds a page to the current journalpage
+//addPage(){
+
+//	pages = this.journal.pages;
+//	highest_page = pages[pages.length];
+//	pages.push()
+
+  //}
 
 }

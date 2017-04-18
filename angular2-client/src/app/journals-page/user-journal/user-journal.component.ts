@@ -9,7 +9,6 @@ import { Journal } from '../../_models/index';
 })
 export class UserJournalComponent implements OnInit {
 	private userid: string;
-
 	@Input() journal: Journal;
 
   constructor(
@@ -84,17 +83,10 @@ export class UserJournalComponent implements OnInit {
   }
 
 
-// ---------------------------------------------------------------------------
-//adds a page to the current journalpage
-//  addPage(){
-  // First make sure the current user is the same one that owns this journal
-//	if (this.userid != this.journal.userID)
-//		return;
-//	pages = this.journal.pages;
-//	highest_page = pages[pages.length];
-//	pages.push()
-
-  //}
-
-
+  // ---------------------------------------------------------------------------
+	//  Set the clicked journal as the currentJournal
+	onClick(something){
+		this.journalsService.getJournal(something.journal._id);
+	  	console.log("(onClick) Successfully set journal as currentJournal " + something.journal._id);
+	}
 }

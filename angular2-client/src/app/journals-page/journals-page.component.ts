@@ -1,4 +1,4 @@
-import { Component, OnInit, trigger, state, style, animate, transition } from '@angular/core';
+import { Component, OnInit, trigger, state, style, animate, transition, Input } from '@angular/core';
 import { JournalsService, DialogService, FormService} from '../_services/index';
 import { Journal } from '../_models/index';
 
@@ -18,7 +18,7 @@ import { Journal } from '../_models/index';
 })
 export class JournalsPageComponent implements OnInit {
 	private userid: string;
-	journals: Journal[];
+	@Input() journals: Journal[];
 	sidebar = {
 		state: 'out',
 		currentIcon: 'keyboard_arrow_left',
@@ -101,4 +101,7 @@ export class JournalsPageComponent implements OnInit {
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
+
+
+	
 }
