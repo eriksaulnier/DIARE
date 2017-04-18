@@ -36,9 +36,9 @@ export class RegisterComponent implements OnInit {
   buildForm(): void {
     this.registrationForm = this.fb.group({
       'email1':     ['', [emailValidator, Validators.required]],
-      'email2':     ['', [emailValidator, Validators.required]],
+      'email2':     ['', [Validators.required]],
       'password1':  ['', [Validators.minLength(8), Validators.required]],
-      'password2':  ['', [Validators.minLength(8), Validators.required]]
+      'password2':  ['', [Validators.required]]
     });
 
     // Handle changes to form data
@@ -52,15 +52,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.user.email = this.registrationForm.value.email1;
+    this.user.email = this.user.email.toLowerCase();
+
     this.user.password = this.registrationForm.value.password1;
     this.user.admin = false;
 
     this.userService.create(this.user)
     .subscribe(
       data => {
-        // On successful registration, clear form and take user to login page
+        // On successful registration, clear form and take user to about page
         this.registrationForm.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/about']);
       },
       error => {
         // On error, print to console
@@ -86,6 +88,20 @@ export class RegisterComponent implements OnInit {
           this.formErrors[field] += messages[key] + ' ';
         }
       }
+
+      // make sure the two email fields match
+      if (field === 'email2' && form.get('email2').value != null && form.get('email2').value != '') {
+        if (form.get('email1').value.toLowerCase() !== form.get('email2').value.toLowerCase()) {
+          this.formErrors['email2'] += this.validationMessages.email2['mismatch'] + ' ';
+        }
+      }
+
+      // make sure the two password fields match
+      if (field === 'password2' && form.get('password2').value != '') {
+        if (form.get('password1').value !== form.get('password2').value) {
+          this.formErrors['password2'] += this.validationMessages.password2['mismatch'] + '';
+        }
+      }
     }
   }
   //------------------------------------------------------------------------------------------------------------------------------
@@ -105,8 +121,9 @@ export class RegisterComponent implements OnInit {
 
     },
     'email2': {
-      'pattern':            'Confirm Email Address is not valid.',
-      'required':           'Confirm Email Address is required.'
+      'pattern':            'Email Address is not valid.',
+      'required':           'Confirm Email Address is required.',
+      'mismatch':           'Emails do not match.'
     },
     'password1': {
       'minlength':          'Password must be at least 8 characters long.',
@@ -114,7 +131,8 @@ export class RegisterComponent implements OnInit {
     },
     'password2': {
       'minlength':          'Password must be at least 8 characters long.',
-      'required':           'Confirm Password is required.'
+      'required':           'Confirm Password is required.',
+      'mismatch':           'Passwords do not match.'
     }
   };
 }

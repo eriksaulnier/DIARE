@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { UserService, DialogService } from './../_services/index';
+import { Router } from '@angular/router';
+import { UserService, JournalsService, DialogService } from './../_services/index';
 
 // Regex email validator
 const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -9,7 +10,7 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
-	providers: [DialogService]
+	providers: [DialogService, JournalsService, UserService]
 })
 export class SettingsComponent implements OnInit {
 	private userid: string;
@@ -18,7 +19,10 @@ export class SettingsComponent implements OnInit {
 
   constructor(
 		private fb: FormBuilder,
-		private dialogService: DialogService
+		private dialogService: DialogService,
+		private journalsService: JournalsService,
+		private userService: UserService,
+		private router: Router
 	) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -134,8 +138,29 @@ export class SettingsComponent implements OnInit {
 	}
 
 	deleteAccount() {
-		// Tell the userService to delete this user.
-		console.log('TODO: Delete user ' + this.userid);
+		// Delete all journals the belong to the user
+		this.journalsService.deleteAll(this.userid)
+		.subscribe(
+		  data => {
+				console.log("Successfully deleted all journals for " + this.userid);
+
+				// Delete the user
+				this.userService.delete(this.userid)
+				.subscribe(
+				  data => {
+						console.log("Successfully deleted user " + this.userid);
+
+						// Logout and return to home screen
+						this.userService.logout()
+						this.router.navigate(['/home']);
+				  },
+				  error => {
+						console.log("Deleting user failed:  " + error._body);
+				  });
+		  },
+		  error => {
+				console.log("Deleting user journals failed:  " + error._body);
+		  });
 	}
 
 	confirmDeleteAccount() {

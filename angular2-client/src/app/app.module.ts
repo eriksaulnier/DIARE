@@ -3,13 +3,15 @@ import { NgModule }                           from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule }                         from '@angular/http';
 
-import { AppComponent }         from './app.component';
-import { AppRoutingModule }     from './app-routing.module';
-import { AppConfig }            from './app.config';
+import { AppComponent }                       from './app.component';
+import { AppRoutingModule }                   from './app-routing.module';
+import { AppConfig }                          from './app.config';
 
-import { HomepageComponent }      from './homepage/homepage.component';
-import { LoginComponent }         from './homepage/login/login.component';
-import { RegisterComponent }      from './register/register.component';
+import { HomepageComponent }                  from './homepage/homepage.component';
+import { LoginComponent }                     from './homepage/login/login.component';
+import { RegisterComponent }                  from './register/register.component';
+import { AboutComponent }                     from './about/about.component';
+import { SettingsComponent } 			            from './settings/settings.component';
 
 import { JournalsPageComponent }  from './journals-page/journals-page.component';
 import { AddJournalComponent }    from './journals-page/add-journal/add-journal.component';
@@ -23,18 +25,20 @@ import { PageToolbarComponent } from './journals-page/page-toolbar/page-toolbar.
 import { AddPageComponent } from './journals-page/page-toolbar/add-page/add-page.component';
 import { SettingsComponent }      from './settings/settings.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
     RegisterComponent,
+    AboutComponent,
+    SettingsComponent,
     JournalsPageComponent,
     AddJournalComponent,
     UserJournalComponent,
     DialogPopupComponent,
     FormPopupComponent,
-    JournalPagesComponent,
     PageComponent,
     PageDisplayComponent,
     PageToolbarComponent,

@@ -86,7 +86,7 @@ function getAllJournals (req, res) {
 // Update a journal
 
 function updateJournal(req, res) {
-  journalsService.updateJournal(req.params._id, req.body.title)
+  journalsService.updateJournal(req.params._id, req.body)
         .then(function (result) {
             // send back success message
             res.send(result);

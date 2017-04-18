@@ -8,12 +8,12 @@
       <div class="modal-body">
         <form>
           <p [innerHTML]="content.body"></p>
-          <input type="string" name="newTitle" class="form-control" autocomplete="off">
+          <input type="string" name="newTitle" class="form-control" autocomplete="off" #newTitle>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{content.cancelBtn}}</button>
-        <button type="button" class="btn btn-primary" (click)="onClick()" data-dismiss="modal">{{content.acceptBtn}}</button>
+        <button type="button" class="btn btn-default" (click)="cancelClick(newTitle)" data-dismiss="modal">{{content.cancelBtn}}</button>
+        <button type="button" class="btn btn-primary" (click)="onClick(newTitle)" data-dismiss="modal">{{content.acceptBtn}}</button>
       </div>
     </div>
   </div>

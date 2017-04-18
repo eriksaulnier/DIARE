@@ -11,10 +11,9 @@ var port = process.env.PORT || 4000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Use JWT authentication to secure the API
-// The paths in the following array do not require the user to have a token
 //--------------------------------------------------------------------------------------------------------------------------------
+// Use JWT authentication to secure the API
+// The paths in the following array do not require the user to have a token, or they're handled by the Angular 2 Client
 app.use(expressJwt({ secret: config.secret }).unless({ path:
   [
     '/users/authenticate',
@@ -24,6 +23,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     '/register',
     '/journals',
     '/settings',
+    '/about',
     '/favicon.ico',
     /\/vendor.*/,
     /\/styles.*/,

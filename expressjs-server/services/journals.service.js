@@ -8,6 +8,7 @@ db.bind('journals');
 var service = {};
 service.createJournal     = createJournal;
 service.deleteJournal     = deleteJournal;
+service.deleteAllJournals = deleteAllJournals;
 service.updateJournal     = updateJournal;
 service.getJournal        = getJournal;
 service.getAllJournals    = getAllJournals;
@@ -52,7 +53,7 @@ function deleteAllJournals (userID) {
   var deferred = Q.defer();
 
 	db.journals.remove(
-    { userID: ObjectId(userID) },
+    { userID: userID },
     function(error, doc) {
       if (error) deferred.reject(error.name + ': ' + error.message);
       deferred.resolve({message: 'All journals successfully removed from database.'});

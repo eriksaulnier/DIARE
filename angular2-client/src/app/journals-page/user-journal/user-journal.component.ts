@@ -27,7 +27,7 @@ export class UserJournalComponent implements OnInit {
 
   }
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
   // Deletes the current journal
 	deleteJournal() {
 		// First make sure the current user is the same one that owns this journal
@@ -46,7 +46,6 @@ export class UserJournalComponent implements OnInit {
         });
   }
 
-
 	confirmDeleteJournal() {
 		this.dialogService.createDialog(
 			"Confirm Delete",
@@ -57,19 +56,32 @@ export class UserJournalComponent implements OnInit {
 		);
 	}
 
+	// -----------------------------------------------------------------------------------------------------------------------------
+  // Update the journal title
+	updateTitle(value: string) {
+	  this.journalsService.updateJournal(this.journal._id, {title: value})
+     .subscribe(
+       data => {
+					console.log("Successfully updated journal " + this.journal._id);
+					this.getJournals();
+       },
+       error => {
+					console.log("Updating journal title failed:  " + error._body);
+       });
+ 	}
 
-	// ---------------------------------------------------------------------------
-	//Edits the current Journal Title
-	editJournalTitle(){
-	  this.formService.createForm(
-	  		"Enter New Title",
-	  		"",
-	  		"Cancel",
-			"Submit"
-	  );
-	}
+  //Edits the current journal title
+  editJournalTitle(){
+    this.formService.createForm(
+      "Enter New Title",
+      "",
+      "Cancel",
+      "Submit",
+      this.updateTitle.bind(this)
+    );
+  }
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID
   getJournals(userID: string = this.userid) {
     this.journalsService.getAllJournals(userID)
