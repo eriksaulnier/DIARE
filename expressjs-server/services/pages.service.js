@@ -30,6 +30,7 @@ function createPage(journalID, title) {
       deferred.resolve({message: 'Page successfully added.'});
     }
   );
+  return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Deletes a page from a journal
@@ -50,6 +51,7 @@ function deletePage(journalID, pageID) {
         deferred.resolve({message: 'Page successfully deleted.'});
     }
   );
+  return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Update a page
