@@ -84,7 +84,7 @@ function deleteUser(_id) {
   var deferred = Q.defer();
 
   db.users.remove(
-      { _id: ObjectID(_id) },
+      { _id: ObjectId(_id) },
       function (err) {
           if (err) deferred.reject(err.name + ': ' + err.message);
 
