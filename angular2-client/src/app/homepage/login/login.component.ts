@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
   // Submit the login data. Either take user to journals page on success, or handle error
 
   onSubmit() {
-    this.userService.login(this.loginForm.value.email, this.loginForm.value.password)
+    let email: string = this.loginForm.value.email.toLowercase();
+    
+    this.userService.login(email, this.loginForm.value.password)
       .subscribe(
         data => {
           // On successful login, clear form and take user to journals page

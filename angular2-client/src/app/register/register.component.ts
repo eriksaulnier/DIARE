@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
   // Submit the registration data. Either take user to login page on success, or handle error
 
   onSubmit() {
-    this.user.email = this.registrationForm.value.email1;
+    this.user.email = this.registrationForm.value.email1.toLowercase();
     this.user.password = this.registrationForm.value.password1;
     this.user.admin = false;
 
