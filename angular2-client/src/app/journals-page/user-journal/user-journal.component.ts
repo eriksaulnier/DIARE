@@ -9,7 +9,6 @@ import { Journal } from '../../_models/index';
 })
 export class UserJournalComponent implements OnInit {
 	private userid: string;
-
 	@Input() journal: Journal;
 
   constructor(
@@ -94,4 +93,22 @@ export class UserJournalComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
+
+
+  // ---------------------------------------------------------------------------
+	//  Set the clicked journal as the currentJournal
+	onClick(something){
+		this.journalsService.getJournal(something.journal._id).subscribe(
+			data => {
+				console.log("(onClick) Successfully set journal as currentJournal " + something.journal._id);
+			},
+
+			error => {
+				console.log("Setting current Journal failed: " + error._body);
+
+			}
+
+		)
+	  	
+	}
 }

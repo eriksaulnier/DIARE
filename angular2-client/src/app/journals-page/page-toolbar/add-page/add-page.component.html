@@ -1,0 +1,10 @@
+<form>
+	<div class="form-group label-floating is-empty">
+		<label for="PageTitle" class="control-label">Page Title</label>
+		<input type="string" name="PageTitle" class="form-control" autocomplete="off" #PageTitle>
+	</div>
+
+	<button class="btn btn-raised btn-primary" (click)="addPage(PageTitle)">
+		Add Page
+	</button>
+</form>
