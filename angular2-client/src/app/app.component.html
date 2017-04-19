@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <!-- Mobile screen navigation button -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNav">
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
@@ -13,7 +13,7 @@
       </div>
 
       <!-- Items in Navbar -->
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <div class="navbar-collapse collapse navbar-responsive-collapse" id="mainNav">
         <!-- NAV LINKS FOR WHEN USER IS LOGGED IN *****************************************************************************-->
         <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()">
           <li id="search-li">
@@ -26,25 +26,25 @@
               </div>
             </form>
           </li>
-          <li class="active"><a routerLink="/journals" routerLinkActive="active">Journals</a></li>
-          <li><a routerLink="/about">About</a></li>
+          <li class="active"><a routerLink="/journals" routerLinkActive="active" data-toggle="collapse" data-target="#mainNav">Journals</a></li>
+          <li><a routerLink="/about" data-toggle="collapse" data-target="#mainNav.in">About</a></li>
 
           <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
             Account <i class="material-icons">arrow_drop_down</i>
             </a>
 
-            <ul class="dropdown-menu" id="dropdownMenu1">
-							<li><a routerLink="/settings" routerLinkActive="active"><i class="material-icons">settings</i> Settings</a></li>
-              <li><a routerLink="/home" routerLinkActive="active"><i class="material-icons">exit_to_app</i> Logout</a></li>
+            <ul class="dropdown-menu" id="dropdownMenu1" >
+							<li><a routerLink="/settings" routerLinkActive="active"><i class="material-icons" data-toggle="collapse" data-target="#mainNav.in">settings</i> Settings</a></li>
+              <li><a routerLink="/home" routerLinkActive="active"><i class="material-icons" data-toggle="collapse" data-target="#mainNav.in">exit_to_app</i> Logout</a></li>
             </ul>
           </li>
         </ul>
         <!-- NAV LINKS FOR WHEN USER IS LOGGED OUT ****************************************************************************-->
-        <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()">
+        <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()" >
           <li class="active"><a routerLink="/home" routerLinkActive="active">Login</a></li>
-          <li><a routerLink="/register">Register</a></li>
-          <li><a routerLink="/about">About</a></li>
+          <li><a routerLink="/register" data-toggle="collapse" data-target="#mainNav.in">Register</a></li>
+          <li><a routerLink="/about" data-toggle="collapse" data-target="#mainNav.in">About</a></li>
         </ul>
 
       </div>
