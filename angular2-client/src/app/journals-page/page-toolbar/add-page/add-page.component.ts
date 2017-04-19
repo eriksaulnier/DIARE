@@ -31,7 +31,6 @@ export class AddPageComponent implements OnInit {
 
   	this.pagesService.create(currentJournal._id, value).subscribe(
   		data => {
-  		console.log("Successfully created added new page " + data.id);
 
   		// Reset title input field
 					PageTitleInput.value = null;
@@ -44,8 +43,18 @@ export class AddPageComponent implements OnInit {
 
 
     //update currentJournal
-    this.journalsService.getJournal(currentJournal._id);
-    console.log("(addpage) Successfully updated currentJournal " + currentJournal._id,);
+    this.journalsService.getJournal(currentJournal._id).subscribe(
+      data => {
+        console.log("(addpage) Successfully updated currentJournal " + currentJournal._id);
+      },
+
+      error => {
+        console.log("Setting current Journal failed: " + error._body);
+
+      }
+
+    )
+    
 
   }
 

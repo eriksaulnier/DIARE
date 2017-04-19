@@ -98,7 +98,17 @@ export class UserJournalComponent implements OnInit {
   // ---------------------------------------------------------------------------
 	//  Set the clicked journal as the currentJournal
 	onClick(something){
-		this.journalsService.getJournal(something.journal._id);
-	  	console.log("(onClick) Successfully set journal as currentJournal " + something.journal._id);
+		this.journalsService.getJournal(something.journal._id).subscribe(
+			data => {
+				console.log("(onClick) Successfully set journal as currentJournal " + something.journal._id);
+			},
+
+			error => {
+				console.log("Setting current Journal failed: " + error._body);
+
+			}
+
+		)
+	  	
 	}
 }

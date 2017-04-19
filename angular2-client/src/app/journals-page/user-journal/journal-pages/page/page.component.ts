@@ -22,14 +22,4 @@ export class PageComponent implements OnInit {
 
 
 
-// ---------------------------------------------------------------------------
-//adds a page to the current journalpage
-//addPage(){
-
-//	pages = this.journal.pages;
-//	highest_page = pages[pages.length];
-//	pages.push()
-
-  //}
-
 }
