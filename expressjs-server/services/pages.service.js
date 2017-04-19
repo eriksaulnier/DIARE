@@ -52,7 +52,7 @@ function deletePage(journalID, pageID) {
   );
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Update a page
+// Update a page title.
 // Returns success message on success, error message on failure
 
 function updatePage(journalID, pageID, title) {

@@ -93,7 +93,7 @@ function getAllJournals (userID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Updates a journal
+// Updates a journal title.
 // Returns success message on success, error message on failure
 
 function updateJournal(journalID, data) {
