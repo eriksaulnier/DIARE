@@ -115,10 +115,17 @@ export class SettingsComponent implements OnInit {
 		}
 
 		// Change the user's email
-		console.log('TODO: Change email');
+		this.userService.update(this.userid, {email: newEmail})
+		.subscribe(
+		  data => {
+				console.log("Successfully changed email for " + this.userid);
 
-		// Reset the form only if we succeed
-		this.changeEmailForm.reset();
+				// Reset the form only if we succeed
+				this.changeEmailForm.reset();
+		  },
+		  error => {
+				console.log("Changing user email failed:  " + error._body);
+		  });
 	}
 
 	pswdFormSubmitted() {
@@ -131,10 +138,17 @@ export class SettingsComponent implements OnInit {
 		}
 
 		// Change the user's password
-		console.log('TODO: Change password');
+		this.userService.update(this.userid, {oldPassword: curPswd, newPassword: newPswd})
+		.subscribe(
+		  data => {
+				console.log("Successfully changed password for " + this.userid);
 
-		// Reset the form only if we succeed
-		this.changePswdForm.reset();
+				// Reset the form only if we succeed
+				this.changePswdForm.reset();
+		  },
+		  error => {
+				console.log("Changing user password failed:  " + error._body);
+		  });
 	}
 
 	deleteAccount() {
