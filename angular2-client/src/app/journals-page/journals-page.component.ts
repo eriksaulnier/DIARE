@@ -45,14 +45,14 @@ export class JournalsPageComponent implements OnInit {
 		)
 	}
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
 		// Fetch all of the user's journals
     this.getJournals();
   }
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID, if no id is specified
 	// it will fetch the current user's journals by default.
   getJournals(userID: string = this.userid) {
@@ -66,7 +66,7 @@ export class JournalsPageComponent implements OnInit {
         });
   }
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
 	// Toggles the sidebar visibility when the client is able to hide it
 	// (sliding it in or out based on button click)
 	toggleSidebarVisibility() {
@@ -77,7 +77,7 @@ export class JournalsPageComponent implements OnInit {
 		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
 	onResize(event) {
@@ -88,14 +88,14 @@ export class JournalsPageComponent implements OnInit {
 		}
 	}
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
 	messageRecieved(message: string) {
 		if (message == 'update')
 			this.updateJournalList();
 	}
 
-	// ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------------------
 	// Updates the current list of journals based on local storage, called when we
 	// get an update method from the journalsService
 	private updateJournalList() {

@@ -98,7 +98,6 @@ function update(userid, data) {
         deferred.resolve({message: 'Email address successfully updated.'});
       }
     );
-
   }
 
   //Update user's password
@@ -110,7 +109,6 @@ function update(userid, data) {
       // Compare plain oldPassword with hashed password from DB
       if (user && bcrypt.compareSync(data.oldPassword, user.hash)) {
         // Passwords matched, update password in DB to newPassword
-
         // Add hashed password to data object
         data.hash = bcrypt.hashSync(data.newPassword, 10);
 
@@ -130,8 +128,7 @@ function update(userid, data) {
       }
     });
   }
-
-return deferred.promise;
+  return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Deletes user account from database

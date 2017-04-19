@@ -53,6 +53,19 @@ export class UserService {
     localStorage.removeItem('currentUser');
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  // Updates user account tied to specified userid
+  // To update user email, data must be an object where {email: "new email address here"}
+  // To update user password, data must be an object where {oldPassword: "old password here", newPassword: "new password here"}
+  // Will return either an error message or {message: string talking about how updating user was successful}
+
+  update(userid: string, data: any) {
+    return this.http.put(this.config.apiURL + '/users/' + userid, data, this.jwt())
+      .map((response: Response) => {
+        let data = response.json();
+        return data;
+      });
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
   // Deletes user account with specified id
   // Will return either an error or {message: string talking about how deleting user was successful}
 
