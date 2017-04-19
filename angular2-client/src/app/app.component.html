@@ -34,14 +34,14 @@
             Account <i class="material-icons">arrow_drop_down</i>
             </a>
 
-            <ul class="dropdown-menu" id="dropdownMenu1" >
+            <ul class="dropdown-menu" id="dropdownMenu1" data-toggle="collapse" data-target="#mainNav.in">
 							<li><a routerLink="/settings" routerLinkActive="active"><i class="material-icons" data-toggle="collapse" data-target="#mainNav.in">settings</i> Settings</a></li>
               <li><a routerLink="/home" routerLinkActive="active"><i class="material-icons" data-toggle="collapse" data-target="#mainNav.in">exit_to_app</i> Logout</a></li>
             </ul>
           </li>
         </ul>
         <!-- NAV LINKS FOR WHEN USER IS LOGGED OUT ****************************************************************************-->
-        <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()" >
+        <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()">
           <li class="active"><a routerLink="/home" routerLinkActive="active">Login</a></li>
           <li><a routerLink="/register" data-toggle="collapse" data-target="#mainNav.in">Register</a></li>
           <li><a routerLink="/about" data-toggle="collapse" data-target="#mainNav.in">About</a></li>
