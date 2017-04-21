@@ -5,17 +5,17 @@ var bulletsService =    require('../services/bullets.service');
 
 // routes
 router.post('/add',                                         addBullet);
-router.delete('/delete/:journal_id/:page_id/:bullet_id',    deleteBullet);
-router.get('/:_id',                                         getBullets);
-router.put('/:journal_id/:page_id/:bullet_id',              updateBullet);
-router.get('search/:_id',                                         searchBullets);
+router.delete('/delete/:journalID/:pageID/:bulletID',       deleteBullet);
+router.get('/:userID',                                      getBullets);
+router.put('/:journalID/:pageID/:bulletID',                 updateBullet);
+router.get('search/:userID/:query',                         searchBullets);
 module.exports = router;
 
 //--------------------------------------------------------------------------------------------------------------------------------
 // Add a bullet to a page.
 
 function addBullet (req, res) {
-    bulletsService.addBullet(req.body.journalID, req.body.pageID, req.body.data)
+    bulletsService.addBullet(req.params.journalID, req.params.pageID, req.params.data)
         .then(function (result) {
             res.send(result);
         })
@@ -27,7 +27,7 @@ function addBullet (req, res) {
 // Delete a bullet from a page
 
 function deleteBullet (req, res) {
-    bulletsService.deleteBullet(req.body.journalID, req.body.pageID, req.body.bulletID)
+    bulletsService.deleteBullet(req.params.journalID, req.params.pageID, req.body)
         .then(function (result) {
             res.send(result);
         })
@@ -39,7 +39,7 @@ function deleteBullet (req, res) {
 // Retrieve all bullets tied to a user
 
 function getBullets (req, res) {
-    bulletsService.getAllBullets(req.body.userID)
+    bulletsService.getAllBullets(req.params.userID)
         .then(function (result) {
             res.send(result);
         })
@@ -51,7 +51,7 @@ function getBullets (req, res) {
 // Update a page's bullet
 
 function updateBullet (req, res) {
-    bulletsService.updateBullet(req.body.journalID, req.body.pageID, req.body.bulletID, req.body.data)
+    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.params.data)
         .then(function (result) {
             res.send(result);
         })
@@ -63,7 +63,7 @@ function updateBullet (req, res) {
 // Search for all bullets under a specific query.
 
 function searchBullets (req, res) {
-    bulletsService.searchBullets(req.body.userID, req.body.query)
+    bulletsService.searchBullets(req.params.userID, req.params.query)
         .then(function (result) {
             res.send(result);
         })

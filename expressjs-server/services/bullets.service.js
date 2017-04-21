@@ -18,7 +18,9 @@ module.exports = service;
 // Returns a success message on success, or an error message on failure.
 
 function addBullet (journalID, pageID, data) {
+    var deferred = Q.defer();
     var date = new Date();
+
     db.journals.updateOne(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) }, 
         { $push: { "pages.$.bullets": { 
@@ -34,13 +36,17 @@ function addBullet (journalID, pageID, data) {
             deferred.resolve({message: 'Bullet successfully added.'});
         }
     );
+
+    return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Deletes a bullet from a page.
 // Returns a success message on success, or an error message on failure.
 
 function deleteBullet (journalID, pageID, bulletID) {
+    var deferred = Q.defer();
     var date = new Date();
+
     db.journals.updateOne(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
         { $pull: { "pages.$.bullets": { _id: ObjectID(bulletID) } } },
@@ -50,33 +56,45 @@ function deleteBullet (journalID, pageID, bulletID) {
             deferred.resolve({ message: 'Bullet successfully updated.' });
         }
     );
+
+    return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Gets all bullets that are tied to a certain userID.
 // Returns an array of bullet objects on success, and an error message on failure.
 
 function getAllBullets (userID) {
+    var deferred = Q.defer();
     var bullets = [];
-    var result = db.journals.find(
+
+    db.journals.find(
         { userID: ObjectId(userID) },
-        { pages: 1 }
+        { _id: 0, pages: 1 }
+    ).toArray(
+        function (err, pages_array) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            pages_array.forEach(function (doc) {
+                bullets = bullets.concat(doc.bullets);
+            });
+            deferred.resolve(bullets);
+        }
     );
-    result.forEach(function (doc) {
-        bullets = bullets.concat(doc.bullets);
-    });
-    deferred.resolve(bullets);
+
+    return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Updates properties of a bullet
 // Returns a success message on success, or an error message on failure.
 
 function updateBullet (journalID, pageID, bulletID, data) {
+    var deferred = Q.defer();
     var cursor = db.journals.find(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
         { pages: 1 }
     );
-
     var result = cursor.hasNext() ? cursor.next : null;
+
     if (result) {
         for (var i = 0; i < result.pages.bullets; i++) {
             var bullet = results.pages.bullets[i];
@@ -98,6 +116,8 @@ function updateBullet (journalID, pageID, bulletID, data) {
     } else {
         deferred.reject({ message: "Failed to update bullet." });
     }
+
+    return deferred.promise;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -105,14 +125,23 @@ function updateBullet (journalID, pageID, bulletID, data) {
 // Returns an array of bullet objects on success, and an error message on failure.
 
 function searchBullets (userID, query) {
+    var deferred = Q.defer();
     var bullets = [];
     var query_property = query.property;
-    var result = db.journals.find(
+
+    db.journals.find(
         { userID: ObjectId(userID), query_parameter: query.term },
-        { pages: 1 }
+        { _id: 0, pages: 1 }
+    ).toArray(
+        function (err, pages_array) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            result.forEach(function (doc) {
+                bullets = bullets.concat(doc.bullets);
+            });
+            deferred.resolve(bullets);
+        }
     );
-    result.forEach(function (doc) {
-        bullets = bullets.concat(doc.bullets);
-    });
-    deferred.resolve(bullets);
+
+    return deferred.promise;
 }
