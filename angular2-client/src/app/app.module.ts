@@ -23,6 +23,7 @@ import { PageComponent } from './journals-page/user-journal/journal-pages/page/p
 import { PageDisplayComponent } from './journals-page/page-display/page-display.component';
 import { PageToolbarComponent } from './journals-page/page-toolbar/page-toolbar.component';
 import { AddPageComponent } from './journals-page/page-toolbar/add-page/add-page.component';
+import { PageBulletComponent } from './journals-page/page-display/page-bullet/page-bullet.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AddPageComponent } from './journals-page/page-toolbar/add-page/add-page
     PageComponent,
     PageDisplayComponent,
     PageToolbarComponent,
-    AddPageComponent
+    AddPageComponent,
+    PageBulletComponent
   ],
   imports: [
     BrowserModule,

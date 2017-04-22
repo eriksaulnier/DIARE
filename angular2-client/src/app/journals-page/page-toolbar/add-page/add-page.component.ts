@@ -23,7 +23,7 @@ export class AddPageComponent implements OnInit {
   // Adds page to the currentJournal
   addPage(PageTitleInput: HTMLInputElement){
     let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-    console.log(currentJournal);
+    //console.log(currentJournal);
   	// Make sure the title input value is not empty
 		let value = PageTitleInput.value.replace(/\s+$/, '');
 		if (value == '')
