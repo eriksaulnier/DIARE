@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DIARE';
+  isIn = false;
+
+  toggleState() {
+      let bool = this.isIn;
+      this.isIn = bool === false ? true : false;
+  }
 
 	isLoggedIn() {
 		if (localStorage.getItem('currentUser'))
@@ -14,4 +20,5 @@ export class AppComponent {
 		else
 			return false;
 	}
+
 }
