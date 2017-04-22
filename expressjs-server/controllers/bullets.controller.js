@@ -15,7 +15,7 @@ module.exports = router;
 // Add a bullet to a page.
 
 function addBullet (req, res) {
-    bulletsService.addBullet(req.params.journalID, req.params.pageID, req.params.data)
+    bulletsService.addBullet(req.body.journalID, req.body.pageID, req.body.data)
         .then(function (result) {
             res.send(result);
         })
@@ -51,7 +51,7 @@ function getBullets (req, res) {
 // Update a page's bullet
 
 function updateBullet (req, res) {
-    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.params.data)
+    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.body)
         .then(function (result) {
             res.send(result);
         })

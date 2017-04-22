@@ -74,8 +74,10 @@ function getAllBullets (userID) {
         function (err, pages_array) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
-            pages_array.forEach(function (doc) {
-                bullets = bullets.concat(doc.bullets);
+            pages_array.forEach(function (pages) {
+                pages.forEach(function (page) {
+                    bullets = bullets.concat(page.bullets);
+                });
             });
             deferred.resolve(bullets);
         }
@@ -136,8 +138,10 @@ function searchBullets (userID, query) {
         function (err, pages_array) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
-            result.forEach(function (doc) {
-                bullets = bullets.concat(doc.bullets);
+            pages_array.forEach(function (pages) {
+                pages.forEach(function (page) {
+                    bullets = bullets.concat(page.bullets);
+                });
             });
             deferred.resolve(bullets);
         }
