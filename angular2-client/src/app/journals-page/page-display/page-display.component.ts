@@ -8,10 +8,18 @@ import { Page} from '../../_models/index';
   styleUrls: ['./page-display.component.css']
 })
 export class PageDisplayComponent implements OnInit {
-	@Input() page: Page;
-  constructor() { }
+	currentJournal: any;
+	recentPage: any;
+	
 
+  constructor() {
+  	this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+	this.recentPage = this.currentJournal.pages[0];
+   }
+// ---------------------------------------------------------------------------
+  // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
+  	
   }
 
 }
