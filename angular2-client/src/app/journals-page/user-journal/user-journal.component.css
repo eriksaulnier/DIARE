@@ -1,23 +1,40 @@
-:host {
+:host .journal {
 	display: block;
+	box-sizing: border-box;
+	height: calc(35px + 24px);
 	padding: 12px;
 	margin-bottom: 10px;
 	background-color: #464b50;
+	cursor: pointer;
+	color: #e2e2e2;
+	border-left: 4px solid transparent;
+	transition: box-shadow 0.3s ease-out,
+							background-color 0.3s ease-out,
+							color 0.3s ease-out,
+							border 0.2s ease-out;
 }
 
-:host p {
+:host(.active) .journal {
+	background-color: #52585d;
+	color: #ffffff;
+	border-left: 4px solid #009688;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10), 0 3px 1px -2px rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10), 0 3px 1px -2px rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.08);
+}
+
+:host .journal p {
 	display: inline-block;
+	vertical-align: top;
 	margin: 0;
 	font-size: 18px;
 	line-height: 35px;
-	color: white;
 }
 
-:host .options {
+:host .journal .options {
 	float: right;
 	line-height: 35px;
 }
 
-:host .options i {
+:host .journal .options i {
 	color: grey;
 }

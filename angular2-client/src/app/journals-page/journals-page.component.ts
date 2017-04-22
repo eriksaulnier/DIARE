@@ -18,6 +18,7 @@ import { Journal } from '../_models/index';
 })
 export class JournalsPageComponent implements OnInit {
 	private userid: string;
+	public currentJournal: string;
 	@Input() journals: Journal[];
 	sidebar = {
 		state: 'out',
@@ -30,13 +31,15 @@ export class JournalsPageComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
-        private dialogService: DialogService,
-        private formService: FormService
-
+    private dialogService: DialogService,
+    private formService: FormService
   ) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		this.userid = user._id;
+
+		// Fetch the current journal
+		this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
@@ -91,8 +94,16 @@ export class JournalsPageComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
 	messageRecieved(message: string) {
-		if (message == 'update')
-			this.updateJournalList();
+		switch (message) {
+			case 'update': {
+				this.updateJournalList();
+				break;
+			}
+			case 'updateJournal': {
+				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+				break;
+			}
+		}
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +112,4 @@ export class JournalsPageComponent implements OnInit {
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
-
-
-	
 }
