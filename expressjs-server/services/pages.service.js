@@ -54,7 +54,7 @@ function deletePage(journalID, pageID) {
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Update a page
+// Update a page title.
 // Returns success message on success, error message on failure
 
 function updatePage(journalID, pageID, title) {
