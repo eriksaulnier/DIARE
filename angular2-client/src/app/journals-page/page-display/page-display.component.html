@@ -1,7 +1,9 @@
-<div>
+<div *ngIf = "recentPage != null">
 	<h1>{{recentPage.title}}</h1>
-	<page-bullet
-	*ngFor = "let bullet of recentPage.bullets"
-	[bulletText] = "bullet.text"
-	></page-bullet>
+	<div *ngIf = "recentPage.bullets != null">
+		<page-bullet
+		*ngFor = "let bullet of recentPage.bullets"
+		[bulletText] = "bullet.text"
+		></page-bullet>
+	<div>
 </div>
