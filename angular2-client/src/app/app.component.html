@@ -26,8 +26,8 @@
               </div>
             </form>
           </li>
-          <li class="active"><a routerLink="/journals" routerLinkActive="active">Journals</a></li>
-          <li><a routerLink="/about">About</a></li>
+          <li class="active"><a routerLink="/journals" routerLinkActive="active" (click)="toggleState()">Journals</a></li>
+          <li><a routerLink="/about" (click)="toggleState()">About</a></li>
 
           <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
@@ -35,8 +35,8 @@
             </a>
 
             <ul class="dropdown-menu" id="dropdownMenu1" data-toggle="collapse">
-							<li><a routerLink="/settings"><i class="material-icons">settings</i> Settings</a></li>
-              <li><a routerLink="/home"><i class="material-icons">exit_to_app</i> Logout</a></li>
+							<li><a routerLink="/settings" (click)="toggleState()"><i class="material-icons">settings</i> Settings</a></li>
+              <li><a routerLink="/home" (click)="toggleState()"><i class="material-icons">exit_to_app</i> Logout</a></li>
             </ul>
           </li>
         </ul>
