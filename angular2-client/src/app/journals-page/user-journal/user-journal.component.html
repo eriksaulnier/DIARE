@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" [hidden]="journal==null">
 	<div class="journal" (click)="selectJournal(this, $event)">
 		<p class="title">{{journal['title']}}</p>
 		<p class="modified">Last Modified {{journal['modified'] | date: 'M/d h:mm a'}}</p>
