@@ -1,9 +1,13 @@
+:host .wrapper {
+	margin-bottom: 10px;
+}
+
 :host .journal {
+	position: relative;
 	display: block;
 	box-sizing: border-box;
-	height: calc(35px + 24px);
+	height: calc(40px + 24px);
 	padding: 12px;
-	margin-bottom: 10px;
 	background-color: #464b50;
 	cursor: pointer;
 	color: #e2e2e2;
@@ -23,16 +27,24 @@
 }
 
 :host .journal p {
-	display: inline-block;
-	vertical-align: top;
 	margin: 0;
-	font-size: 18px;
-	line-height: 35px;
+}
+:host .journal .title {
+	line-height: 25px;
+	font-size: 17px;
+}
+
+:host .journal .modified {
+	line-height: 15px;
+	font-size: 13px;
+	opacity: 0.5;
 }
 
 :host .journal .options {
-	float: right;
-	line-height: 35px;
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	line-height: 40px;
 }
 
 :host .journal .options i {

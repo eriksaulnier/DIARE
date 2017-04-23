@@ -58,16 +58,6 @@
 	padding: 0;
 }
 
-:host .sidebar .sidebar-footer {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	font-size: 15px;
-	color: white;
-	text-align: center;
-}
-
 :host .sidebar .sidebar-toggle {
 	position: absolute;
 	top: 0;

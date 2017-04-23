@@ -1,17 +1,20 @@
-<div class="journal" (click)="selectJournal(this, $event)">
-	<p>{{journal['title']}}</p>
+<div class="wrapper">
+	<div class="journal" (click)="selectJournal(this, $event)">
+		<p class="title">{{journal['title']}}</p>
+		<p class="modified">Last Modified {{journal['modified'] | date: 'M/d h:mm a'}}</p>
 
-	<div class="dropdown options">
-		<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			<i class="material-icons">more_vert</i>
-		</a>
-		<ul class="dropdown-menu dropdown-menu-right">
-		  <li><a href="javascript:void(0)" (click)="editJournalTitle()">Edit Title</a></li>
-			<li><a href="javascript:void(0)" (click)="confirmDeleteJournal()">Delete</a></li>
-		</ul>
+		<div class="dropdown options">
+			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				<i class="material-icons">more_vert</i>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right">
+			  <li><a href="javascript:void(0)" (click)="editJournalTitle()">Edit Title</a></li>
+				<li><a href="javascript:void(0)" (click)="confirmDeleteJournal()">Delete</a></li>
+			</ul>
+		</div>
 	</div>
+	<journal-pages
+		[pages]="journal.pages"
+		*ngIf="showPages">
+	</journal-pages>
 </div>
-<journal-pages
-	[pages]="journal.pages"
-	*ngIf="showPages">
-</journal-pages>

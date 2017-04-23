@@ -18,7 +18,7 @@ import { Journal } from '../_models/index';
 })
 export class JournalsPageComponent implements OnInit {
 	private userid: string;
-	public currentJournal: string;
+	public currentJournal: Journal;
 	@Input() journals: Journal[];
 	sidebar = {
 		state: 'out',
