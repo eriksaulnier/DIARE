@@ -13,16 +13,21 @@ export class PageDisplayComponent implements OnInit {
 	
 
   constructor() {
-  this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-  if(this.currentJournal.pages != null){
-    this.recentPage = this.currentJournal.pages[0];
-  }
-	
+	  this.loadPage();
    }
 // ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
   	
+  }
+
+  loadPage(){
+
+    this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+    if(this.currentJournal.pages != null){
+      this.recentPage = this.currentJournal.pages[0];
+    }
+
   }
 
 }

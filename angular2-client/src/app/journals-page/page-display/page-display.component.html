@@ -1,5 +1,7 @@
+
 <div *ngIf = "recentPage != null">
 	<h1>{{recentPage.title}}</h1>
+	<!-- can't have multiple ng tags on an element so we need an extra div -->
 	<div *ngIf = "recentPage.bullets != null">
 		<page-bullet
 		*ngFor = "let bullet of recentPage.bullets"
