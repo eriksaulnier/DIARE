@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<journal-pages
-		[pages]="journal.pages"
+		[pages]="journal!=null ? journal.pages : []"
 		*ngIf="showPages">
 	</journal-pages>
 </div>
