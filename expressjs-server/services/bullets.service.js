@@ -11,7 +11,6 @@ service.deleteBullet     = deleteBullet;
 service.getAllBullets    = getAllBullets;
 service.updateBullet     = updateBullet;
 service.searchBullets    = searchBullets;
-// service.deleteAllBullets = deleteAllBullets;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
 // Adds a bullet to the specified page.
@@ -22,8 +21,8 @@ function addBullet (journalID, pageID, data) {
     var date = new Date();
 
     db.journals.updateOne(
-        { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) }, 
-        { $push: { "pages.$.bullets": { 
+        { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
+        { $push: { "pages.$.bullets": {
             _id: ObjectID(),
             created: date,
             modified: date,
