@@ -1,4 +1,4 @@
-<div (click)="onClick(this)">
+<div class="journal" (click)="selectJournal(this, $event)">
 	<p>{{journal['title']}}</p>
 
 	<div class="dropdown options">
@@ -6,10 +6,12 @@
 			<i class="material-icons">more_vert</i>
 		</a>
 		<ul class="dropdown-menu dropdown-menu-right">
-		    <li><a href="javascript:void(0)" (click)="editJournalTitle()">Edit Title</a></li>
+		  <li><a href="javascript:void(0)" (click)="editJournalTitle()">Edit Title</a></li>
 			<li><a href="javascript:void(0)" (click)="confirmDeleteJournal()">Delete</a></li>
-			<journal-pages></journal-pages>
-			
 		</ul>
 	</div>
 </div>
+<journal-pages
+	[pages]="journal.pages"
+	*ngIf="showPages">
+</journal-pages>

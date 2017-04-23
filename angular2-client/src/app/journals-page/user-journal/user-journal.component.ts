@@ -9,6 +9,7 @@ import { Journal } from '../../_models/index';
 })
 export class UserJournalComponent implements OnInit {
 	private userid: string;
+	public showPages: boolean = false;
 	@Input() journal: Journal;
 
   constructor(
@@ -19,6 +20,12 @@ export class UserJournalComponent implements OnInit {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		this.userid = user._id;
+
+		// Subscribe to the journalService emitter so we can get global update
+		// messages
+		this.journalsService.emitter.subscribe(
+			message => { this.messageRecieved(message) }
+		)
 	}
 
 	// ---------------------------------------------------------------------------
@@ -94,23 +101,38 @@ export class UserJournalComponent implements OnInit {
         });
   }
 
+	// -----------------------------------------------------------------------------------------------------------------------------
+  // Selects this journal as the current journal
+	selectJournal(element, event) {
+		let journalId = element.journal._id;
 
-  // ---------------------------------------------------------------------------
-	//  Set the clicked journal as the currentJournal
-	onClick(something){
-		this.journalsService.getJournal(something.journal._id).subscribe(
-			data => {
-				console.log("(onClick) Successfully set journal as currentJournal " + something.journal._id);
-			},
+		// Prevents event from tiggering while clicking on dropdown
+		if (event.target.tagName === 'A' || event.target.tagName === 'I')
+			return;
 
-			error => {
-				console.log("Setting current Journal failed: " + error._body);
+		this.journalsService.getJournal(journalId)
+			.subscribe(
+				data => {
+					console.log("Successfully set currentJournal to " + journalId);
+					this.showPages = true;
+					this.journal = JSON.parse(localStorage.getItem('currentJournal'));
+				},
+				error => {
+					console.log("Setting current Journal failed: " + error._body);
+				})
+	}
 
+	// -----------------------------------------------------------------------------------------------------------------------------
+	// Handles recieving and routing messages from the journalsService
+	messageRecieved(message: string) {
+		switch (message) {
+			case 'updateJournal': {
+				if (this.journal._id != JSON.parse(localStorage.getItem('currentJournal'))) {
+					this.showPages = false;
+				}
+				break;
 			}
 
-		)
-
-		
-	  	
+		}
 	}
 }

@@ -14,7 +14,6 @@ export class JournalsService {
   constructor(
 		private http: Http,
 		private config: AppConfig
-		
 	){}
 
 
@@ -57,7 +56,7 @@ export class JournalsService {
 	getJournal(journalid: string) {
 		return this.http.get(this.config.apiURL + '/journals/' + journalid, this.jwt())
 		.map((response: Response) => {
-				
+
 				let data = response.json();
 				if (data) {
 					// store journal object in local storage
@@ -99,6 +98,7 @@ export class JournalsService {
 				});
 		}
 	}
+
 	//------------------------------------------------------------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes
 
@@ -113,21 +113,13 @@ export class JournalsService {
   //------------------------------------------------------------------------------------------------------------------------------
   //Initialize currentJournal
   private initialize(){
-
   	let journals = JSON.parse(localStorage.getItem('userJournals'));
   	this.getJournal(journals[0]._id).subscribe(
 			data => {
 				console.log("(initialize) Successfully set journal as currentJournal " + journals[0]._id);
 			},
-
 			error => {
 				console.log("Setting current Journal failed: " + error._body);
-
 			});
-
   }
-
-
-
-
 }

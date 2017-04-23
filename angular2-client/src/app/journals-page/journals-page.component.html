@@ -1,14 +1,14 @@
 <page-toolbar></page-toolbar>
 <page-display></page-display>
 
-
 <aside class="sidebar" (window:resize)="onResize($event)" [@slideInOut]="sidebar.state">
 	<div class="sidebar-container">
 		<h1>My Journals</h1>
 		<ul>
-			<user-journal  
+			<user-journal
 				*ngFor="let individual_journal of journals"
-				[journal]="individual_journal"  >
+				[journal]="individual_journal"
+				[class.active]="individual_journal._id == currentJournal._id">
 			</user-journal>
 		</ul>
 
@@ -19,5 +19,6 @@
 	</div>
 	<a class="sidebar-toggle hidden-sm hidden-md hidden-lg hidden-xl" href="javascript:void(0)" (click)="toggleSidebarVisibility()"><i class="material-icons">{{sidebar.currentIcon}}</i></a>
 </aside>
+
 <dialog-popup></dialog-popup>
 <editform-popup></editform-popup>
