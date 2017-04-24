@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService, DialogService, FormService, } from '../../_services/index';
-import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
+import { JournalsService, PagesService, PopupService } from '../../_services/index';
+import { PagedisplayUserjournalService } from '../shared/pagedisplay-userjournal.service';
 import { Journal } from '../../_models/index';
 
 @Component({
@@ -16,8 +16,8 @@ export class UserJournalComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
-		private dialogService: DialogService,
-		private formService: FormService,
+		private popupService: PopupService,
+		private pagesService: PagesService,
 		private pagedisplayUserjournalService: PagedisplayUserjournalService
 	) {
 		// Fetch the current userid and update variable
@@ -77,7 +77,7 @@ export class UserJournalComponent implements OnInit {
   }
 
 	confirmDeleteJournal() {
-		this.dialogService.createDialog(
+		this.popupService.createDialog(
 			"Confirm Delete",
 			"Are you sure you want to delete <b>" + this.journal.title + "</b>?",
 			"Cancel",
@@ -89,28 +89,61 @@ export class UserJournalComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Update the journal title
 	updateTitle(value: string) {
-	  this.journalsService.updateJournal(this.journal._id, {title: value})
-     .subscribe(
-       data => {
+		let cleanValue = value.replace(/\s+$/, '');
+		if (cleanValue == '')
+				return;
+
+		// Update journal title
+	  this.journalsService.updateJournal(this.journal._id, {title: cleanValue})
+			.subscribe(
+				data => {
 					console.log("Successfully updated journal " + this.journal._id);
 					this.getJournals();
-       },
-       error => {
+				},
+				error => {
 					console.log("Updating journal title failed:  " + error._body);
-       });
+				});
  	}
 
   //Edits the current journal title
-  editJournalTitle(){
-    this.formService.createForm(
+  editJournalTitle() {
+    this.popupService.createForm(
       "Enter New Title",
       "",
+			"Journal Title",
       "Cancel",
       "Submit",
       this.updateTitle.bind(this)
     );
   }
 
+	addPage(value: string) {
+		let cleanValue = value.replace(/\s+$/, '');
+		if (cleanValue == '')
+				return;
+
+		// Create new page
+		this.pagesService.create(this.journal._id, cleanValue)
+			.subscribe(
+				data => {
+					console.log("Successfully added new page to " + this.journal._id);
+					this.getJournals();
+				},
+				error => {
+					console.log("Adding page to journal failed:  " + error._body);
+				});
+	}
+
+	createPagePopup() {
+		this.popupService.createForm(
+      "Create New Page",
+      "",
+			"Page Name",
+      "Cancel",
+      "Add page to journal",
+      this.addPage.bind(this)
+    );
+	}
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID
   getJournals(userID: string = this.userid) {

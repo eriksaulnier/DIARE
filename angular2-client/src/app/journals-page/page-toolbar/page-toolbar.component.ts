@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AddPageComponent } from './add-page/add-page.component';
 import { PagesService, JournalsService} from '../../_services/index';
 import { Journal } from '../../_models/index';
 

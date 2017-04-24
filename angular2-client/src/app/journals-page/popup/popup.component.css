@@ -1,0 +1,7 @@
+:host .modal {
+	padding-top: 20%;
+}
+
+:host .modal .form-group {
+	margin: 0;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService, JournalsService, DialogService } from './../_services/index';
+import { UserService, JournalsService, PopupService } from './../_services/index';
 
 // Regex email validator
 const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -10,7 +10,7 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
-	providers: [DialogService, JournalsService, UserService]
+	providers: [PopupService, JournalsService, UserService]
 })
 export class SettingsComponent implements OnInit {
 	private userid: string;
@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(
 		private fb: FormBuilder,
-		private dialogService: DialogService,
+		private popupService: PopupService,
 		private journalsService: JournalsService,
 		private userService: UserService,
 		private router: Router
@@ -190,7 +190,7 @@ export class SettingsComponent implements OnInit {
 	}
 
 	confirmDeleteAccount() {
-		this.dialogService.createDialog(
+		this.popupService.createDialog(
 			"Confirm Delete",
 			"Are you sure you want to <b>permanently</b> delete your account?",
 			"Cancel",

@@ -1,13 +1,13 @@
 import { Component, OnInit, trigger, state, style, animate, transition, Input } from '@angular/core';
-import { JournalsService, DialogService, FormService} from '../_services/index';
-import {PagedisplayUserjournalService} from './shared/pagedisplay-userjournal.service';
+import { JournalsService, PagesService, PopupService } from '../_services/index';
+import { PagedisplayUserjournalService } from './shared/pagedisplay-userjournal.service';
 import { Journal } from '../_models/index';
 
 @Component({
   selector: 'journals-page',
   templateUrl: './journals-page.component.html',
   styleUrls: ['./journals-page.component.css'],
-  providers: [JournalsService, DialogService, FormService, PagedisplayUserjournalService],
+  providers: [JournalsService, PagesService, PopupService, PagedisplayUserjournalService],
 	animations: [
 		// Sidebar slide in-out animation
 		trigger('slideInOut', [
@@ -32,8 +32,8 @@ export class JournalsPageComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
-    private dialogService: DialogService,
-    private formService: FormService
+		private pagesService: PagesService,
+    private popupService: PopupService,
   ) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -123,7 +123,7 @@ export class JournalsPageComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Updates the current list of journals based on local storage, called when we
 	// get an update method from the journalsService
-  
+
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
