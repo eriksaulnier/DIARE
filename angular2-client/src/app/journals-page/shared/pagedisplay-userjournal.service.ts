@@ -8,7 +8,7 @@ import { AppConfig } from '../../app.config';
 
 @Injectable()
 export class PagedisplayUserjournalService{
-	private emitterSource: Subject<string> = new Subject();
+	private emitterSource: Subject<{}> = new Subject();
 	emitter = this.emitterSource.asObservable();
 
   constructor(
@@ -17,10 +17,18 @@ export class PagedisplayUserjournalService{
 	){}
   	
 
-  updatePageDisplay(){
- 
+  updatePageDisplay(target){
+ 	let packet = {}
+ 	packet["message"] = "update";
+ 	if(target != ""){
+ 		packet["target"] = target;
+ 	}
+ 	else {
+ 		packet["target"] = ""
+ 	}
   	// emit update message
-	this.emitterSource.next('update');
+  	console.log("emitting package")
+	this.emitterSource.next(packet);
   }
 
 

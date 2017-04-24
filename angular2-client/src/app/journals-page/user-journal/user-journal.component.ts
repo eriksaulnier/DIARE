@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService, PagesService, PopupService } from '../../_services/index';
-import { PagedisplayUserjournalService } from '../shared/pagedisplay-userjournal.service';
+import { JournalsService, PopupService, } from '../../_services/index';
+import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
 import { Journal } from '../../_models/index';
 
 @Component({
@@ -16,8 +16,7 @@ export class UserJournalComponent implements OnInit {
 
   constructor(
 		private journalsService: JournalsService,
-		private popupService: PopupService,
-		private pagesService: PagesService,
+		private popupService:PopupService,
 		private pagedisplayUserjournalService: PagedisplayUserjournalService
 	) {
 		// Fetch the current userid and update variable
@@ -27,12 +26,6 @@ export class UserJournalComponent implements OnInit {
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
 		this.journalsService.emitter.subscribe(
-			message => { this.messageRecieved(message) }
-		)
-
-		// Subscribe to the sharedservice pagedisplayUserjournalService emitter so we can get global update
-		// messages
-		this.pagedisplayUserjournalService.emitter.subscribe(
 			message => { this.messageRecieved(message) }
 		)
 	}
@@ -89,61 +82,28 @@ export class UserJournalComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Update the journal title
 	updateTitle(value: string) {
-		let cleanValue = value.replace(/\s+$/, '');
-		if (cleanValue == '')
-				return;
-
-		// Update journal title
-	  this.journalsService.updateJournal(this.journal._id, {title: cleanValue})
-			.subscribe(
-				data => {
+	  this.journalsService.updateJournal(this.journal._id, {title: value})
+     .subscribe(
+       data => {
 					console.log("Successfully updated journal " + this.journal._id);
 					this.getJournals();
-				},
-				error => {
+       },
+       error => {
 					console.log("Updating journal title failed:  " + error._body);
-				});
+       });
  	}
 
   //Edits the current journal title
-  editJournalTitle() {
+  editJournalTitle(){
     this.popupService.createForm(
       "Enter New Title",
       "",
-			"Journal Title",
       "Cancel",
       "Submit",
       this.updateTitle.bind(this)
     );
   }
 
-	addPage(value: string) {
-		let cleanValue = value.replace(/\s+$/, '');
-		if (cleanValue == '')
-				return;
-
-		// Create new page
-		this.pagesService.create(this.journal._id, cleanValue)
-			.subscribe(
-				data => {
-					console.log("Successfully added new page to " + this.journal._id);
-					this.getJournals();
-				},
-				error => {
-					console.log("Adding page to journal failed:  " + error._body);
-				});
-	}
-
-	createPagePopup() {
-		this.popupService.createForm(
-      "Create New Page",
-      "",
-			"Page Name",
-      "Cancel",
-      "Add page to journal",
-      this.addPage.bind(this)
-    );
-	}
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID
   getJournals(userID: string = this.userid) {
@@ -171,7 +131,7 @@ export class UserJournalComponent implements OnInit {
 				data => {
 					console.log("Successfully set currentJournal to " + journalId);
 					this.journal = JSON.parse(localStorage.getItem('currentJournal'));
-					this.pagedisplayUserjournalService.updatePageDisplay();
+					this.pagedisplayUserjournalService.updatePageDisplay("");
 				},
 				error => {
 					console.log("Setting current Journal failed: " + error._body);
