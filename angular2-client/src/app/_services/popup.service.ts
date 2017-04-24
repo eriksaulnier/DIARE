@@ -8,7 +8,7 @@ export class PopupService {
 
 	// ---------------------------------------------------------------------------
 	// Sends new dialog info which tells our dialog to populate and toggle
-	createDialog(title: string = '', text: string = '', cancelBtn: string = '', acceptBtn: string = '', callback: Function = null) {
+	createDialog(title: string = '', text: string = '', cancelBtn: string = '', confirmBtn: string = '', callback: Function = null) {
 		console.log('Creating dialog popup: ' + title);
 
 		// emit dialog info
@@ -16,14 +16,14 @@ export class PopupService {
 			title: title,
 			text: text,
 			cancelBtn: cancelBtn,
-			acceptBtn: acceptBtn,
+			confirmBtn: confirmBtn,
 			callback: callback,
 			isForm: false
 		});
 	}
 
 	// ---------------------------------------------------------------------------
-	createForm(title: string = '', text: string = '', label: string = '', cancelBtn: string = '', acceptBtn: string = '', callback: Function = null) {
+	createForm(title: string = '', text: string = '', label: string = '', cancelBtn: string = '', confirmBtn: string = '', callback: Function = null) {
 		console.log('Creating form popup: ' + title);
 
 		// emit dialog info
@@ -32,7 +32,7 @@ export class PopupService {
 			text: text,
 			label: label,
 			cancelBtn: cancelBtn,
-			acceptBtn: acceptBtn,
+			confirmBtn: confirmBtn,
 			callback: callback,
 			isForm: true
 		});
