@@ -16,4 +16,13 @@ export class PagedisplayUserjournalService{
 		private config: AppConfig
 	){}
   	
+
+  updatePageDisplay(){
+ 
+  	// emit update message
+	this.emitterSource.next('update');
+  }
+
+
+
 }

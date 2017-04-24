@@ -17,7 +17,8 @@ export class UserJournalComponent implements OnInit {
   constructor(
 		private journalsService: JournalsService,
 		private dialogService: DialogService,
-		private formService: FormService
+		private formService: FormService,
+		private pagedisplayUserjournalService: PagedisplayUserjournalService
 	) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -26,6 +27,12 @@ export class UserJournalComponent implements OnInit {
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
 		this.journalsService.emitter.subscribe(
+			message => { this.messageRecieved(message) }
+		)
+
+		// Subscribe to the sharedservice pagedisplayUserjournalService emitter so we can get global update
+		// messages
+		this.pagedisplayUserjournalService.emitter.subscribe(
 			message => { this.messageRecieved(message) }
 		)
 	}
@@ -131,6 +138,7 @@ export class UserJournalComponent implements OnInit {
 				data => {
 					console.log("Successfully set currentJournal to " + journalId);
 					this.journal = JSON.parse(localStorage.getItem('currentJournal'));
+					this.pagedisplayUserjournalService.updatePageDisplay();
 				},
 				error => {
 					console.log("Setting current Journal failed: " + error._body);

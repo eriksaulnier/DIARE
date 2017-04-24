@@ -10,12 +10,22 @@ import { Page} from '../../_models/index';
   styleUrls: ['./page-display.component.css']
 })
 export class PageDisplayComponent implements OnInit {
-	currentJournal: any;
+	
+  currentJournal: any;
 	recentPage: any;
 
 
-  constructor() {
-	 
+
+  constructor(
+    private pagedisplayUserjournalService: PagedisplayUserjournalService
+    ) {
+
+
+    // Subscribe to the sharedservice pagedisplayUserjournalService emitter so we can get global update
+    // messages
+    this.pagedisplayUserjournalService.emitter.subscribe(
+      message => { this.messageRecieved(message) }
+    )
    }
 // ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
@@ -24,8 +34,7 @@ export class PageDisplayComponent implements OnInit {
   }
 
   loadPage(){
-    this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-
+     this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
     if( this.currentJournal && this.currentJournal.pages && this.currentJournal.pages.length > 0){
       this.recentPage = this.currentJournal.pages[0];
     }
@@ -48,4 +57,16 @@ export class PageDisplayComponent implements OnInit {
       return false;
     }
   }
+
+    // Handles recieving and routing messages from the journalsService
+
+    messageRecieved(message: string) {
+      switch (message) {
+        case 'update': {
+          console.log("recieved message update, calling loadPage");
+          this.loadPage();
+          break;
+        }
+      }
+    }
 }
