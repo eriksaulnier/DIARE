@@ -6,7 +6,7 @@
 	position: relative;
 	display: block;
 	box-sizing: border-box;
-	height: calc(40px + 24px);
+	height: calc(30px + 24px);
 	padding: 12px;
 	background-color: #464b50;
 	cursor: pointer;
@@ -30,21 +30,15 @@
 	margin: 0;
 }
 :host .journal .title {
-	line-height: 25px;
+	line-height: 30px;
 	font-size: 17px;
-}
-
-:host .journal .modified {
-	line-height: 15px;
-	font-size: 13px;
-	opacity: 0.5;
 }
 
 :host .journal .options {
 	position: absolute;
 	top: 12px;
 	right: 10px;
-	line-height: 40px;
+	line-height: 30px;
 }
 
 :host .journal .options i {

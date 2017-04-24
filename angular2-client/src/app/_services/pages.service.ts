@@ -51,6 +51,7 @@ export class PagesService {
 				});
 		}
   }
+
   //------------------------------------------------------------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes
 

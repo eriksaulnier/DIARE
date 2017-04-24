@@ -13,13 +13,15 @@ export class PageComponent implements OnInit {
   constructor(
 		private pagesService: PagesService,
 	) {
-		
-	}
 
+	}
 
   ngOnInit() {
   }
 
-
-
+	selectPage(element, event) {
+		let pageId = element.page._id;
+		
+		console.log('TODO: Load page ' + pageId);
+	}
 }

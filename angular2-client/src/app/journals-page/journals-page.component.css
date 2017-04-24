@@ -23,7 +23,7 @@
 
 :host .sidebar {
 	position: relative;
-	display: block;
+	float: left;
 	width: 350px;
 	height: 100%;
 	padding: 0 15px;
@@ -72,4 +72,16 @@
 
 :host .sidebar .sidebar-toggle i {
 	font-size: 30px;
+}
+
+:host .main {
+	min-height: 100%;
+	padding: 10px;
+	background-color: #eff0f4;
+	overflow: hidden;
+}
+
+:host .main .main-container {
+	padding: 15px;
+	background-color: #ffffff;
 }

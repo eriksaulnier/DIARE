@@ -128,7 +128,6 @@ export class UserJournalComponent implements OnInit {
 			.subscribe(
 				data => {
 					console.log("Successfully set currentJournal to " + journalId);
-					this.showPages = true;
 					this.journal = JSON.parse(localStorage.getItem('currentJournal'));
 				},
 				error => {
@@ -141,7 +140,12 @@ export class UserJournalComponent implements OnInit {
 	messageRecieved(message: string) {
 		switch (message) {
 			case 'updateJournal': {
-				if (this.journal._id != JSON.parse(localStorage.getItem('currentJournal'))) {
+				let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
+				if (currentJournal != null && this.journal._id == currentJournal._id) {
+					this.journal = currentJournal;
+					this.showPages = true;
+				} else {
 					this.showPages = false;
 				}
 				break;
