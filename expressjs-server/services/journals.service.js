@@ -11,6 +11,7 @@ service.deleteJournal     = deleteJournal;
 service.deleteAllJournals = deleteAllJournals;
 service.updateJournal     = updateJournal;
 service.getJournal        = getJournal;
+service.getLastModified   = getLastModified;
 service.getAllJournals    = getAllJournals;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -70,9 +71,47 @@ function getJournal (journalID) {
 
   db.journals.findOne({ _id: ObjectId(journalID) }, function (err, journal) {
     if (err) deferred.reject(err.name + ': ' + err.message);
+
+    //sort pages from most recently modified to least recently modified
+    if (journal && journal.pages && journal.pages.length > 0) {
+      journal.pages.sort(function(a,b){
+        return new Date(b.modified) - new Date(a.modified);
+      });
+    }
+
     deferred.resolve(journal);
   });
 
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get the last modified journal for a given userID
+// Returns a journal object on success, failure message on error
+function getLastModified(userID) {
+  var deferred = Q.defer();
+
+  db.journals.find(
+    {userID: userID}
+  ).sort({modified: -1}).toArray(function (err, journals) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+
+      if (journals && journals.length > 0) {
+        var curJournal = journals[0];
+
+        //sort pages from most recently modified to least recently modified
+        if (curJournal && curJournal.pages && curJournal.pages.length > 0) {
+          curJournal.pages.sort(function(a,b){
+            return new Date(b.modified) - new Date(a.modified);
+          });
+        }
+
+        deferred.resolve(journals[0]);
+      }
+      else {
+        deferred.resolve(journals);
+      }
+    }
+  );
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------

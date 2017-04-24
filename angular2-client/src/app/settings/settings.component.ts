@@ -14,8 +14,12 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 })
 export class SettingsComponent implements OnInit {
 	private userid: string;
+
 	public changeEmailForm: FormGroup;
+  public emailsMatch: boolean = false;
+
 	public changePswdForm: FormGroup;
+  public passwordsMatch: boolean = false;
 
   constructor(
 		private fb: FormBuilder,
@@ -75,7 +79,11 @@ export class SettingsComponent implements OnInit {
 			if (field === 'newEmail2' && form.get('newEmail2').value != '') {
 				if (form.get('newEmail').value !== form.get('newEmail2').value) {
 					this.formErrors['newEmail2'] += messages['mismatch'] + ' ';
+          this.emailsMatch = false;
 				}
+        else {
+          this.emailsMatch = true;
+        }
 			}
     }
 	}
@@ -101,7 +109,11 @@ export class SettingsComponent implements OnInit {
 			if (field === 'newPswd2' && form.get('newPswd2').value != '') {
 				if (form.get('newPswd').value !== form.get('newPswd2').value) {
 					this.formErrors['newPswd2'] += messages['mismatch'] + ' ';
+          this.passwordsMatch = false;
 				}
+        else {
+          this.passwordsMatch= true;
+        }
 			}
     }
 	}

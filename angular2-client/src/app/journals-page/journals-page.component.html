@@ -1,10 +1,8 @@
-<page-toolbar></page-toolbar>
-<page-display></page-display>
-
 <aside class="sidebar" (window:resize)="onResize($event)" [@slideInOut]="sidebar.state">
 	<div class="sidebar-container">
 		<h1>My Journals</h1>
-		<ul>
+
+		<ul *ngIf="currentJournalExists()">
 			<user-journal
 				*ngFor="let individual_journal of journals"
 				[journal]="individual_journal"
@@ -14,11 +12,15 @@
 
 		<add-journal></add-journal>
 	</div>
-	<div class="sidebar-footer">
-		<p>Some sort of footer message</p>
-	</div>
 	<a class="sidebar-toggle hidden-sm hidden-md hidden-lg hidden-xl" href="javascript:void(0)" (click)="toggleSidebarVisibility()"><i class="material-icons">{{sidebar.currentIcon}}</i></a>
 </aside>
+
+<main class="main">
+	<div class="main-container" *ngIf="currentJournal!=null">
+		<page-toolbar></page-toolbar>
+		<page-display></page-display>
+	</div>
+</main>
 
 <dialog-popup></dialog-popup>
 <editform-popup></editform-popup>

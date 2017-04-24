@@ -33,7 +33,21 @@ export class UserJournalComponent implements OnInit {
 	// ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
+		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
+		// If this is the current journal then 'switch' to it to load pages
+		if (currentJournal._id == this.journal._id) {
+			this.journalsService.getJournal(this.journal._id)
+				.subscribe(
+					data => {
+						console.log("Successfully fetched pages for " + this.journal._id);
+						this.journal = JSON.parse(localStorage.getItem('currentJournal'));
+						this.showPages = true;
+					},
+					error => {
+						console.log("Setting current Journal failed: " + error._body);
+					})
+		}
   }
 
 	// -----------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +130,6 @@ export class UserJournalComponent implements OnInit {
 			.subscribe(
 				data => {
 					console.log("Successfully set currentJournal to " + journalId);
-					this.showPages = true;
 					this.journal = JSON.parse(localStorage.getItem('currentJournal'));
 				},
 				error => {
@@ -129,7 +142,12 @@ export class UserJournalComponent implements OnInit {
 	messageRecieved(message: string) {
 		switch (message) {
 			case 'updateJournal': {
-				if (this.journal._id != JSON.parse(localStorage.getItem('currentJournal'))) {
+				let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
+				if (currentJournal != null && this.journal._id == currentJournal._id) {
+					this.journal = currentJournal;
+					this.showPages = true;
+				} else {
 					this.showPages = false;
 				}
 				break;

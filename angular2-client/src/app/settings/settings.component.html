@@ -22,7 +22,7 @@
 			</div>
 
 			<!-- Submit Button *************************************************************************************************-->
-			<button class="btn btn-raised" type="submit">Update Email</button>
+			<button class="btn btn-raised btn-primary" type="submit" [disabled]="!changeEmailForm.valid || !emailsMatch">Update Email</button>
 		</form>
 	</div>
 	<div class="section">
@@ -53,7 +53,7 @@
 			</div>
 
 			<!-- Submit Button ************************************************************************************************-->
-			<button class="btn btn-raised" type="submit">Update Password</button>
+			<button class="btn btn-raised btn-primary" type="submit" [disabled]="!changePswdForm.valid || !passwordsMatch">Update Password</button>
 		</form>
 	</div>
 	<div class="section">

@@ -16,8 +16,6 @@ export class JournalsService {
 		private config: AppConfig
 	){}
 
-
-
   //------------------------------------------------------------------------------------------------------------------------------
   // Creates new journal
   // Will return either an error or {id: journalID, message: string talking about how adding journal was successful}
@@ -58,7 +56,21 @@ export class JournalsService {
 		.map((response: Response) => {
 
 				let data = response.json();
-				if (data) {
+				if (data && data._id) {
+					// store journal object in local storage
+					localStorage.setItem('currentJournal', JSON.stringify(data));
+
+					// emit update message
+					this.emitterSource.next('updateJournal');
+				}
+			});
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
+	getLastModified(userid: string) {
+		return this.http.get(this.config.apiURL + '/journals/getLastModified/' + userid, this.jwt())
+			.map((response: Response) => {
+				let data = response.json();
+				if (data && data._id) {
 					// store journal object in local storage
 					localStorage.setItem('currentJournal', JSON.stringify(data));
 

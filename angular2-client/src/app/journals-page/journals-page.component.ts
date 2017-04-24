@@ -19,7 +19,7 @@ import { Journal } from '../_models/index';
 })
 export class JournalsPageComponent implements OnInit {
 	private userid: string;
-	public currentJournal: string;
+	public currentJournal: Journal;
 	@Input() journals: Journal[];
 	sidebar = {
 		state: 'out',
@@ -39,9 +39,6 @@ export class JournalsPageComponent implements OnInit {
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		this.userid = user._id;
 
-		// Fetch the current journal
-		this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
 		this.journalsService.emitter.subscribe(
@@ -51,14 +48,16 @@ export class JournalsPageComponent implements OnInit {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
+
   ngOnInit() {
-		// Fetch all of the user's journals
+		// Fetch all of the user's journals; this will also handle setting the current journal
     this.getJournals();
   }
 
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID, if no id is specified
 	// it will fetch the current user's journals by default.
+
   getJournals(userID: string = this.userid) {
     this.journalsService.getAllJournals(userID)
       .subscribe(
@@ -69,10 +68,24 @@ export class JournalsPageComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
-
 	// -----------------------------------------------------------------------------------------------------------------------------
+  // Get the journal that was last modified by the user
+  // it will fetch the current user's journals by default
+
+  getLastModified(userID: string = this.userid) {
+    this.journalsService.getLastModified(userID)
+    .subscribe(
+      data => {
+        console.log("Successfully fetched last modified journal for user " + userID);
+      },
+      error => {
+        console.log("Getting last modified journal failed:  " + error._body);
+      });
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
 	// Toggles the sidebar visibility when the client is able to hide it
 	// (sliding it in or out based on button click)
+
 	toggleSidebarVisibility() {
 		// Toggle the state between 'in' and 'out'
 		this.sidebar.state = (this.sidebar.state === 'out') ? 'in' : 'out';
@@ -80,10 +93,10 @@ export class JournalsPageComponent implements OnInit {
 		// Update current button icon
 		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
+
 	onResize(event) {
 		if (event.target.innerWidth > 768) {
 			// Set sidebar back to to default state
@@ -91,13 +104,14 @@ export class JournalsPageComponent implements OnInit {
 			this.sidebar.currentIcon = this.sidebar.icons['out'];
 		}
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
+
 	messageRecieved(message: string) {
 		switch (message) {
 			case 'update': {
 				this.updateJournalList();
+        this.getLastModified();
 				break;
 			}
 			case 'updateJournal': {
@@ -106,11 +120,21 @@ export class JournalsPageComponent implements OnInit {
 			}
 		}
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Updates the current list of journals based on local storage, called when we
 	// get an update method from the journalsService
+  
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
+  //------------------------------------------------------------------------------------------------------------------------------
+  currentJournalExists() {
+    if(this.currentJournal) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
 }

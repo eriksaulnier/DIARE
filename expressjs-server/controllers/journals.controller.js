@@ -4,12 +4,13 @@ var router = express.Router();
 var journalsService = require('../services/journals.service');
 
 // routes
-router.post('/create',                createJournal);
-router.delete('/delete/:_id',         deleteJournal);
-router.delete('/deleteAll/:userid',   deleteAllJournals);
-router.get('/:_id',                   getJournal);
-router.get('/getAll/:userID',         getAllJournals);
-router.put('/:_id',                   updateJournal);
+router.post('/create',                    createJournal);
+router.delete('/delete/:_id',             deleteJournal);
+router.delete('/deleteAll/:userid',       deleteAllJournals);
+router.get('/:_id',                       getJournal);
+router.get('/getLastModified/:userID',    getLastModified);
+router.get('/getAll/:userID',             getAllJournals);
+router.put('/:_id',                       updateJournal);
 
 module.exports = router;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -61,6 +62,19 @@ function getJournal (req, res) {
   journalsService.getJournal(req.params._id)
     .then(function (result) {
       //send back journal objects
+      res.send(result);
+    })
+    .catch(function (err) {
+      //send back error message
+      res.status(400).send(err);
+    });
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get the last journal that was modified for a given userid
+function getLastModified (req, res) {
+  journalsService.getLastModified(req.params.userID)
+    .then(function (result) {
+      //send back journal object
       res.send(result);
     })
     .catch(function (err) {

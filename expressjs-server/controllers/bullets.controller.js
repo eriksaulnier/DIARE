@@ -27,7 +27,7 @@ function addBullet (req, res) {
 // Delete a bullet from a page
 
 function deleteBullet (req, res) {
-    bulletsService.deleteBullet(req.params.journalID, req.params.pageID, req.body)
+    bulletsService.deleteBullet(req.params.journalID, req.params.pageID, req.params.bulletID)
         .then(function (result) {
             res.send(result);
         })
@@ -51,7 +51,7 @@ function getBullets (req, res) {
 // Update a page's bullet
 
 function updateBullet (req, res) {
-    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.body)
+    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.body.data)
         .then(function (result) {
             res.send(result);
         })

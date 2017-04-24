@@ -1,3 +1,18 @@
-:host {
-	color: #ffffff;
+:host li {
+	padding: 8px;
+	margin-top: -1px;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease-out;
+}
+
+:host li:first-of-type {
+	margin: 0;
+}
+
+:host li:hover {
+	background-color: rgba(0,0,0,0.15);
+}
+:host li p {
+	margin: 0;
 }

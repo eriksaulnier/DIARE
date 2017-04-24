@@ -12,7 +12,7 @@ import { Page} from '../../_models/index';
 export class PageDisplayComponent implements OnInit {
 	currentJournal: any;
 	recentPage: any;
-	
+
 
   constructor() {
 	 
@@ -21,16 +21,31 @@ export class PageDisplayComponent implements OnInit {
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
      this.loadPage();
-  	
   }
 
   loadPage(){
-
     this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-    if(this.currentJournal.pages != null){
+
+    if( this.currentJournal && this.currentJournal.pages && this.currentJournal.pages.length > 0){
       this.recentPage = this.currentJournal.pages[0];
     }
-
   }
 
+  pageExists() {
+    if (this.recentPage) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  bulletsExist() {
+    if (this.recentPage && this.recentPage.bullets && this.recentPage.bullets.length > 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }
