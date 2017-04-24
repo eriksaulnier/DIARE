@@ -33,18 +33,18 @@ export class PageDisplayComponent implements OnInit {
      this.loadPage("");
   }
 
-  loadPage(page_title: string){
+  loadPage(page_id: string){
      this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
      //make sure currentJournal exists, and has pages with size > 1
     if( this.currentJournal && this.currentJournal.pages && this.currentJournal.pages.length > 0){
       //no specified page
-      if(page_title == ""){
+      if(page_id == ""){
         this.recentPage = this.currentJournal.pages[0];
       }
       else {
         //We got a page to match, need to find it.
         for (var i = this.currentJournal.pages.length - 1; i >= 0; i--) {
-          if(this.currentJournal.pages[i].title == page_title){
+          if(this.currentJournal.pages[i]._id == page_id){
             this.recentPage = this.currentJournal.pages[i];
           }
                  

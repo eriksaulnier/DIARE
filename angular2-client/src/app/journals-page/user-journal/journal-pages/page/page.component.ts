@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PagesService} from '../../../../_services/index';
+import {PagedisplayUserjournalService} from '../../../shared/pagedisplay-userjournal.service';
+
 import { Page} from '../../../../_models/index';
 
 @Component({
@@ -12,6 +14,8 @@ export class PageComponent implements OnInit {
 
   constructor(
 		private pagesService: PagesService,
+		private pagedisplayUserjournalService: PagedisplayUserjournalService
+   
 	) {
 
 	}
@@ -21,7 +25,7 @@ export class PageComponent implements OnInit {
 
 	selectPage(element, event) {
 		let pageId = element.page._id;
-		
+		this.pagedisplayUserjournalService.updatePageDisplay(pageId);
 		console.log('TODO: Load page ' + pageId);
 	}
 }
