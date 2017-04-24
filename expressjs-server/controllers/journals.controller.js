@@ -71,7 +71,7 @@ function getJournal (req, res) {
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 // Get the last journal that was modified for a given userid
-function getLastModified(req, res) {
+function getLastModified (req, res) {
   journalsService.getLastModified(req.params.userID)
     .then(function (result) {
       //send back journal object

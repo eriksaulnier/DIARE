@@ -80,11 +80,14 @@ function getJournal (journalID) {
 // Get the last modified journal for a given userID
 // Returns a journal object on success, failure message on error
 function getLastModified(userID) {
+  var deferred = Q.defer();
+
   db.journals.find(
     {userID: userID}
   ).sort({modified: -1}).toArray(function (err, journals) {
       if (err) deferred.reject(err.name + ': ' + err.message);
-      if (journals.length > 0) {
+
+      if (journals && journals.length > 0) {
         deferred.resolve(journals[0]);
       }
       else {

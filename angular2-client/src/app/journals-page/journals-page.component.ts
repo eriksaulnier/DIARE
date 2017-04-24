@@ -73,6 +73,7 @@ export class JournalsPageComponent implements OnInit {
   // it will fetch the current user's journals by default
 
   getLastModified(userID: string = this.userid) {
+    console.log(userID);
     this.journalsService.getLastModified(userID)
     .subscribe(
       data => {
@@ -108,6 +109,7 @@ export class JournalsPageComponent implements OnInit {
 		switch (message) {
 			case 'update': {
 				this.updateJournalList();
+        this.getLastModified();
 				break;
 			}
 			case 'updateJournal': {
