@@ -56,7 +56,8 @@
             </div>
             <!-- Submit Button ************************************************************************************************-->
             <div class="text-center">
-              <button class="btn btn-raised btn-primary" type="submit" [disabled]="!registrationForm.valid">Submit</button>
+              <button class="btn btn-raised btn-primary" type="submit" [disabled]="!registrationForm.valid || !passwordsMatch ||
+              !emailsMatch">Submit</button>
             </div>
           </form>
         </div>

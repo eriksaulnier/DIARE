@@ -17,6 +17,8 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 export class RegisterComponent implements OnInit {
   user = new User;
   public registrationForm: FormGroup;
+  public passwordsMatch: boolean = false;
+  public emailsMatch: boolean = false;
   //------------------------------------------------------------------------------------------------------------------------------
   constructor(
     private fb: FormBuilder,
@@ -93,6 +95,10 @@ export class RegisterComponent implements OnInit {
       if (field === 'email2' && form.get('email2').value != null && form.get('email2').value != '') {
         if (form.get('email1').value.toLowerCase() !== form.get('email2').value.toLowerCase()) {
           this.formErrors['email2'] += this.validationMessages.email2['mismatch'] + ' ';
+          this.emailsMatch = false;
+        }
+        else {
+          this.emailsMatch = true;
         }
       }
 
@@ -100,6 +106,10 @@ export class RegisterComponent implements OnInit {
       if (field === 'password2' && form.get('password2').value != '') {
         if (form.get('password1').value !== form.get('password2').value) {
           this.formErrors['password2'] += this.validationMessages.password2['mismatch'] + '';
+          this.passwordsMatch = false;
+        }
+        else {
+          this.passwordsMatch = true;
         }
       }
     }
