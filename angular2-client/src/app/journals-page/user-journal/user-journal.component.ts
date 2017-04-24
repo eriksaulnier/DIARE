@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService, PopupService, } from '../../_services/index';
+import { JournalsService, PopupService, PagesService } from '../../_services/index';
 import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
 import { Journal } from '../../_models/index';
 
@@ -17,7 +17,8 @@ export class UserJournalComponent implements OnInit {
   constructor(
 		private journalsService: JournalsService,
 		private popupService:PopupService,
-		private pagedisplayUserjournalService: PagedisplayUserjournalService
+		private pagedisplayUserjournalService: PagedisplayUserjournalService,
+		private pagesService: PagesService
 	) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -103,6 +104,37 @@ export class UserJournalComponent implements OnInit {
       this.updateTitle.bind(this)
     );
   }
+
+
+  addPage(value: string) {
+  		let cleanValue = value.replace(/\s+$/, '');
+  		if (cleanValue == '')
+  				return;
+  
+  		// Create new page
+  		this.pagesService.create(this.journal._id, cleanValue)
+  			.subscribe(
+  				data => {
+  					console.log("Successfully added new page to " + this.journal._id);
+  					this.getJournals();
+  				},
+  				error => {
+  					console.log("Adding page to journal failed:  " + error._body);
+  				});
+  	}
+  
+  	createPagePopup() {
+  		this.popupService.createForm(
+        "Create New Page",
+        "",
+  			"Page Name",
+        "Cancel",
+        "Add page to journal",
+        this.addPage.bind(this)
+      );
+  	}
+
+
 
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID

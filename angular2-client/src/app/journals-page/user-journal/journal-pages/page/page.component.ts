@@ -26,6 +26,6 @@ export class PageComponent implements OnInit {
 	selectPage(element, event) {
 		let pageId = element.page._id;
 		this.pagedisplayUserjournalService.updatePageDisplay(pageId);
-		console.log('TODO: Load page ' + pageId);
+		console.log('Load page ' + pageId);
 	}
 }
