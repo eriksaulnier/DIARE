@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { JournalsService, DialogService, FormService} from '../../_services/index';
+import { JournalsService, DialogService, FormService, } from '../../_services/index';
+import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
 import { Journal } from '../../_models/index';
 
 @Component({
@@ -11,6 +12,7 @@ export class UserJournalComponent implements OnInit {
 	private userid: string;
 	public showPages: boolean = false;
 	@Input() journal: Journal;
+
 
   constructor(
 		private journalsService: JournalsService,

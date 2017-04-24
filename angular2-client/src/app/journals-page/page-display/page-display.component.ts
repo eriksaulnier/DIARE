@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PagesService} from '../../_services/index';
+import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
 import { Page} from '../../_models/index';
+
 
 @Component({
   selector: 'page-display',
@@ -13,11 +15,12 @@ export class PageDisplayComponent implements OnInit {
 	
 
   constructor() {
-	  this.loadPage();
+	 
    }
 // ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
+     this.loadPage();
   	
   }
 
