@@ -4,7 +4,8 @@
 <aside class="sidebar" (window:resize)="onResize($event)" [@slideInOut]="sidebar.state">
 	<div class="sidebar-container">
 		<h1>My Journals</h1>
-		<ul>
+
+		<ul *ngIf="currentJournalExists()">
 			<user-journal
 				*ngFor="let individual_journal of journals"
 				[journal]="individual_journal"

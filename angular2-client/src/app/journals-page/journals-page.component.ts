@@ -39,7 +39,7 @@ export class JournalsPageComponent implements OnInit {
 		this.userid = user._id;
 
 		// Fetch the current journal
-		this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+    this.getLastModified();
 
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
@@ -68,8 +68,21 @@ export class JournalsPageComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
-
 	// -----------------------------------------------------------------------------------------------------------------------------
+  // Get the journal that was last modified by the user
+  // it will fetch the current user's journals by default
+
+  getLastModified(userID: string = this.userid) {
+    this.journalsService.getLastModified(userID)
+    .subscribe(
+      data => {
+        console.log("Successfully fetched last modified journal for user " + userID);
+      },
+      error => {
+        console.log("Getting last modified journal failed:  " + error._body);
+      });
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
 	// Toggles the sidebar visibility when the client is able to hide it
 	// (sliding it in or out based on button click)
 	toggleSidebarVisibility() {
@@ -79,7 +92,6 @@ export class JournalsPageComponent implements OnInit {
 		// Update current button icon
 		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
@@ -90,7 +102,6 @@ export class JournalsPageComponent implements OnInit {
 			this.sidebar.currentIcon = this.sidebar.icons['out'];
 		}
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
 	messageRecieved(message: string) {
@@ -105,11 +116,22 @@ export class JournalsPageComponent implements OnInit {
 			}
 		}
 	}
-
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Updates the current list of journals based on local storage, called when we
 	// get an update method from the journalsService
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
+  //------------------------------------------------------------------------------------------------------------------------------
+  currentJournalExists() {
+    if(this.currentJournal) {
+      console.log("current journal exists");
+      return true;
+    }
+    else {
+      console.log("current journal does not exist");
+      return false;
+    }
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
 }

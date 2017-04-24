@@ -11,6 +11,7 @@ service.deleteJournal     = deleteJournal;
 service.deleteAllJournals = deleteAllJournals;
 service.updateJournal     = updateJournal;
 service.getJournal        = getJournal;
+service.getLastModified   = getLastModified;
 service.getAllJournals    = getAllJournals;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -73,6 +74,19 @@ function getJournal (journalID) {
     deferred.resolve(journal);
   });
 
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get the last modified journal for a given userID
+// Returns a journal object on success, failure message on error
+function getLastModified(userID) {
+  db.journals.find(
+    {userID: userID}
+  ).sort({modified: -1}).toArray(function (err, journals) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+      deferred.resolve(journals[0]);
+    }
+  );
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
