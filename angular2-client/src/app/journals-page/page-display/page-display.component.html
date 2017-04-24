@@ -1,11 +1,14 @@
-
-<div *ngIf = "pageExists()">
-	<h1>{{recentPage?.title}}</h1>
+<div *ngIf="pageExists()">
+	<header class="page-header">
+		<h1>{{recentPage.title}}</h1>
+		<div class="divider"></div>
+		<p class="timestamp">Last saved {{recentPage.modified | date:'MM/dd h:mm a'}}</p>
+	</header>
 
 	<!-- can't have multiple ng tags on an element so we need an extra div -->
-	<div *ngIf = "bulletsExist()">
+	<div *ngIf="bulletsExist()">
 		<page-bullet
-		*ngFor = "let bullet of recentPage.bullets"
+		*ngFor="let bullet of recentPage.bullets"
 		[bulletText] = "bullet.text"
 		></page-bullet>
 	<div>
