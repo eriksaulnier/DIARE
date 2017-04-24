@@ -84,7 +84,12 @@ function getLastModified(userID) {
     {userID: userID}
   ).sort({modified: -1}).toArray(function (err, journals) {
       if (err) deferred.reject(err.name + ': ' + err.message);
-      deferred.resolve(journals[0]);
+      if (journals.length > 0) {
+        deferred.resolve(journals[0]);
+      }
+      else {
+        deferred.resolve(journals);
+      }
     }
   );
   return deferred.promise;

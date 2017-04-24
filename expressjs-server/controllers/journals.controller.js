@@ -8,7 +8,7 @@ router.post('/create',                    createJournal);
 router.delete('/delete/:_id',             deleteJournal);
 router.delete('/deleteAll/:userid',       deleteAllJournals);
 router.get('/:_id',                       getJournal);
-router.get('/getLastModified/:userid',    getLastModified);
+router.get('/getLastModified/:userID',    getLastModified);
 router.get('/getAll/:userID',             getAllJournals);
 router.put('/:_id',                       updateJournal);
 

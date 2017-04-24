@@ -16,8 +16,6 @@ export class JournalsService {
 		private config: AppConfig
 	){}
 
-
-
   //------------------------------------------------------------------------------------------------------------------------------
   // Creates new journal
   // Will return either an error or {id: journalID, message: string talking about how adding journal was successful}
