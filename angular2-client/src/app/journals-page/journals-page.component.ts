@@ -38,9 +38,6 @@ export class JournalsPageComponent implements OnInit {
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		this.userid = user._id;
 
-		// Fetch the current journal
-    this.getLastModified();
-
 		// Subscribe to the journalService emitter so we can get global update
 		// messages
 		this.journalsService.emitter.subscribe(
@@ -50,14 +47,16 @@ export class JournalsPageComponent implements OnInit {
 
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
+
   ngOnInit() {
-		// Fetch all of the user's journals
+		// Fetch all of the user's journals; this will also handle setting the current journal
     this.getJournals();
   }
 
 	// -----------------------------------------------------------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID, if no id is specified
 	// it will fetch the current user's journals by default.
+
   getJournals(userID: string = this.userid) {
     this.journalsService.getAllJournals(userID)
       .subscribe(
@@ -73,7 +72,6 @@ export class JournalsPageComponent implements OnInit {
   // it will fetch the current user's journals by default
 
   getLastModified(userID: string = this.userid) {
-    console.log(userID);
     this.journalsService.getLastModified(userID)
     .subscribe(
       data => {
@@ -86,6 +84,7 @@ export class JournalsPageComponent implements OnInit {
   //------------------------------------------------------------------------------------------------------------------------------
 	// Toggles the sidebar visibility when the client is able to hide it
 	// (sliding it in or out based on button click)
+
 	toggleSidebarVisibility() {
 		// Toggle the state between 'in' and 'out'
 		this.sidebar.state = (this.sidebar.state === 'out') ? 'in' : 'out';
@@ -96,6 +95,7 @@ export class JournalsPageComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
+
 	onResize(event) {
 		if (event.target.innerWidth > 768) {
 			// Set sidebar back to to default state
@@ -105,6 +105,7 @@ export class JournalsPageComponent implements OnInit {
 	}
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
+
 	messageRecieved(message: string) {
 		switch (message) {
 			case 'update': {
@@ -121,17 +122,16 @@ export class JournalsPageComponent implements OnInit {
 	// -----------------------------------------------------------------------------------------------------------------------------
 	// Updates the current list of journals based on local storage, called when we
 	// get an update method from the journalsService
+  
 	private updateJournalList() {
 		this.journals = JSON.parse(localStorage.getItem('userJournals'));
 	}
   //------------------------------------------------------------------------------------------------------------------------------
   currentJournalExists() {
     if(this.currentJournal) {
-      console.log("current journal exists");
       return true;
     }
     else {
-      console.log("current journal does not exist");
       return false;
     }
   }
