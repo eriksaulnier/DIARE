@@ -52,6 +52,23 @@ export class PagesService {
   }
 
 	// ---------------------------------------------------------------------------
+	// Gets a page object
+	// will return either an error message or a page object
+
+	get(journalID: string, pageID: string) {
+		return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID, this.jwt())
+		.map((response: Response) => {
+				let data = response.json();
+				if (data && data._id) {
+					// Store page object in local storage
+					localStorage.setItem('currenPage', JSON.stringify(data));
+
+					// Emit message to update page
+					this.emitterSource.next('updatePage');
+				}
+			});
+	}
+	// ---------------------------------------------------------------------------
 	selectPage(pageId: string = "") {
 		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
@@ -68,7 +85,6 @@ export class PagesService {
 		// emit update message
 		this.emitterSource.next('updatePage');
 	}
-
   // ---------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes
   private jwt() {
