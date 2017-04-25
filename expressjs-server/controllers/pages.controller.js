@@ -7,6 +7,7 @@ var pagesService =      require('../services/pages.service');
 router.post('/create',                              createPage);
 router.delete('/delete/:journal_id/:page_id',       deletePage);
 router.put('/:journal_id/:page_id',                 updatePage);
+router.get('/:journal_id/:page_id',                 getPage);
 module.exports = router;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -52,3 +53,15 @@ function updatePage(req, res) {
     });
 }
 //--------------------------------------------------------------------------------------------------------------------------------
+// Get a page
+function getPage(req, res) {
+  pagesService.getPage(req.params.journal_id, req.params.page_id)
+    .then(function (result) {
+      // send back success message
+      res.send(result);
+    })
+    .catch(function (err) {
+      // send back error message
+      res.status(400).send(err);
+    });
+}

@@ -24,10 +24,11 @@ function addBullet (journalID, pageID, data) {
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
         { $push: { "pages.$.bullets": {
             _id: ObjectId(),
-            created: date,
-            modified: date,
-            content: data.content,
-            starred: data.starred }
+            created:    date,
+            modified:   date,
+            content:    data.content,
+            type:       data.type,
+            starred:    data.starred }
         }},
         { $set: { "pages.$.modified": date, "modified": date } },
         function (err, doc) {

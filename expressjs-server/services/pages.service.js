@@ -9,6 +9,7 @@ var service = {};
 service.createPage        = createPage;
 service.deletePage        = deletePage;
 service.updatePage        = updatePage;
+service.getPage           = getPage;
 module.exports = service;
 //--------------------------------------------------------------------------------------------------------------------------------
 // Create a page within a journal
@@ -71,6 +72,26 @@ function updatePage(journalID, pageID, title) {
       deferred.resolve({message: 'Page successfully updated.'});
     }
   );
+  return deferred.promise;
+}
+//--------------------------------------------------------------------------------------------------------------------------------
+// Get a page.
+// Returns a page object on success, error message on failure
+
+function getPage(journalID, pageID) {
+  var deferred = Q.defer();
+
+  db.journals.findOne(
+    { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
+    { 'pages.$': 1, _id: 0 },
+    function (err, doc) {
+      if (err) deferred.reject(err.name + ': ' + err.message);
+
+      if (doc && doc.pages && doc.pages.length > 0) {
+        deferred.resolve(doc.pages[0]);
+      }
+  });
+
   return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
