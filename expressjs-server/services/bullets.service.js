@@ -22,15 +22,22 @@ function addBullet (journalID, pageID, data) {
 
     db.journals.updateOne(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
-        { $push: { "pages.$.bullets": {
-            _id: ObjectId(),
-            created:    date,
-            modified:   date,
-            content:    data.content,
-            type:       data.type,
-            starred:    data.starred }
-        }},
-        { $set: { "pages.$.modified": date, "modified": date } },
+        {
+          $push: {
+            "pages.$.bullets": {
+              _id: ObjectId(),
+              created:    date,
+              modified:   date,
+              content:    data.content,
+              type:       data.type,
+              starred:    data.starred
+            }
+          },
+          $set: {
+            "pages.$.modified": date,
+            "modified": date
+          } 
+        },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve({message: 'Bullet successfully added.'});
