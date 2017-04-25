@@ -11,7 +11,7 @@
 	<div *ngIf="bulletsExist()">
 		<page-bullet
 		*ngFor="let bullet of currentPage.bullets"
-		[bulletText] = "bullet.text"
-		></page-bullet>
+		[bulletText] = "bullet.content">
+		</page-bullet>
 	<div>
 </div>

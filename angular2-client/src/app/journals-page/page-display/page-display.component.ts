@@ -49,12 +49,6 @@ export class PageDisplayComponent implements OnInit {
 			return;
 		}
 
-		// If pageId is blank show the most recently modified one
-		else if (pageId == '') {
-			this.currentPage = this.currentJournal.pages[0];
-			return;
-		}
-		
 		// Search for the pageId in the journal, if it exists set current page
 		else {
 			for (let i = 0; i < this.currentJournal.pages.length; i++) {

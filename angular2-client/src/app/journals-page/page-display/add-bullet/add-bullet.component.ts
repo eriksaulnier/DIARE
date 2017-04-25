@@ -20,4 +20,31 @@ export class AddBulletComponent implements OnInit {
 
   ngOnInit() {
   }
+
+	// ---------------------------------------------------------------------------
+  // Adds bullet to database, tied to journal and user id
+	// create(journalID: string, pageID: string, bulletText: string, bulletStarred: boolean) {
+  addBullet(bulletText: HTMLInputElement, starred: HTMLInputElement) {
+		let journal = JSON.parse(localStorage.getItem('currentJournal'));
+		let pageId = localStorage.getItem('currentPage');
+
+		// Make sure the title input value is not empty
+		let text = bulletText.value.replace(/\s+$/, '');
+		if (text == '')
+			return;
+
+		// Create a new bullet using the bullets service
+		this.bulletsService.create(journal._id, pageId, text, starred.checked)
+			.subscribe(
+				data => {
+					console.log("Successfully added a new bullet to page " + pageId);
+
+					// Reset form
+					bulletText.value = null;
+					starred.checked = false;
+				},
+				error => {
+					console.log("Adding bullet failed:  " + error._body);
+				});
+  }
 }

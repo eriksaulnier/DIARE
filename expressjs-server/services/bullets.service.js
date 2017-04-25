@@ -23,7 +23,7 @@ function addBullet (journalID, pageID, data) {
     db.journals.updateOne(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
         { $push: { "pages.$.bullets": {
-            _id: ObjectID(),
+            _id: ObjectId(),
             created: date,
             modified: date,
             content: data.content,

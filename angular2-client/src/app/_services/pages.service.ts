@@ -53,6 +53,15 @@ export class PagesService {
 
 	// ---------------------------------------------------------------------------
 	selectPage(pageId: string = "") {
+		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
+		// If id is empty fill with default value
+		if (pageId == "") {
+			if (currentJournal.pages.length > 0)  {
+				pageId = currentJournal.pages[0]._id;
+			}
+		}
+
 		// update current page variable on local storage
 		localStorage.setItem('currentPage', pageId);
 

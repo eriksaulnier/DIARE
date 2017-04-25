@@ -20,13 +20,14 @@ export class BulletsService {
   // Creates new bullet
   // Will return either an error message or a success message
   create(journalID: string, pageID: string, bulletText: string, bulletStarred: boolean) {
-        return this.http.post(this.config.apiURL + '/bullets/create',
-					{journalID: journalID, pageID: pageID, content: bulletText, starred: bulletStarred}, this.jwt())
-            .map((response: Response) => {
-                let data = response.json();
-                return data;
-            });
-    }
+		let data = {content: bulletText, starred: bulletStarred};
+    return this.http.post(this.config.apiURL + '/bullets/add',
+			{journalID: journalID, pageID: pageID, data: data}, this.jwt())
+        .map((response: Response) => {
+            let data = response.json();
+            return data;
+        });
+  }
 
   // ---------------------------------------------------------------------------
   // Deletes a bullet
