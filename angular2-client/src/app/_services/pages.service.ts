@@ -54,9 +54,11 @@ export class PagesService {
 	// ---------------------------------------------------------------------------
 	// Gets a page object
 	// will return either an error message or a page object
+	// if sortOrder is true, bullets will return sorted from most recently modified to least recently modified
+	// if sortOrder is false, bullets will return sorted from least recently modified to most recently modified
 
-	get(journalID: string, pageID: string) {
-		return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID, this.jwt())
+	get(journalID: string, pageID: string, sortOrder: boolean) {
+		return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID + "/" + sortOrder, this.jwt())
 		.map((response: Response) => {
 				let data = response.json();
 				if (data && data._id) {

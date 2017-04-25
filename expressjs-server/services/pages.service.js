@@ -78,7 +78,7 @@ function updatePage(journalID, pageID, title) {
 // Get a page.
 // Returns a page object on success, error message on failure
 
-function getPage(journalID, pageID) {
+function getPage(journalID, pageID, sortOrder) {
   var deferred = Q.defer();
 
   db.journals.findOne(
@@ -88,6 +88,24 @@ function getPage(journalID, pageID) {
       if (err) deferred.reject(err.name + ': ' + err.message);
 
       if (doc && doc.pages && doc.pages.length > 0) {
+
+        if (doc.pages[0].bullets && doc.pages[0].bullets.length > 0) {
+
+          //most recent to least recent
+          if (sortOrder) {
+            doc.pages[0].bullets.sort(function(a,b){
+              return new Date(b.modified) - new Date(a.modified);
+            });
+          }
+
+          //least recent to most recent
+          else if (!sortOrder) {
+            doc.pages[0].bullets.sort(function(a,b){
+              return new Date(a.modified) - new Date(b.modified);
+            });
+          }
+        }
+        
         deferred.resolve(doc.pages[0]);
       }
   });
