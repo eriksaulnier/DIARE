@@ -58,19 +58,17 @@ export class PagesService {
 	// if sortOrder is false, bullets will return sorted from least recently modified to most recently modified
 
 	get(journalID: string, pageID: string, sortOrder: boolean) {
-		if (journalID && pageID) {
-			return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID + "/" + sortOrder, this.jwt())
-			.map((response: Response) => {
-					let data = response.json();
-					if (data && data._id) {
-						// Store page object in local storage
-						localStorage.setItem('currentPage', JSON.stringify(data));
+		return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID + "/" + sortOrder, this.jwt())
+		.map((response: Response) => {
+				let data = response.json();
+				if (data && data._id) {
+					// Store page object in local storage
+					localStorage.setItem('currentPage', JSON.stringify(data));
 
-						// Emit message to update page
-						this.emitterSource.next('updatePage');
-					}
-				});
-		}
+					// Emit message to update page
+					this.emitterSource.next('updatePage');
+				}
+			});
 	}
 
 	// ---------------------------------------------------------------------------
@@ -78,13 +76,19 @@ export class PagesService {
 	selectPage(pageId: string = "") {
 		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
-		// If id is empty fill with default value
+		// If id is empty and there are pages fill with first one
 		if (pageId == "") {
-			if (currentJournal.pages.length > 0)  {
+			if (currentJournal.pages.length > 0) {
 				pageId = currentJournal.pages[0]._id;
+			} else {
+				// Clear current page if there is no page to load
+				localStorage.setItem('currentPage', null);
+				this.emitterSource.next('updatePage');
+				return;
 			}
 		}
 
+		// Tell the service to get the page and store on local storage
 		this.get(currentJournal._id, pageId, false)
 			.subscribe(
 				data => {
@@ -92,8 +96,7 @@ export class PagesService {
 				},
 				error => {
 					console.log("Failed to get page: " + error._body);
-				}
-			)
+				});
 	}
 
 	// ---------------------------------------------------------------------------
