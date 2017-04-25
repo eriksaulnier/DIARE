@@ -69,7 +69,10 @@ function deleteAllJournals (userID) {
 function getJournal (journalID) {
   var deferred = Q.defer();
 
-  db.journals.findOne({ _id: ObjectId(journalID) }, function (err, journal) {
+  db.journals.findOne(
+    { _id: ObjectId(journalID) },
+    {"pages.bullets": 0},
+    function (err, journal) {
     if (err) deferred.reject(err.name + ': ' + err.message);
 
     //sort pages from most recently modified to least recently modified
