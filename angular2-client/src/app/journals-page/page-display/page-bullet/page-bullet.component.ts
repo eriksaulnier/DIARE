@@ -1,4 +1,5 @@
 import { Component, OnInit,  Input } from '@angular/core';
+import { Bullet } from '../../../_models/index';
 
 @Component({
   selector: 'page-bullet',
@@ -6,12 +7,12 @@ import { Component, OnInit,  Input } from '@angular/core';
   styleUrls: ['./page-bullet.component.css']
 })
 export class PageBulletComponent implements OnInit {
-
-  @Input('bulletText') bulletText: string;
+  @Input() bullet: Bullet;
 
   constructor() { }
 
   ngOnInit() {
+		console.log(this.bullet);
   }
 
 }

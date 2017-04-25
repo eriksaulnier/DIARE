@@ -1,0 +1,27 @@
+:host .delete {
+	float: left;
+}
+
+:host .list-group-item {
+	padding: 0;
+}
+:host .star,
+:host .text {
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0;
+}
+
+:host .star {
+	margin-left: 5px;
+	font-size: 15px;
+	color: transparent;
+}
+
+:host .star.starred {
+	color: #ffd43b;
+}
+
+:host .text {
+	font-size: 16px;
+}

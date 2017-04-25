@@ -1,5 +1,6 @@
 <form class="form-inline">
-	<input type="checkbox" #isStarred>
+	<input type="checkbox" id="starred" #isStarred>
+	<label for="starred"></label>
 	<input type="text" class="form-control" placeholder="Enter text here" autocomplete="off" #bulletText>
 	<button class="btn btn-raised btn-primary" (click)="addBullet(bulletText, isStarred)">
 		Add Bullet

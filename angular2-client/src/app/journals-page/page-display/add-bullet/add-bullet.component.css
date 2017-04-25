@@ -1,0 +1,39 @@
+:host .form-inline {
+	width: 100%;
+	margin: 0 0 20px
+}
+
+:host input[type=checkbox] {
+	display: none;
+}
+
+:host input[type=checkbox] + label {
+	margin: 0;
+	margin-right: 5px;
+}
+
+:host input[type=checkbox] + label:before {
+	vertical-align: top;
+	content: '\E83A';
+	cursor: pointer;
+	user-select: none;
+	font-family: "Material Icons";
+	font-size: 25px;
+	line-height: 45px;
+}
+
+:host input[type=checkbox]:checked + label:before {
+	content: '\E838';
+  color: #ffd43b;
+}
+
+:host input[type=text] {
+	vertical-align: top;
+	margin: 3.5px 0;
+}
+
+:host .form-inline button {
+	vertical-align: top;
+	float: right;
+	margin: 4.5px 0;
+}

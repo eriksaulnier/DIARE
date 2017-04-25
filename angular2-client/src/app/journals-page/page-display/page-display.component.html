@@ -7,11 +7,10 @@
 
 	<add-bullet></add-bullet>
 
-	<!-- can't have multiple ng tags on an element so we need an extra div -->
-	<div *ngIf="bulletsExist()">
+	<div class="list-group" *ngIf="bulletsExist()">
 		<page-bullet
 		*ngFor="let bullet of currentPage.bullets"
-		[bulletText] = "bullet.content">
+		[bullet]="bullet">
 		</page-bullet>
-	<div>
+	</div>
 </div>
