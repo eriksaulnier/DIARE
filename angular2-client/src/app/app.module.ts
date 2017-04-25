@@ -20,7 +20,6 @@ import { PopupComponent } 						from './journals-page/popup/popup.component';
 import { JournalPagesComponent } 			from './journals-page/user-journal/journal-pages/journal-pages.component';
 import { PageComponent } 							from './journals-page/user-journal/journal-pages/page/page.component';
 import { PageDisplayComponent } 			from './journals-page/page-display/page-display.component';
-import { PageToolbarComponent } 			from './journals-page/page-toolbar/page-toolbar.component';
 import { AddBulletComponent } 				from './journals-page/page-display/add-bullet/add-bullet.component';
 import { PageBulletComponent } 				from './journals-page/page-display/page-bullet/page-bullet.component';
 
@@ -40,7 +39,6 @@ import { PageBulletComponent } 				from './journals-page/page-display/page-bulle
     JournalPagesComponent,
     PageComponent,
     PageDisplayComponent,
-    PageToolbarComponent,
 		AddBulletComponent,
     PageBulletComponent
   ],

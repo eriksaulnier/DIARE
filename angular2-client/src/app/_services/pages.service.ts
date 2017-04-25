@@ -58,17 +58,19 @@ export class PagesService {
 	// if sortOrder is false, bullets will return sorted from least recently modified to most recently modified
 
 	get(journalID: string, pageID: string, sortOrder: boolean) {
-		return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID + "/" + sortOrder, this.jwt())
-		.map((response: Response) => {
-				let data = response.json();
-				if (data && data._id) {
-					// Store page object in local storage
-					localStorage.setItem('currentPage', JSON.stringify(data));
+		if (journalID && pageID) {
+			return this.http.get(this.config.apiURL + '/pages/' + journalID + "/" + pageID + "/" + sortOrder, this.jwt())
+			.map((response: Response) => {
+					let data = response.json();
+					if (data && data._id) {
+						// Store page object in local storage
+						localStorage.setItem('currentPage', JSON.stringify(data));
 
-					// Emit message to update page
-					this.emitterSource.next('updatePage');
-				}
-			});
+						// Emit message to update page
+						this.emitterSource.next('updatePage');
+					}
+				});
+		}
 	}
 
 	// ---------------------------------------------------------------------------
