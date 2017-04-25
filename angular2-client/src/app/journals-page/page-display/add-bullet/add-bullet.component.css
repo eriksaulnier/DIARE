@@ -1,6 +1,6 @@
 :host .form-inline {
 	width: 100%;
-	margin: 0 0 20px
+	margin: 0 0 10px
 }
 
 :host input[type=checkbox] {

@@ -48,7 +48,7 @@ function deleteBullet (journalID, pageID, bulletID) {
 
     db.journals.updateOne(
         { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
-        { $pull: { "pages.$.bullets": { _id: ObjectID(bulletID) } } },
+        { $pull: { "pages.$.bullets": { _id: ObjectId(bulletID) } } },
         { $set: { "pages.$.modified": date, "modified": date } },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);

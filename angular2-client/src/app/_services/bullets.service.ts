@@ -33,7 +33,7 @@ export class BulletsService {
   // Deletes a bullet
   // Returns success message on success, error message on failure
   delete(journalID: string, pageID: string, bulletID: string) {
-    return this.http.delete(this.config.apiURL + '/bullets/delete/'+ journalID + "/" + pageID + "bulletID", this.jwt())
+    return this.http.delete(this.config.apiURL + '/bullets/delete/'+ journalID + "/" + pageID + "/" + bulletID, this.jwt())
       .map((response: Response) => {
         let data = response.json();
         return data;

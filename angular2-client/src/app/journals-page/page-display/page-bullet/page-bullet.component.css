@@ -1,12 +1,14 @@
-:host .delete {
-	float: left;
-}
-
 :host .list-group-item {
 	padding: 0;
 }
+
+:host .list-group-item:hover .delete {
+	opacity: 1;
+}
+
 :host .star,
-:host .text {
+:host .text,
+:host .delete {
 	vertical-align: middle;
 	display: inline-block;
 	margin: 0;
@@ -24,4 +26,20 @@
 
 :host .text {
 	font-size: 16px;
+}
+
+:host .delete {
+	opacity: 0;
+	margin-left: 15px;
+	color: #868e96;
+	font-size: 14px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: color 0.3s ease-out,
+							opacity 0.3s ease-out;
+}
+
+:host .delete:hover {
+	color: #fa5252;
+	font-weight: 500;
 }

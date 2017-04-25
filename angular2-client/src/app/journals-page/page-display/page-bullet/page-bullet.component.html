@@ -1,4 +1,5 @@
 <div class="list-group-item">
 	<p class="star" [class.starred]="bullet.starred"><i class="material-icons">&#xE838;</i></p>
 	<p class="text">{{bullet.content}}</p>
+	<p class="delete" (click)="deleteBullet()">Delete?</p>
 </div>
