@@ -1,8 +1,13 @@
 <form class="form-inline">
 	<input type="checkbox" id="starred" #isStarred>
 	<label for="starred"></label>
+	<select class="form-control" #bulletType>
+		<option value="note" label="Note">N</option>
+		<option value="task" label="Task">T</option>
+		<option value="event" label="Event">E</option>
+	</select>
 	<input type="text" class="form-control" placeholder="Enter text here" autocomplete="off" #bulletText>
-	<button class="btn btn-raised btn-primary" (click)="addBullet(bulletText, isStarred)">
+	<button class="btn btn-raised btn-primary" (click)="addBullet(bulletText, bulletType, isStarred)">
 		Add Bullet
 	</button>
 </form>

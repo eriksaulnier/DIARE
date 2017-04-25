@@ -2,26 +2,31 @@
 	padding: 0;
 }
 
-:host .list-group-item:hover .delete {
-	opacity: 1;
-}
-
-:host .star,
-:host .text,
-:host .delete {
-	vertical-align: middle;
-	display: inline-block;
+:host p {
 	margin: 0;
 }
 
+:host .star,
+:host .type,
+:host .text,
+:host .delete {
+	vertical-align: top;
+	display: inline-block;
+}
+
 :host .star {
-	margin-left: 5px;
+	margin-right: 4px;
 	font-size: 15px;
 	color: transparent;
 }
 
 :host .star.starred {
 	color: #ffd43b;
+}
+
+:host .type {
+	margin-right: 5px;
+	font-size: 15px;
 }
 
 :host .text {
@@ -37,6 +42,10 @@
 	cursor: pointer;
 	transition: color 0.3s ease-out,
 							opacity 0.3s ease-out;
+}
+
+:host .list-group-item:hover .delete {
+	opacity: 1;
 }
 
 :host .delete:hover {

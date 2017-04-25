@@ -57,7 +57,7 @@ export class PageDisplayComponent implements OnInit {
 				// If id's match then set page
 				if (page._id == pageId) {
 					this.currentPage = page;
-					console.log("Successfully updated currentPage to " + pageId);
+					console.log("Successfully set currentPage to " + pageId);
 					return;
 				}
 			}
@@ -100,6 +100,9 @@ export class PageDisplayComponent implements OnInit {
   private pageMessageRecieved(message: string) {
 		switch (message) {
 			case 'updatePage': {
+				// Update local currentJournal object
+				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
 				// Load the target page
 				this.loadPage();
 

@@ -3,5 +3,6 @@ export class Bullet {
     created: string;
 		modified: string;
     content: string;
+		type: string;
 		starred: boolean;
 }

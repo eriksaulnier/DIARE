@@ -9,13 +9,29 @@ import { Bullet } from '../../../_models/index';
 })
 export class PageBulletComponent implements OnInit {
   @Input() bullet: Bullet;
+	symbol: string;
 
   constructor(
 		private bulletsService: BulletsService
 	) {}
 
   ngOnInit() {
-
+		// Set's the current symbol based on the bullet type
+		switch(this.bullet.type) {
+			case 'event': {
+				this.symbol = '&#9898;';
+				break;
+			}
+			case 'task': {
+				this.symbol = '&#9899;';
+				break;
+			}
+			default:
+			case 'note': {
+				this.symbol = '&#9866;';
+				break;
+			}
+		}
   }
 
 	deleteBullet() {

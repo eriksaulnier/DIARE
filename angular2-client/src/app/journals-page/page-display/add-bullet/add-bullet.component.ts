@@ -24,7 +24,7 @@ export class AddBulletComponent implements OnInit {
 	// ---------------------------------------------------------------------------
   // Adds bullet to database, tied to journal and user id
 	// create(journalID: string, pageID: string, bulletText: string, bulletStarred: boolean) {
-  addBullet(bulletText: HTMLInputElement, starred: HTMLInputElement) {
+  addBullet(bulletText: HTMLInputElement, bulletType: HTMLInputElement, starred: HTMLInputElement) {
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
 		let pageId = localStorage.getItem('currentPage');
 
@@ -34,7 +34,7 @@ export class AddBulletComponent implements OnInit {
 			return;
 
 		// Create a new bullet using the bullets service
-		this.bulletsService.create(journal._id, pageId, text, starred.checked)
+		this.bulletsService.create(journal._id, pageId, text, bulletType.value, starred.checked)
 			.subscribe(
 				data => {
 					console.log("Successfully added a new bullet to page " + pageId);
