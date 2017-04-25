@@ -79,10 +79,11 @@
 	padding: 10px;
 	background-color: #eff0f4;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 :host .main .main-container {
+	min-height: 100%;
 	padding: 15px;
 	background-color: #ffffff;
 }
