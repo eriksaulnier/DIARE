@@ -1,13 +1,12 @@
 import { Component, OnInit, trigger, state, style, animate, transition, Input } from '@angular/core';
-import { JournalsService, PagesService, PopupService } from '../_services/index';
-import { PagedisplayUserjournalService } from './shared/pagedisplay-userjournal.service';
+import { JournalsService, PagesService, BulletsService, PopupService } from '../_services/index';
 import { Journal } from '../_models/index';
 
 @Component({
   selector: 'journals-page',
   templateUrl: './journals-page.component.html',
   styleUrls: ['./journals-page.component.css'],
-  providers: [JournalsService, PagesService, PopupService, PagedisplayUserjournalService],
+  providers: [JournalsService, PagesService, BulletsService, PopupService],
 	animations: [
 		// Sidebar slide in-out animation
 		trigger('slideInOut', [
@@ -33,32 +32,33 @@ export class JournalsPageComponent implements OnInit {
   constructor(
 		private journalsService: JournalsService,
 		private pagesService: PagesService,
+		private bulletsService: BulletsService,
     private popupService: PopupService,
   ) {
-		// Fetch the current userid and update variable
+		// Fetch the current userid and store in local storage
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		this.userid = user._id;
 
-		// Subscribe to the journalService emitter so we can get global update
-		// messages
+		// Subscribe to the journalService emitter so we can get global update messages
 		this.journalsService.emitter.subscribe(
-			message => { this.messageRecieved(message) }
+			message => { this.journalMessageRecieved(message) }
 		)
 	}
 
-	// -----------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
-
   ngOnInit() {
 		// Fetch all of the user's journals; this will also handle setting the current journal
-    this.getJournals();
+    this.getAllJournals();
+
+		// Fetch the last modified journal
+		this.getLastModified();
   }
 
-	// -----------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID, if no id is specified
 	// it will fetch the current user's journals by default.
-
-  getJournals(userID: string = this.userid) {
+  getAllJournals(userID: string = this.userid) {
     this.journalsService.getAllJournals(userID)
       .subscribe(
         data => {
@@ -68,10 +68,10 @@ export class JournalsPageComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
-	// -----------------------------------------------------------------------------------------------------------------------------
+
+	// ---------------------------------------------------------------------------
   // Get the journal that was last modified by the user
   // it will fetch the current user's journals by default
-
   getLastModified(userID: string = this.userid) {
     this.journalsService.getLastModified(userID)
     .subscribe(
@@ -82,10 +82,10 @@ export class JournalsPageComponent implements OnInit {
         console.log("Getting last modified journal failed:  " + error._body);
       });
   }
-  //------------------------------------------------------------------------------------------------------------------------------
+
+  //----------------------------------------------------------------------------
 	// Toggles the sidebar visibility when the client is able to hide it
 	// (sliding it in or out based on button click)
-
 	toggleSidebarVisibility() {
 		// Toggle the state between 'in' and 'out'
 		this.sidebar.state = (this.sidebar.state === 'out') ? 'in' : 'out';
@@ -93,10 +93,10 @@ export class JournalsPageComponent implements OnInit {
 		// Update current button icon
 		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
-	// -----------------------------------------------------------------------------------------------------------------------------
+
+	// ---------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
-
 	onResize(event) {
 		if (event.target.innerWidth > 768) {
 			// Set sidebar back to to default state
@@ -104,37 +104,37 @@ export class JournalsPageComponent implements OnInit {
 			this.sidebar.currentIcon = this.sidebar.icons['out'];
 		}
 	}
-	// -----------------------------------------------------------------------------------------------------------------------------
-	// Handles recieving and routing messages from the journalsService
 
-	messageRecieved(message: string) {
+	// ---------------------------------------------------------------------------
+	// Handles recieving and routing messages from the journalsService
+	private journalMessageRecieved(message: string) {
 		switch (message) {
-			case 'update': {
-				this.updateJournalList();
-        this.getLastModified();
+			case 'updateList': {
+				// Fetch journals from local storage
+				this.journals = JSON.parse(localStorage.getItem('userJournals'));
+
+				// Update currently selected journal
+				this.getLastModified();
+
 				break;
 			}
 			case 'updateJournal': {
+				// Fetch current journal from local storage
 				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
 				break;
 			}
 		}
 	}
-	// -----------------------------------------------------------------------------------------------------------------------------
-	// Updates the current list of journals based on local storage, called when we
-	// get an update method from the journalsService
 
-	private updateJournalList() {
-		this.journals = JSON.parse(localStorage.getItem('userJournals'));
-	}
-  //------------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   currentJournalExists() {
-    if(this.currentJournal) {
+    if (this.currentJournal) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
-  //------------------------------------------------------------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
 }

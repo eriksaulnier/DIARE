@@ -5,13 +5,13 @@ import { Journal } from '../../_models/index';
 @Component({
   selector: 'page-toolbar',
   templateUrl: './page-toolbar.component.html',
-  styleUrls: ['./page-toolbar.component.css'],
-   providers: [PagesService]
+  styleUrls: ['./page-toolbar.component.css']
 })
 export class PageToolbarComponent implements OnInit {
-	private pagesService: PagesService;
 
-  constructor() { }
+  constructor(
+		private pagesService: PagesService
+	) { }
 
   ngOnInit() {
   }

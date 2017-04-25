@@ -16,10 +16,9 @@ export class PagesService {
 		private config: AppConfig
 	) { }
 
-	//------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------
 	// Creates new journal page
 	// Will return either an error or the new page object
-
 	create(journalID: string, pageTitle: string) {
 		return this.http.post(this.config.apiURL + '/pages/create', {id: journalID, title: pageTitle}, this.jwt())
 			.map((response: Response) => {
@@ -27,21 +26,21 @@ export class PagesService {
 				return data;
 			});
 	}
-  //------------------------------------------------------------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
 	// Deletes journal page with specified id
 	// Will return either an error or {message: string talking about how deleting page was successful}
-
 	delete(journalID: string, pageID: string) {
 		return this.http.delete(this.config.apiURL + '/pages/delete/'+ journalID + "/" + pageID, this.jwt())
 			.map((response: Response) => {
 				return response;
 			});
 	}
-	//------------------------------------------------------------------------------------------------------------------------------
+
+	// ---------------------------------------------------------------------------
   // Updates a page object
 	// data should be an object where data = {title: 'New Title'}
   // Will return either an error or {message: string talking about how updating page was successful}
-
   update(journalID: string, pageID: string, data: any) {
 		if (data.title) {
 			return this.http.put(this.config.apiURL + '/pages/' + journalID + "/" + pageID,  data, this.jwt())
@@ -52,9 +51,17 @@ export class PagesService {
 		}
   }
 
-  //------------------------------------------------------------------------------------------------------------------------------
-  // Creates request header with JWT token - needed so that you can hit protected api routes
+	// ---------------------------------------------------------------------------
+	selectPage(pageId: string = "") {
+		// update current page variable on local storage
+		localStorage.setItem('currentPage', pageId);
 
+		// emit update message
+		this.emitterSource.next('updatePage');
+	}
+
+  // ---------------------------------------------------------------------------
+  // Creates request header with JWT token - needed so that you can hit protected api routes
   private jwt() {
     // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -63,5 +70,6 @@ export class PagesService {
       return new RequestOptions({ headers: headers });
     }
   }
-  //------------------------------------------------------------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
 }

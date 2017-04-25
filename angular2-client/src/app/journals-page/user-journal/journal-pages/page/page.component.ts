@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PagesService} from '../../../../_services/index';
-import {PagedisplayUserjournalService} from '../../../shared/pagedisplay-userjournal.service';
+import { PagesService } from '../../../../_services/index';
 
 import { Page} from '../../../../_models/index';
 
@@ -14,8 +13,6 @@ export class PageComponent implements OnInit {
 
   constructor(
 		private pagesService: PagesService,
-		private pagedisplayUserjournalService: PagedisplayUserjournalService
-   
 	) {
 
 	}
@@ -23,9 +20,7 @@ export class PageComponent implements OnInit {
   ngOnInit() {
   }
 
-	selectPage(element, event) {
-		let pageId = element.page._id;
-		this.pagedisplayUserjournalService.updatePageDisplay(pageId);
-		console.log('Load page ' + pageId);
+	selectPage(event) {
+		this.pagesService.selectPage(this.page._id);
 	}
 }

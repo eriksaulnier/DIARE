@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PagesService} from '../../_services/index';
-import {PagedisplayUserjournalService} from '../shared/pagedisplay-userjournal.service';
-import { Page} from '../../_models/index';
-
+import { PagesService, JournalsService } from '../../_services/index';
+import { Page, Journal } from '../../_models/index';
 
 @Component({
   selector: 'page-display',
@@ -10,76 +8,109 @@ import { Page} from '../../_models/index';
   styleUrls: ['./page-display.component.css']
 })
 export class PageDisplayComponent implements OnInit {
-	
-  currentJournal: any;
-	recentPage: any;
-
-
+  currentJournal: Journal;
+	currentPage: Page;
 
   constructor(
-    private pagedisplayUserjournalService: PagedisplayUserjournalService
-    ) {
+		private pagesService: PagesService,
+    private journalsService: JournalsService
+  ) {
 
+		// Subscribe to journal service messages
+    this.journalsService.emitter.subscribe(
+      message => { this.journalMessageRecieved(message) }
+    )
 
-    // Subscribe to the sharedservice pagedisplayUserjournalService emitter so we can get global update
-    // messages
-    this.pagedisplayUserjournalService.emitter.subscribe(
-      message => { this.messageRecieved(message) }
+    // Subscribe to page service messages
+    this.pagesService.emitter.subscribe(
+      message => { this.pageMessageRecieved(message) }
     )
    }
-// ---------------------------------------------------------------------------
+
+	// ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
-     this.loadPage("");
+
   }
 
-  loadPage(page_id: string){
-     this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-     //make sure currentJournal exists, and has pages with size > 1
-    if( this.currentJournal && this.currentJournal.pages && this.currentJournal.pages.length > 0){
-      //no specified page
-      if(page_id == ""){
-        this.recentPage = this.currentJournal.pages[0];
-      }
-      else {
-        //We got a page to match, need to find it.
-        for (var i = this.currentJournal.pages.length - 1; i >= 0; i--) {
-          if(this.currentJournal.pages[i]._id == page_id){
-            this.recentPage = this.currentJournal.pages[i];
-          }
-                 
-        }
+  loadPage() {
+		// Make sure currentJournal exists and has pages
+		if (this.currentJournal == null || this.currentJournal.pages.length < 1) {
+			this.currentPage = null;
+			return;
+		}
 
-      }
-      
-    }
+		// Fetch page id from local storage
+		let pageId = localStorage.getItem('currentPage');
+
+		// If pageId is null clear current page and exit function
+		if (pageId == null) {
+			this.currentPage = null;
+			return;
+		}
+
+		// If pageId is blank show the most recently modified one
+		else if (pageId == '') {
+			this.currentPage = this.currentJournal.pages[0];
+			return;
+		}
+		
+		// Search for the pageId in the journal, if it exists set current page
+		else {
+			for (let i = 0; i < this.currentJournal.pages.length; i++) {
+				let page = this.currentJournal.pages[i];
+
+				// If id's match then set page
+				if (page._id == pageId) {
+					this.currentPage = page;
+					console.log("Successfully updated currentPage to " + pageId);
+					return;
+				}
+			}
+		}
+
+		// If we make it this far then there is no current page
+		this.currentPage = null;
   }
 
   pageExists() {
-    if (this.recentPage) {
+    if (this.currentPage) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   bulletsExist() {
-    if (this.recentPage && this.recentPage.bullets && this.recentPage.bullets.length > 0) {
+    if (this.currentPage && this.currentPage.bullets && this.currentPage.bullets.length > 0) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-    // Handles recieving and routing messages from the journalsService
+	private journalMessageRecieved(message: string) {
+		switch (message) {
+			case 'updateJournal': {
+				// Update local currentJournal object
+				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
-    messageRecieved(message: {}) {
-      if(message["message"] == 'update'){
-          console.log("recieved message update, calling loadPage");
-          this.loadPage(message["target"]);
-      }
+				// If this journal has more than 1 page set the current page to the first one
+				this.pagesService.selectPage();
 
-    }
+				break;
+			}
+		}
+	}
+
+  private pageMessageRecieved(message: string) {
+		switch (message) {
+			case 'updatePage': {
+				// Load the target page
+				this.loadPage();
+
+				break;
+			}
+		}
+  }
 }

@@ -1,16 +1,17 @@
 <div *ngIf="pageExists()">
 	<header class="page-header">
-		<h1>{{recentPage.title}}</h1>
+		<h1>{{currentPage.title}}</h1>
 		<div class="divider"></div>
-		<p class="timestamp">Last saved {{recentPage.modified | date:'MM/dd h:mm a'}}</p>
+		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p>
 	</header>
+
+	<add-bullet></add-bullet>
 
 	<!-- can't have multiple ng tags on an element so we need an extra div -->
 	<div *ngIf="bulletsExist()">
 		<page-bullet
-		*ngFor="let bullet of recentPage.bullets"
+		*ngFor="let bullet of currentPage.bullets"
 		[bulletText] = "bullet.text"
 		></page-bullet>
 	<div>
-
 </div>

@@ -3,4 +3,5 @@ export class Page {
     journalID: string;
 		title: string;
     text: string[];
+		bullets: any[];
 }

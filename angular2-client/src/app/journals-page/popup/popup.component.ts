@@ -46,10 +46,8 @@ export class PopupComponent {
 		}
 	}
 
-
 	cancelClick(inputField: HTMLInputElement){
 		// Reset title input field
 		inputField.value = null;
-}
-
+	}
 }

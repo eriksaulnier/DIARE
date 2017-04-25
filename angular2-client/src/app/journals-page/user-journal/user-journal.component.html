@@ -1,5 +1,5 @@
-<div class="wrapper" *ngIf="journal!=null">
-	<div class="journal" (click)="selectJournal(this, $event)">
+<div class="wrapper">
+	<div class="journal" (click)="selectJournal($event)">
 		<p class="title">{{journal['title']}}</p>
 
 		<div class="dropdown options">
@@ -7,14 +7,14 @@
 				<i class="material-icons">more_vert</i>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="javascript:void(0)" (click)="createPagePopup()">Add Page</a></li>
+				<li><a href="javascript:void(0)" (click)="createNewPage()">Add Page</a></li>
 			  <li><a href="javascript:void(0)" (click)="editJournalTitle()">Edit Title</a></li>
 				<li><a href="javascript:void(0)" (click)="confirmDeleteJournal()">Delete</a></li>
 			</ul>
 		</div>
 	</div>
 	<journal-pages
-		[pages]="journal!=null ? journal.pages : []"
+		[pages]="journal.pages"
 		*ngIf="showPages">
 	</journal-pages>
 </div>

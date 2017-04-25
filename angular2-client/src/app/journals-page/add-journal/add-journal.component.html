@@ -1,7 +1,6 @@
 <form>
-	<div class="form-group label-floating is-empty">
-		<label for="title" class="control-label">Journal Title</label>
-		<input type="string" name="title" class="form-control" autocomplete="off" #newTitle>
+	<div class="form-group">
+		<input type="text" name="title" class="form-control" placeholder="Journal Title" autocomplete="off" #newTitle>
 	</div>
 
 	<button class="btn btn-raised btn-primary" (click)="addJournal(newTitle)">
