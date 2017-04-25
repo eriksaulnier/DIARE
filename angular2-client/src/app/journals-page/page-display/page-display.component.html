@@ -5,12 +5,12 @@
 		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p>
 	</header>
 
-	<add-bullet></add-bullet>
-
+	<add-bullet *ngIf="!pageSort"></add-bullet>
 	<div class="list-group" *ngIf="bulletsExist()">
 		<page-bullet
 		*ngFor="let bullet of currentPage.bullets"
 		[bullet]="bullet">
 		</page-bullet>
 	</div>
+	<add-bullet *ngIf="pageSort"></add-bullet>
 </div>
