@@ -1,8 +1,9 @@
 :host li {
-	padding: 8px;
+	padding: 12px 10px;
 	margin-top: -1px;
 	color: #fff;
 	cursor: pointer;
+	font-size: 16px;
 	transition: background-color 0.3s ease-out;
 }
 
@@ -13,6 +14,12 @@
 :host li:hover {
 	background-color: rgba(0,0,0,0.15);
 }
+
 :host li p {
 	margin: 0;
+}
+
+:host(.active) li {
+	text-decoration: underline;
+	background-color: rgba(0,0,0,0.10);
 }

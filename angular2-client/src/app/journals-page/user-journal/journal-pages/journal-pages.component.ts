@@ -9,11 +9,28 @@ import { Page } from '../../../_models/index';
 })
 export class JournalPagesComponent implements OnInit {
 	@Input() pages: Page[];
+	currentPage: Page;
 
   constructor(
 		private pagesService: PagesService
-	) { }
+	) {
+		// Subscribe to page service messages
+    this.pagesService.emitter.subscribe(
+      message => { this.pageMessageRecieved(message) }
+    )
+	}
 
   ngOnInit() {
   }
+
+	private pageMessageRecieved(message: string) {
+		switch (message) {
+			case 'updatePage': {
+				// Update local currentJournal object
+				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
+
+				break;
+			}
+		}
+	}
 }

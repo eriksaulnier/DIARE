@@ -117,8 +117,9 @@ export class PagesService {
 				)
 		}
 	}
-  // ---------------------------------------------------------------------------
-  // Creates request header with JWT token - needed so that you can hit protected api routes
+
+
+	// Creates request header with JWT token - needed so that you can hit protected api routes
   private jwt() {
     // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
