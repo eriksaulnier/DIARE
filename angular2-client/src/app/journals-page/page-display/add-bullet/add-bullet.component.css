@@ -27,12 +27,18 @@
   color: #ffd43b;
 }
 
-:host input[type=text] {
+:host select {
 	vertical-align: top;
-	margin: 3.5px 0;
+	margin: 0;
 }
 
-:host .form-inline button {
+:host input[type=text] {
+	vertical-align: top;
+	margin: 0;
+	padding: 0 5px;
+}
+
+:host button {
 	vertical-align: top;
 	float: right;
 	margin: 4.5px 0;

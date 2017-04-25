@@ -19,8 +19,8 @@ export class BulletsService {
   // ---------------------------------------------------------------------------
   // Creates new bullet
   // Will return either an error message or a success message
-  create(journalID: string, pageID: string, bulletText: string, bulletStarred: boolean) {
-		let data = {content: bulletText, starred: bulletStarred};
+  create(journalID: string, pageID: string, bulletText: string, bulletType: string, bulletStarred: boolean) {
+		let data = {content: bulletText, type: bulletType, starred: bulletStarred};
     return this.http.post(this.config.apiURL + '/bullets/add',
 			{journalID: journalID, pageID: pageID, data: data}, this.jwt())
         .map((response: Response) => {
