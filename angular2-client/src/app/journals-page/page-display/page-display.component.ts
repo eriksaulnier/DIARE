@@ -40,31 +40,17 @@ export class PageDisplayComponent implements OnInit {
 			return;
 		}
 
-		// Fetch page id from local storage
-		let pageId = localStorage.getItem('currentPage');
+		// Fetch current page from local storage
+		let curPage = JSON.parse(localStorage.getItem('currentPage'));
 
-		// If pageId is null clear current page and exit function
-		if (pageId == null) {
+		// If current page is null clear page and exit function
+		if (curPage == null || curPage._id == null) {
 			this.currentPage = null;
 			return;
 		}
 
-		// Search for the pageId in the journal, if it exists set current page
-		else {
-			for (let i = 0; i < this.currentJournal.pages.length; i++) {
-				let page = this.currentJournal.pages[i];
-
-				// If id's match then set page
-				if (page._id == pageId) {
-					this.currentPage = page;
-					console.log("Successfully set currentPage to " + pageId);
-					return;
-				}
-			}
-		}
-
-		// If we make it this far then there is no current page
-		this.currentPage = null;
+		// Update current page object on display
+		this.currentPage = curPage;
   }
 
   pageExists() {

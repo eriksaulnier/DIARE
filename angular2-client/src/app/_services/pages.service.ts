@@ -63,14 +63,16 @@ export class PagesService {
 				let data = response.json();
 				if (data && data._id) {
 					// Store page object in local storage
-					localStorage.setItem('currenPage', JSON.stringify(data));
+					localStorage.setItem('currentPage', JSON.stringify(data));
 
 					// Emit message to update page
 					this.emitterSource.next('updatePage');
 				}
 			});
 	}
+
 	// ---------------------------------------------------------------------------
+	// Selects page with the given id
 	selectPage(pageId: string = "") {
 		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
@@ -81,11 +83,34 @@ export class PagesService {
 			}
 		}
 
-		// update current page variable on local storage
-		localStorage.setItem('currentPage', pageId);
+		this.get(currentJournal._id, pageId, false)
+			.subscribe(
+				data => {
+					console.log("Successfully set currentPage to " + pageId);
+				},
+				error => {
+					console.log("Failed to get page: " + error._body);
+				}
+			)
+	}
 
-		// emit update message
-		this.emitterSource.next('updatePage');
+	// ---------------------------------------------------------------------------
+	// Updates page data if currentPage is set on local storage
+	updatePage() {
+		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
+
+		if (currentPage != null && currentPage._id != null) {
+			this.get(currentJournal._id, currentPage._id, false)
+				.subscribe(
+					data => {
+						console.log("Successfully updated currentPage data");
+					},
+					error => {
+						console.log("Failed to update page data: " + error._body);
+					}
+				)
+		}
 	}
   // ---------------------------------------------------------------------------
   // Creates request header with JWT token - needed so that you can hit protected api routes

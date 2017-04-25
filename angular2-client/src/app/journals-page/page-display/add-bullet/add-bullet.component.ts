@@ -26,7 +26,7 @@ export class AddBulletComponent implements OnInit {
 	// create(journalID: string, pageID: string, bulletText: string, bulletStarred: boolean) {
   addBullet(bulletText: HTMLInputElement, bulletType: HTMLInputElement, starred: HTMLInputElement) {
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
-		let pageId = localStorage.getItem('currentPage');
+		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
 
 		// Make sure the title input value is not empty
 		let text = bulletText.value.replace(/\s+$/, '');
@@ -34,14 +34,17 @@ export class AddBulletComponent implements OnInit {
 			return;
 
 		// Create a new bullet using the bullets service
-		this.bulletsService.create(journal._id, pageId, text, bulletType.value, starred.checked)
+		this.bulletsService.create(journal._id, currentPage._id, text, bulletType.value, starred.checked)
 			.subscribe(
 				data => {
-					console.log("Successfully added a new bullet to page " + pageId);
+					console.log("Successfully added a new bullet to page " + currentPage._id);
 
 					// Reset form
 					bulletText.value = null;
 					starred.checked = false;
+
+					// Update the current page data
+					this.pagesService.updatePage();
 				},
 				error => {
 					console.log("Adding bullet failed:  " + error._body);

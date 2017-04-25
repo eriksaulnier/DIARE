@@ -23,14 +23,5 @@ export class PageComponent implements OnInit {
 
 	selectPage(event) {
 		this.pagesService.selectPage(this.page._id);
-		console.log(this.page.journalID)
-		// this.journalsService.getJournal(this.page.journalID)
-		// 	.subscribe(
-		// 		data => {
-		// 			console.log("Successfully set currentJournal to " + this.journal._id);
-		// 		},
-		// 		error => {
-		// 			console.log("Setting currentJournal failed: " + error.body);
-		// 		})
 	}
 }

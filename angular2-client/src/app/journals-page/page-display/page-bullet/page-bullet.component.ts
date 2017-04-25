@@ -1,5 +1,5 @@
 import { Component, OnInit,  Input } from '@angular/core';
-import { BulletsService } from '../../../_services/index';
+import { BulletsService, PagesService } from '../../../_services/index';
 import { Bullet } from '../../../_models/index';
 
 @Component({
@@ -12,7 +12,8 @@ export class PageBulletComponent implements OnInit {
 	symbol: string;
 
   constructor(
-		private bulletsService: BulletsService
+		private bulletsService: BulletsService,
+		private pagesService: PagesService
 	) {}
 
   ngOnInit() {
@@ -36,13 +37,16 @@ export class PageBulletComponent implements OnInit {
 
 	deleteBullet() {
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
-		let pageId = localStorage.getItem('currentPage');
+		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
 
 		// Delete this journal through the journal service
-    this.bulletsService.delete(journal._id, pageId, this.bullet._id)
+    this.bulletsService.delete(journal._id, currentPage._id, this.bullet._id)
       .subscribe(
         data => {
 					console.log("Successfully deleted bullet " + this.bullet._id);
+
+					// Update the current page data
+					this.pagesService.updatePage();
         },
         error => {
 					console.log("Deleting bullet failed:  " + error._body);
