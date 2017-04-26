@@ -1,6 +1,8 @@
 <div class="content" *ngIf="pageExists()">
 	<header class="page-header">
-		<h1>{{currentPage.title}}</h1>
+		<h1 *ngIf = "!editable" (click)="toggleEditable()">{{currentPage.title}}</h1>
+		<input *ngIf = "editable" #pageTitleInput BulletFocus type="text" value = "{{currentPage.title}}" (keyup.enter) ="onEnter(pageTitleInput.value)" (keyup.esc)="toggleEditable()" />
+
 		<div class="divider"></div>
 		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p>
 	</header>

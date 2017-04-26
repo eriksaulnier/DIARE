@@ -15,8 +15,11 @@ export class PageBulletComponent implements OnInit {
 
   constructor(
 		private bulletsService: BulletsService,
-		private pagesService: PagesService
-	) {}
+		private pagesService: PagesService,
+	) {
+		this.editable = false;
+
+  }
 
   ngOnInit() {
 		// Set's the current symbol based on the bullet type
@@ -76,5 +79,7 @@ export class PageBulletComponent implements OnInit {
 	        error => {
 						console.log("Deleting bullet failed:  " + error._body);
 	        });
+		this.toggleEditable();
 	}
+
 }

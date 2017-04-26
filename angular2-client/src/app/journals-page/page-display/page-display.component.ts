@@ -9,12 +9,15 @@ import { Page, Journal } from '../../_models/index';
 })
 export class PageDisplayComponent implements OnInit {
   currentJournal: Journal;
-	currentPage: Page;
+  currentPage: Page;
+  editable: boolean;
 
   constructor(
-		private pagesService: PagesService,
+	private pagesService: PagesService,
     private journalsService: JournalsService
   ) {
+
+  	this.editable = false;
 
 		// Subscribe to journal service messages
     this.journalsService.emitter.subscribe(
@@ -73,4 +76,28 @@ export class PageDisplayComponent implements OnInit {
 			}
 		}
   }
+
+  	// ---------------------------------------------------------------------------
+  	// Need to be able to toggle between editing and non editing
+	toggleEditable(){
+		this.editable = !this.editable;
+	}
+	// ---------------------------------------------------------------------------
+  	// Need to persist user's input
+	onEnter(value: string){
+		
+		this.pagesService.update(this.currentJournal._id, this.currentPage._id, {"title": value})
+		.subscribe(
+			 data => {
+					console.log("Successfully updated page " + this.currentPage._id);
+
+					// Update the current page data
+					this.pagesService.updatePage();
+	        },
+	        error => {
+						console.log("Deleting page failed:  " + error._body);
+	        });
+	}
+	this.toggleEditable();
+
 }

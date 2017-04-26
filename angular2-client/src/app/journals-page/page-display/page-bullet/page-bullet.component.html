@@ -3,9 +3,11 @@
 		<p class="star" [class.starred]="bullet.starred"><i class="material-icons">&#xE838;</i></p>
 		<p class="type" [innerHTML]="symbol"></p>
 	</div>
+	
 	<p *ngIf = "!editable" class="text" (click)="toggleEditable()">
 		{{bullet.content}} <span class="delete" (click)="deleteBullet()">Delete</span>
 	</p>
+
 	<input *ngIf = "editable" #bulletInput BulletFocus type="text" value = "{{bullet.content}}" (keyup.enter) ="onEnter(bulletInput.value)" (keyup.esc)="toggleEditable()" />
 
 	<p class="delete" (click)="deleteBullet()">Delete?</p>
