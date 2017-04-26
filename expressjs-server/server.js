@@ -24,6 +24,7 @@ app.use(expressJwt({ secret: config.secret }).unless({ path:
     '/journals',
     '/settings',
     '/about',
+    '/search',
     '/favicon.ico',
     /\/vendor.*/,
     /\/styles.*/,

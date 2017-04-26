@@ -10,6 +10,7 @@ router.get('/register',   sendIndex);
 router.get('/journals',   sendIndex);
 router.get('/settings',   sendIndex);
 router.get('/about',      sendIndex);
+router.get('/search',     sendIndex);
 
 module.exports = router;
 
