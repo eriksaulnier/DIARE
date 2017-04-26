@@ -1,6 +1,7 @@
 import { Component, OnInit,  Input } from '@angular/core';
 import { BulletsService, PagesService } from '../../../_services/index';
 import { Bullet } from '../../../_models/index';
+import {BulletFocusDirective} from './../bullet-focus.directive'
 
 @Component({
   selector: 'page-bullet',
@@ -9,7 +10,8 @@ import { Bullet } from '../../../_models/index';
 })
 export class PageBulletComponent implements OnInit {
   @Input() bullet: Bullet;
-	symbol: string;
+  editable: boolean;
+  symbol: string;
 
   constructor(
 		private bulletsService: BulletsService,
@@ -34,7 +36,8 @@ export class PageBulletComponent implements OnInit {
 			}
 		}
   }
-
+  	// ---------------------------------------------------------------------------
+  
 	deleteBullet() {
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
 		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
@@ -51,5 +54,27 @@ export class PageBulletComponent implements OnInit {
         error => {
 					console.log("Deleting bullet failed:  " + error._body);
         });
+	}
+	// ---------------------------------------------------------------------------
+  	// Need to be able to toggle between editing and non editing
+	toggleEditable(){
+		this.editable = !this.editable;
+	}
+	// ---------------------------------------------------------------------------
+  	// Need to persist user's input
+	onEnter(value: string){
+		let journal = JSON.parse(localStorage.getItem('currentJournal'));
+		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
+		this.bulletsService.update(journal._id, currentPage._id, this.bullet._id, {"content": value})
+		.subscribe(
+			 data => {
+					console.log("Successfully updated bullet " + this.bullet._id);
+
+					// Update the current page data
+					this.pagesService.updatePage();
+	        },
+	        error => {
+						console.log("Deleting bullet failed:  " + error._body);
+	        });
 	}
 }

@@ -107,7 +107,7 @@ function updateBullet (journalID, pageID, bulletID, data) {
     if (result) {
         for (var i = 0; i < result.pages.bullets; i++) {
             var bullet = results.pages.bullets[i];
-            if (bullet._id !== ObjectID(bulletID)) continue;
+            if (bullet._id !== ObjectId(bulletID)) continue;
             for (property in data) {
                 bullet.property = data.property;
             }
