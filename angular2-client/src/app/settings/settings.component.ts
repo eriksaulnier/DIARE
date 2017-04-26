@@ -17,9 +17,13 @@ export class SettingsComponent implements OnInit {
 
 	public changeEmailForm: FormGroup;
   public emailsMatch: boolean = false;
+  public emailErrorMessage: string;
+  public emailSuccessMessage: string;
 
 	public changePswdForm: FormGroup;
   public passwordsMatch: boolean = false;
+  public passwordErrorMessage: string;
+  public passwordSuccessMessage: string;
 
   constructor(
 		private fb: FormBuilder,
@@ -119,6 +123,8 @@ export class SettingsComponent implements OnInit {
 	}
 
 	emailFormSubmitted() {
+    this.emailErrorMessage = "";
+    this.emailSuccessMessage = "";
 		const newEmail = this.changeEmailForm.value.newEmail;
 
 		// Don't submit if form isn't valid
@@ -130,17 +136,20 @@ export class SettingsComponent implements OnInit {
 		this.userService.update(this.userid, {email: newEmail})
 		.subscribe(
 		  data => {
-				console.log("Successfully changed email for " + this.userid);
-
+        if (data && data.message) {
+          this.emailSuccessMessage = data.message;
+        }
 				// Reset the form only if we succeed
 				this.changeEmailForm.reset();
 		  },
 		  error => {
-				console.log("Changing user email failed:  " + error._body);
+        this.emailErrorMessage = "Changing user email failed: " + error._body;
 		  });
 	}
 
 	pswdFormSubmitted() {
+    this.passwordErrorMessage = "";
+    this.passwordSuccessMessage = "";
 		const curPswd = this.changePswdForm.value.curPswd;
 		const newPswd = this.changePswdForm.value.newPswd;
 
@@ -153,13 +162,14 @@ export class SettingsComponent implements OnInit {
 		this.userService.update(this.userid, {oldPassword: curPswd, newPassword: newPswd})
 		.subscribe(
 		  data => {
-				console.log("Successfully changed password for " + this.userid);
-
+        if (data && data.message) {
+          this.passwordSuccessMessage = data.message;
+        }
 				// Reset the form only if we succeed
 				this.changePswdForm.reset();
 		  },
 		  error => {
-				console.log("Changing user password failed:  " + error._body);
+        this.passwordErrorMessage = "Changing user password failed: " + error._body;
 		  });
 	}
 
