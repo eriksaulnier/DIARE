@@ -22,6 +22,10 @@ export class PageComponent implements OnInit {
 		let user = JSON.parse(localStorage.getItem('currentUser'));
 		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 		this.userid = user._id;
+		// Subscribe to journals service messages
+    	this.journalsService.emitter.subscribe(
+      	message => { this.journalsMessageRecieved(message) }
+   		)
 	}
 
   ngOnInit() {
@@ -90,6 +94,18 @@ export class PageComponent implements OnInit {
     );
   }
 
+    private journalsMessageRecieved(message: string) {
+		switch (message) {
+			case 'updateJournal': {
+				// Update local currentJournal object
+
+				this.journal = JSON.parse(localStorage.getItem('currentJournal'));
+
+				break;
+			}
+		}
+	
+	}
     // Update this pages's title
 	private updatePageTitle(value: string) {
 	let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
