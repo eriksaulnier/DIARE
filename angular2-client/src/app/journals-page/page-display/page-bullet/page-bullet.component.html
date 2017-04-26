@@ -5,10 +5,8 @@
 	</div>
 	
 	<p *ngIf = "!editable" class="text" (click)="toggleEditable()">
-		{{bullet.content}} <span class="delete" (click)="deleteBullet()">Delete</span>
+		{{bullet.content}} <span (click)="deleteBullet()">Delete</span>
 	</p>
 
 	<input *ngIf = "editable" #bulletInput BulletFocus type="text" value = "{{bullet.content}}" (keyup.enter) ="onEnter(bulletInput.value)" (keyup.esc)="toggleEditable()" />
-
-	<p class="delete" (click)="deleteBullet()">Delete?</p>
 </div>
