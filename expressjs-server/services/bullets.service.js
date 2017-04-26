@@ -151,12 +151,16 @@ function searchBullets (userID, data) {
 
               //for each key in the input data
               for (key in data) {
-                if ((key !== "content") && (bullet[key].toString() === data[key])) {
+
+                var lowerBullet = bullet[key].toString().toLowerCase();
+                var lowerData = data[key].toLowerCase();
+
+                if ((key !== "content") && ( lowerBullet === lowerData )) {
                     bullet.journalID = journal_id;
                     bullet.pageID = page_id;
                     bullets.push(bullet);
                 }
-                else if ((key === "content") && bullet[key].includes(data[key])) {
+                else if ((key === "content") && lowerBullet.includes(lowerData)) {
                   bullet.journalID = journal_id;
                   bullet.pageID = page_id;
                   bullets.push(bullet);
