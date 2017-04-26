@@ -51,7 +51,7 @@ function getBullets (req, res) {
 // Update a page's bullet
 
 function updateBullet (req, res) {
-    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.body.data)
+    bulletsService.updateBullet(req.params.journalID, req.params.pageID, req.params.bulletID, req.body)
         .then(function (result) {
             res.send(result);
         })

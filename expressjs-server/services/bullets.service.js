@@ -104,36 +104,48 @@ function getAllBullets (userID) {
 // Returns a success message on success, or an error message on failure.
 
 function updateBullet (journalID, pageID, bulletID, data) {
-    var deferred = Q.defer();
-    var cursor = db.journals.find(
-        { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
-        { pages: 1 }
-    );
-    var result = cursor.hasNext() ? cursor.next : null;
+  var deferred = Q.defer();
 
-    if (result) {
-        for (var i = 0; i < result.pages.bullets; i++) {
-            var bullet = results.pages.bullets[i];
-            if (bullet._id !== ObjectId(bulletID)) continue;
-            for (property in data) {
-                bullet.property = data.property;
+  db.journals.findOne(
+      { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
+      { 'pages.$': 1, _id: 0},
+      function (err, doc) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+
+        if (doc && doc.pages && doc.pages[0]) {
+          var bullets = doc.pages[0].bullets;
+          for (var i = 0; i < bullets.length; ++i) {
+            if (bullets[i]._id != bulletID) {
+              continue;
             }
-            var bullet_position = `pages.$.bullets.${i}`;
-            db.journals.updateOne(
-                { _id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
-                { $set: { bullet_position: bullet } },
-                function (err, doc) {
-                    if (err) deferred.reject(err.name + ': ' + err.message);
-                    deferred.resolve({message: 'Bullet successfully updated.'});
-                }
-            );
-            break;
-        }
-    } else {
-        deferred.reject({ message: "Failed to update bullet." });
-    }
+            var bullet = bullets[i];
+            var bullet_pos = "pages.$.bullets." + i.toString();
 
-    return deferred.promise;
+            var obj={};
+
+            for (item in data) {
+              bullet[item] = data[item];
+            }
+
+            obj[bullet_pos] = bullet;
+
+            db.journals.updateOne(
+              {_id: ObjectId(journalID), "pages._id": ObjectId(pageID) },
+              {$set: obj },
+              function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+                deferred.resolve({message: 'Bullet successfully updated.'});
+              }
+            )
+            break;
+          }
+        }
+        else {
+          deferred.reject({ message: "Failed to update bullet." });
+        }
+      }
+  );
+  return deferred.promise;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------

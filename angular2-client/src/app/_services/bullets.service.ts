@@ -60,6 +60,7 @@ export class BulletsService {
   //----------------------------------------------------------------------------
   // Updates a bullet object
   // data should be an object where data = {fieldYouWantToUpdate: 'value'}
+  // YOU CAN UPDATE MULTIPLE BULLET FIELDS AT ONCE (just add multiple key: value pairs to the data object)
   // Will return either an error message or a success message
   update(journalID: string, pageID: string, bulletID: string, data: any) {
     return this.http.put(this.config.apiURL + '/bullets/' + journalID + "/" + pageID + "/" + bulletID, data, this.jwt())
