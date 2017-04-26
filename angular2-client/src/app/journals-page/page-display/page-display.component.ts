@@ -84,7 +84,7 @@ export class PageDisplayComponent implements OnInit {
 	}
 	// ---------------------------------------------------------------------------
   	// Need to persist user's input
-	onEnter(value: string){
+	onEnter(value: string){	
 
 		this.pagesService.update(this.currentJournal._id, this.currentPage._id, {"title": value})
 		.subscribe(
@@ -93,6 +93,14 @@ export class PageDisplayComponent implements OnInit {
 
 					// Update the current page data
 					this.pagesService.updatePage();
+
+					this.journalsService.getJournal(this.currentJournal._id).subscribe(
+					data => {
+						console.log("Successfully set currentJournal to " + this.currentJournal._id);
+					},
+					error => {
+						console.log("Setting currentJournal failed: " + error.body);
+					})
 	        },
 	        error => {
 						console.log("Deleting page failed:  " + error._body);
