@@ -1,0 +1,52 @@
+:host .list-group-item {
+	position: relative;
+	padding: 0;
+	min-height: 32px;
+}
+
+:host p {
+	margin: 0;
+}
+
+:host .head {
+	position: absolute;
+	left: 0;
+}
+
+:host .head .star {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 0;
+	color: transparent;
+	line-height: 32px;
+}
+
+:host .head .star i {
+	vertical-align: middle;
+	margin-right: 2px;
+	font-size: 26px;
+}
+
+:host .head .star.starred {
+	color: #ffd43b;
+}
+
+:host .head .type {
+	display: inline-block;
+	vertical-align: top;
+	font-size: 13px;
+	line-height: 32px;
+}
+
+:host .content {
+	vertical-align: top;
+	padding-left: 48px;
+	font-size: 16px;
+}
+
+:host .content .text {
+	display: inline-block;
+	min-height: 32px;
+	margin-left: 4px;
+	margin-top: 5px;
+}

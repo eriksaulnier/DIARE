@@ -61,7 +61,7 @@ export class BulletsService {
     return this.http.post(this.config.apiURL + '/bullets/search/' + userid, data, this.jwt())
       .map((response: Response) => {
         let data = response.json();
-        if (data && data[0]._id) {
+        if (data && data.length > 0) {
           // store array of bullet objects in local storage
           localStorage.setItem('searchResults', JSON.stringify(data));
 

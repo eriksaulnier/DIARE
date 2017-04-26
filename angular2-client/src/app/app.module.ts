@@ -23,6 +23,8 @@ import { PageDisplayComponent } 			from './journals-page/page-display/page-displ
 import { AddBulletComponent } 				from './journals-page/page-display/add-bullet/add-bullet.component';
 import { PageBulletComponent } 				from './journals-page/page-display/page-bullet/page-bullet.component';
 import { BulletFocusDirective } from './journals-page/page-display/bullet-focus.directive';
+import { SearchComponent } from './search/search.component';
+import { SearchBulletComponent } from './search/search-bullet/search-bullet.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { BulletFocusDirective } from './journals-page/page-display/bullet-focus.
     PageDisplayComponent,
 		AddBulletComponent,
     PageBulletComponent,
-    BulletFocusDirective
+    BulletFocusDirective,
+    SearchComponent,
+    SearchBulletComponent
   ],
   imports: [
     BrowserModule,
