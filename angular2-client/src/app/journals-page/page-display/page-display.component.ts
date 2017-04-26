@@ -85,7 +85,7 @@ export class PageDisplayComponent implements OnInit {
 	// ---------------------------------------------------------------------------
   	// Need to persist user's input
 	onEnter(value: string){
-		
+
 		this.pagesService.update(this.currentJournal._id, this.currentPage._id, {"title": value})
 		.subscribe(
 			 data => {
@@ -97,7 +97,8 @@ export class PageDisplayComponent implements OnInit {
 	        error => {
 						console.log("Deleting page failed:  " + error._body);
 	        });
-	}
 	this.toggleEditable();
+	}
+
 
 }
