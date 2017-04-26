@@ -76,13 +76,19 @@ export class PagesService {
 	selectPage(pageId: string = "") {
 		let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 
-		// If id is empty fill with default value
+		// If id is empty and there are pages fill with first one
 		if (pageId == "") {
-			if (currentJournal.pages.length > 0)  {
+			if (currentJournal.pages.length > 0) {
 				pageId = currentJournal.pages[0]._id;
+			} else {
+				// Clear current page if there is no page to load
+				localStorage.setItem('currentPage', null);
+				this.emitterSource.next('updatePage');
+				return;
 			}
 		}
 
+		// Tell the service to get the page and store on local storage
 		this.get(currentJournal._id, pageId, false)
 			.subscribe(
 				data => {
@@ -90,8 +96,7 @@ export class PagesService {
 				},
 				error => {
 					console.log("Failed to get page: " + error._body);
-				}
-			)
+				});
 	}
 
 	// ---------------------------------------------------------------------------
@@ -112,8 +117,9 @@ export class PagesService {
 				)
 		}
 	}
-  // ---------------------------------------------------------------------------
-  // Creates request header with JWT token - needed so that you can hit protected api routes
+
+
+	// Creates request header with JWT token - needed so that you can hit protected api routes
   private jwt() {
     // create authorization header with jwt token
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));

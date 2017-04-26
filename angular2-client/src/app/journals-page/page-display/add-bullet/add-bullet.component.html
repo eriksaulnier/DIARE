@@ -1,12 +1,12 @@
 <form class="form-inline">
-	<input type="checkbox" id="starred" #isStarred>
-	<label for="starred"></label>
-	<select class="form-control" #bulletType>
+	<input type="checkbox" id="isStarred" #isStarred>
+	<label for="isStarred"></label>
+	<select class="form-control" id="bulletType" #bulletType>
 		<option value="note" label="Note">N</option>
 		<option value="task" label="Task">T</option>
 		<option value="event" label="Event">E</option>
 	</select>
-	<input type="text" class="form-control" placeholder="Enter text here" autocomplete="off" #bulletText>
+	<input type="text" class="form-control" placeholder="Enter text here" autocomplete="off" id="bulletText" #bulletText>
 	<button class="btn btn-raised btn-primary" (click)="addBullet(bulletText, bulletType, isStarred)">
 		Add Bullet
 	</button>

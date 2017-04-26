@@ -1,45 +1,53 @@
 :host .form-inline {
-	width: 100%;
-	margin: 0 0 10px
+	max-width: 750px;
+	min-height: 38px;
+	margin: 10px 0;
 }
 
-:host input[type=checkbox] {
+:host #isStarred,
+:host #isStarred + label,
+:host #isStarred + label:before,
+:host #bulletType,
+:host #bulletText {
+	display: inline-block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+:host #isStarred {
 	display: none;
 }
 
-:host input[type=checkbox] + label {
-	margin: 0;
+:host #isStarred + label {
 	margin-right: 5px;
 }
 
-:host input[type=checkbox] + label:before {
-	vertical-align: top;
+:host #isStarred + label:before {
 	content: '\E83A';
 	cursor: pointer;
 	user-select: none;
 	font-family: "Material Icons";
 	font-size: 25px;
-	line-height: 45px;
+	line-height: 38px;
 }
 
-:host input[type=checkbox]:checked + label:before {
+:host #isStarred:checked + label:before {
 	content: '\E838';
   color: #ffd43b;
 }
 
-:host select {
-	vertical-align: top;
-	margin: 0;
+:host .form-inline #bulletType {
+	margin-right: 5px;
 }
 
-:host input[type=text] {
-	vertical-align: top;
-	margin: 0;
+:host .form-inline #bulletText {
 	padding: 0 5px;
 }
 
-:host button {
-	vertical-align: top;
+:host .btn {
 	float: right;
-	margin: 4.5px 0;
+	vertical-align: middle;
+	margin: 0;
 }

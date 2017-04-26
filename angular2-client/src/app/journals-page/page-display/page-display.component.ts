@@ -33,26 +33,6 @@ export class PageDisplayComponent implements OnInit {
 
   }
 
-  loadPage() {
-		// Make sure currentJournal exists and has pages
-		if (this.currentJournal == null || this.currentJournal.pages.length < 1) {
-			this.currentPage = null;
-			return;
-		}
-
-		// Fetch current page from local storage
-		let curPage = JSON.parse(localStorage.getItem('currentPage'));
-
-		// If current page is null clear page and exit function
-		if (curPage == null || curPage._id == null) {
-			this.currentPage = null;
-			return;
-		}
-
-		// Update current page object on display
-		this.currentPage = curPage;
-  }
-
   pageExists() {
     if (this.currentPage) {
       return true;
@@ -87,10 +67,7 @@ export class PageDisplayComponent implements OnInit {
 		switch (message) {
 			case 'updatePage': {
 				// Update local currentJournal object
-				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-
-				// Load the target page
-				this.loadPage();
+				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
 
 				break;
 			}

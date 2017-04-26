@@ -1,6 +1,7 @@
 <ul>
 	<page
 		*ngFor="let individual_page of pages"
-		[page]="individual_page">
+		[page]="individual_page"
+		[class.active]="currentPage ? individual_page._id==currentPage._id : false">
 	</page>
 </ul>
