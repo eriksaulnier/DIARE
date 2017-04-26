@@ -131,18 +131,20 @@ function searchBullets (userID, data) {
 
     db.journals.find(
       { userID: userID },
-      { _id: 0, "pages": 1}
+      { _id: 1, "pages": 1}
     ).toArray( function (err, doc) {
         if (err) {
           deferred.reject(err.name + ': ' + err.message);
         }
 
         doc.forEach(function(item) {
+          var journal_id = item._id;
           var pages_array = item.pages;
 
           //for each pages array
           pages_array.forEach(function(page) {
             var bullets_array = page.bullets;
+            var page_id = page._id;
 
             //for each bullets array
             bullets_array.forEach(function(bullet) {
@@ -150,9 +152,13 @@ function searchBullets (userID, data) {
               //for each key in the input data
               for (key in data) {
                 if ((key !== "content") && (bullet[key].toString() === data[key])) {
+                    bullet.journalID = journal_id;
+                    bullet.pageID = page_id;
                     bullets.push(bullet);
                 }
                 else if ((key === "content") && bullet[key].includes(data[key])) {
+                  bullet.journalID = journal_id;
+                  bullet.pageID = page_id;
                   bullets.push(bullet);
                 }
               }
