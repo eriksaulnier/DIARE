@@ -1,14 +1,14 @@
 <div class="content" *ngIf="pageExists()">
 	<header class="page-header">
-		<h1 *ngIf = "!editable" (click)="toggleEditable()">{{currentPage.title}}</h1>
-		<input *ngIf = "editable" #pageTitleInput BulletFocus type="text" value = "{{currentPage.title}}" (keyup.enter) ="onEnter(pageTitleInput.value)" (keyup.esc)="toggleEditable()" />
+		<h1 *ngIf="!editable" (click)="toggleEditable()">{{currentPage.title}}</h1>
+		<input *ngIf="editable" class="editTitle form-control" type="text" value="{{currentPage.title}}" (keyup.enter)="onEnter(pageTitleInput.value)" (keyup.esc)="toggleEditable()" #pageTitleInput BulletFocus>
 
 		<div class="divider"></div>
 		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p>
 	</header>
 
 	<add-bullet></add-bullet>
-	
+
 	<div class="list-group" *ngIf="bulletsExist()">
 		<page-bullet
 		*ngFor="let bullet of currentPage.bullets"

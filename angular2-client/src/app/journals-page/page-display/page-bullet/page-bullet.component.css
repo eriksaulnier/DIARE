@@ -1,67 +1,94 @@
 :host .list-group-item {
 	position: relative;
 	padding: 0;
+	min-height: 32px;
 }
 
 :host p {
 	margin: 0;
-	line-height: 30px;
 }
 
 :host .head {
 	position: absolute;
-	height: 30px;
 	left: 0;
 }
 
 :host .head .star {
 	display: inline-block;
-	vertical-align: middle;
-	margin-right: 4px;
-	font-size: 15px;
+	vertical-align: top;
+	font-size: 0;
 	color: transparent;
+	line-height: 32px;
+}
+
+:host .head .star i {
+	vertical-align: middle;
+	margin-right: 2px;
+	font-size: 26px;
 }
 
 :host .head .star.starred {
 	color: #ffd43b;
 }
 
-:host .head .star i {
-	margin: 2px 0;
-}
-
 :host .head .type {
 	display: inline-block;
 	vertical-align: top;
-	width: 15px;
-	margin-right: 5px;
 	font-size: 13px;
+	line-height: 32px;
 }
 
-:host .text {
-	display: inline;
+:host .content {
 	vertical-align: top;
-	float: left;
-	padding-left: 52px;
+	padding-left: 48px;
 	font-size: 16px;
 }
 
-:host .text .delete {
-	opacity: 0;
-	margin-left: 10px;
-	color: #868e96;
+:host .content .text {
+	display: inline-block;
+	min-height: 32px;
+	margin-left: 4px;
+	margin-top: 5px;
+}
+
+:host .content .delete {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 2px 4px;
+	color: #989fa6;
 	font-size: 14px;
 	text-transform: uppercase;
 	cursor: pointer;
-	transition: color 0.3s ease-out,
-							opacity 0.3s ease-out;
+	transition: color 0.3s ease-out;
+	opacity: 0.7;
+	user-select: none;
 }
 
-:host .list-group-item:hover .text .delete {
-	opacity: 1;
-}
-
-:host .text .delete:hover {
-	color: #fa5252;
+:host .content .delete:hover {
+	color: #f03e3e;
 	font-weight: 500;
 }
+
+:host .content .edit {
+
+}
+
+:host .content .edit .form-control {
+	display: inline-block;
+	width: auto;
+	height: 32px;
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0 5px;
+	background-color: #e2e2e2;
+}
+/*
+:host .content .edit .delete {
+	display: inline-block;
+	margin-left: 5px;
+	color: #f03e3e;
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	cursor: pointer;
+}*/
