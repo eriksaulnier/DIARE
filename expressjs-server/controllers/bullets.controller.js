@@ -6,9 +6,8 @@ var bulletsService =    require('../services/bullets.service');
 // routes
 router.post('/add',                                         addBullet);
 router.delete('/delete/:journalID/:pageID/:bulletID',       deleteBullet);
-router.get('/:userID',                                      getBullets);
 router.put('/:journalID/:pageID/:bulletID',                 updateBullet);
-router.post('/search/:userID',                               searchBullets);
+router.post('/search/:userID',                              searchBullets);
 module.exports = router;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -28,18 +27,6 @@ function addBullet (req, res) {
 
 function deleteBullet (req, res) {
     bulletsService.deleteBullet(req.params.journalID, req.params.pageID, req.params.bulletID)
-        .then(function (result) {
-            res.send(result);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
-}
-//--------------------------------------------------------------------------------------------------------------------------------
-// Retrieve all bullets tied to a user
-
-function getBullets (req, res) {
-    bulletsService.getAllBullets(req.params.userID)
         .then(function (result) {
             res.send(result);
         })

@@ -8,7 +8,6 @@ db.bind('journals');
 var service = {};
 service.addBullet        = addBullet;
 service.deleteBullet     = deleteBullet;
-service.getAllBullets    = getAllBullets;
 service.updateBullet     = updateBullet;
 service.searchBullets    = searchBullets;
 module.exports = service;
@@ -68,32 +67,6 @@ function deleteBullet (journalID, pageID, bulletID) {
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve({ message: 'Bullet successfully updated.' });
-        }
-    );
-
-    return deferred.promise;
-}
-//--------------------------------------------------------------------------------------------------------------------------------
-// Gets all bullets that are tied to a certain userID.
-// Returns an array of bullet objects on success, and an error message on failure.
-
-function getAllBullets (userID) {
-    var deferred = Q.defer();
-    var bullets = [];
-
-    db.journals.find(
-        { userID: ObjectId(userID) },
-        { _id: 0, pages: 1 }
-    ).toArray(
-        function (err, pages_array) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
-
-            pages_array.forEach(function (pages) {
-                pages.forEach(function (page) {
-                    bullets = bullets.concat(page.bullets);
-                });
-            });
-            deferred.resolve(bullets);
         }
     );
 
