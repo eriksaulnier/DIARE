@@ -63,7 +63,7 @@ function updatePage(journalID, pageID, title) {
   var date = new Date();
 
   db.journals.update(
-    { _id: ObjectId(_id), "pages._id": ObjectId(pageID)},
+    { _id: ObjectId(journalID), "pages._id": ObjectId(pageID)},
     { $set:
       {"pages.$.title": title, "pages.$.modified": date, modified: date}
     },
@@ -105,7 +105,7 @@ function getPage(journalID, pageID, sortOrder) {
             });
           }
         }
-        
+
         deferred.resolve(doc.pages[0]);
       }
   });
