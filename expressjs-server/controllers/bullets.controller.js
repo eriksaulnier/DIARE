@@ -8,7 +8,7 @@ router.post('/add',                                         addBullet);
 router.delete('/delete/:journalID/:pageID/:bulletID',       deleteBullet);
 router.get('/:userID',                                      getBullets);
 router.put('/:journalID/:pageID/:bulletID',                 updateBullet);
-router.get('search/:userID/:query',                         searchBullets);
+router.post('/search/:userID',                               searchBullets);
 module.exports = router;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -63,11 +63,11 @@ function updateBullet (req, res) {
 // Search for all bullets under a specific query.
 
 function searchBullets (req, res) {
-    bulletsService.searchBullets(req.params.userID, req.params.query)
-        .then(function (result) {
-            res.send(result);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
+  bulletsService.searchBullets(req.params.userID, req.body)
+      .then(function (result) {
+          res.send(result);
+      })
+      .catch(function (err) {
+          res.status(400).send(err);
+      });
 }
