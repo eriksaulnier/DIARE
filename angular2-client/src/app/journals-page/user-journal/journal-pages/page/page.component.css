@@ -17,6 +17,7 @@
 
 :host li p {
 	margin: 0;
+	float:left;
 }
 
 :host(.active) li {

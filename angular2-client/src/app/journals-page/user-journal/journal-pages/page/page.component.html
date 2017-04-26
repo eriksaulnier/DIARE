@@ -1,3 +1,12 @@
 <li (click)="selectPage($event)">
 	<p>{{page['title']}}</p>
+	<div class="dropdown options">
+			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				<i class="material-icons">more_vert</i>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right">
+			  <li><a href="javascript:void(0)" (click)="editPageTitle()">Edit Title</a></li>
+				<li><a href="javascript:void(0)" (click)="confirmDeletePage()">Delete</a></li>
+			</ul>
+		</div>
 </li>
