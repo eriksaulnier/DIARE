@@ -26,25 +26,25 @@
               </div>
             </form>
           </li>
-          <li class="active"><a routerLink="/journals" routerLinkActive="active" (click)="toggleState()">Journals</a></li>
-          <li><a routerLink="/about" (click)="toggleState()">About</a></li>
+          <li [ngClass]="{'active': journalsActive()}"><a routerLink="/journals" routerLinkActive="active" (click)="toggleState()">Journals</a></li>
+          <li [ngClass]="{'active': aboutActive()}"><a routerLink="/about" (click)="toggleState()">About</a></li>
 
-          <li class="dropdown">
+          <li class="dropdown" [ngClass]="{'active': settingsActive()}">
             <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
             Account <i class="material-icons">arrow_drop_down</i>
             </a>
 
             <ul class="dropdown-menu" id="dropdownMenu1" data-toggle="collapse">
-							<li><a routerLink="/settings" (click)="toggleState()"><i class="material-icons">settings</i> Settings</a></li>
+							<li [ngClass]="{'active': settingsActive()}"><a routerLink="/settings" (click)="toggleState()"><i class="material-icons">settings</i> Settings</a></li>
               <li><a routerLink="/home" (click)="toggleState()"><i class="material-icons">exit_to_app</i> Logout</a></li>
             </ul>
           </li>
         </ul>
         <!-- NAV LINKS FOR WHEN USER IS LOGGED OUT ****************************************************************************-->
         <ul class="nav navbar-nav navbar-right" *ngIf="!isLoggedIn()">
-          <li class="active"><a routerLink="/home" routerLinkActive="active" (click)="toggleState()">Login</a></li>
-          <li><a routerLink="/register" (click)="toggleState()">Register</a></li>
-          <li><a routerLink="/about" (click)="toggleState()">About</a></li>
+          <li [ngClass]="{'active': homeActive()}"><a routerLink="/home" routerLinkActive="active" (click)="toggleState()">Login</a></li>
+          <li [ngClass]="{'active': registerActive()}"><a routerLink="/register" (click)="toggleState()">Register</a></li>
+          <li [ngClass]="{'active': aboutActive()}"><a routerLink="/about" (click)="toggleState()">About</a></li>
         </ul>
 
       </div>
