@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   public registrationForm: FormGroup;
   public passwordsMatch: boolean = false;
   public emailsMatch: boolean = false;
+  public registrationErrorMessage: string;
   //------------------------------------------------------------------------------------------------------------------------------
   constructor(
     private fb: FormBuilder,
@@ -53,6 +54,7 @@ export class RegisterComponent implements OnInit {
   // Submit the registration data. Either take user to login page on success, or handle error
 
   onSubmit() {
+    this.registrationErrorMessage = "";
     this.user.email = this.registrationForm.value.email1;
     this.user.email = this.user.email.toLowerCase();
 
@@ -67,8 +69,8 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/about']);
       },
       error => {
-        // On error, print to console
-        console.log(error._body);
+        // On error, output alert
+        this.registrationErrorMessage = error._body;
       });
   }
   //------------------------------------------------------------------------------------------------------------------------------

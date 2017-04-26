@@ -60,6 +60,13 @@
               !emailsMatch">Submit</button>
             </div>
           </form>
+
+          <!-- Alert for when some kind of error happened *********************************************************************-->
+          <div *ngIf="registrationErrorMessage" class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Oh snap!</strong> <span>{{ registrationErrorMessage }}</span>
+          </div>
+          
         </div>
       </div>
     </div>
