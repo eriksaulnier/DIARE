@@ -39,24 +39,6 @@ export class BulletsService {
         return data;
       });
   }
-
-  // ---------------------------------------------------------------------------
-  // Get all bullets tied to a userid -- probably won't ever need to use this for anything
-  // Will load an array of bullet objects into userBullets local storage item and emit message to update
-  getAll(userid: string) {
-    return this.http.get(this.config.apiURL + '/bullets/' + userid, this.jwt())
-      .map((response: Response) => {
-        let data = response.json();
-        if (data && data[0].content) {
-          // store array of bullet objects in local storage
-          localStorage.setItem('userBullets', JSON.stringify(data));
-
-          // emit update message
-          this.emitterSource.next('updateBullets');
-        }
-      });
-  }
-
   //----------------------------------------------------------------------------
   // Updates a bullet object
   // data should be an object where data = {fieldYouWantToUpdate: 'value'}
@@ -71,13 +53,15 @@ export class BulletsService {
   }
 
   //----------------------------------------------------------------------------
-  // Search through all bullets tied to a userid based off a query
-  // Will load an array of bullet objects into searchResults local storagae item on
-  search(userid: string, query: string) {
-    return this.http.get(this.config.apiURL + '/bullets/search/' + userid + '/' + query, this.jwt())
+  // Search through all bullets tied to a userid based off data
+  // data should be an object in the format {"name of bullet field": "query value"}
+  // any search done on content is a "contains" search. every other search type is an exact match search
+  // Will load an array of bullet objects into searchResults local storagae item on success
+  search(userid: string, data: any) {
+    return this.http.post(this.config.apiURL + '/bullets/search/' + userid, data, this.jwt())
       .map((response: Response) => {
         let data = response.json();
-        if (data && data[0].content) {
+        if (data && data[0]._id) {
           // store array of bullet objects in local storage
           localStorage.setItem('searchResults', JSON.stringify(data));
 

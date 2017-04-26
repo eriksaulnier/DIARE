@@ -8,7 +8,6 @@ db.bind('journals');
 var service = {};
 service.addBullet        = addBullet;
 service.deleteBullet     = deleteBullet;
-service.getAllBullets    = getAllBullets;
 service.updateBullet     = updateBullet;
 service.searchBullets    = searchBullets;
 module.exports = service;
@@ -74,32 +73,6 @@ function deleteBullet (journalID, pageID, bulletID) {
     return deferred.promise;
 }
 //--------------------------------------------------------------------------------------------------------------------------------
-// Gets all bullets that are tied to a certain userID.
-// Returns an array of bullet objects on success, and an error message on failure.
-
-function getAllBullets (userID) {
-    var deferred = Q.defer();
-    var bullets = [];
-
-    db.journals.find(
-        { userID: ObjectId(userID) },
-        { _id: 0, pages: 1 }
-    ).toArray(
-        function (err, pages_array) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
-
-            pages_array.forEach(function (pages) {
-                pages.forEach(function (page) {
-                    bullets = bullets.concat(page.bullets);
-                });
-            });
-            deferred.resolve(bullets);
-        }
-    );
-
-    return deferred.promise;
-}
-//--------------------------------------------------------------------------------------------------------------------------------
 // Updates properties of a bullet
 // Returns a success message on success, or an error message on failure.
 
@@ -152,25 +125,43 @@ function updateBullet (journalID, pageID, bulletID, data) {
 // Search bullets with containing a query.
 // Returns an array of bullet objects on success, and an error message on failure.
 
-function searchBullets (userID, query) {
+function searchBullets (userID, data) {
     var deferred = Q.defer();
     var bullets = [];
-    var query_property = query.property;
 
     db.journals.find(
-        { userID: ObjectId(userID), query_parameter: query.term },
-        { _id: 0, pages: 1 }
-    ).toArray(
-        function (err, pages_array) {
-            if (err) deferred.reject(err.name + ': ' + err.message);
-
-            pages_array.forEach(function (pages) {
-                pages.forEach(function (page) {
-                    bullets = bullets.concat(page.bullets);
-                });
-            });
-            deferred.resolve(bullets);
+      { userID: userID },
+      { _id: 0, "pages": 1}
+    ).toArray( function (err, doc) {
+        if (err) {
+          deferred.reject(err.name + ': ' + err.message);
         }
+
+        doc.forEach(function(item) {
+          var pages_array = item.pages;
+
+          //for each pages array
+          pages_array.forEach(function(page) {
+            var bullets_array = page.bullets;
+
+            //for each bullets array
+            bullets_array.forEach(function(bullet) {
+
+              //for each key in the input data
+              for (key in data) {
+                if ((key !== "content") && (bullet[key].toString() === data[key])) {
+                    bullets.push(bullet);
+                }
+                else if ((key === "content") && bullet[key].includes(data[key])) {
+                  bullets.push(bullet);
+                }
+              }
+            });
+          });
+        });
+
+        deferred.resolve(bullets);
+      }
     );
 
     return deferred.promise;
