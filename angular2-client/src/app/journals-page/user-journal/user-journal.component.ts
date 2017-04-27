@@ -162,12 +162,15 @@ export class UserJournalComponent implements OnInit {
 	// Handles recieving and routing messages from the journalsService
 	private journalMessageRecieved(message: string) {
 		switch (message) {
+			// Called when the current journal has been updated
 			case 'updateJournal': {
+				// Fetch the new current journal from storage
 				let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
 				if (currentJournal == null)
 					break;
 
-				// If this is the new current journal then update the journal object and show pages
+				// If this is the new current journal then update the journal object and
+				// show pages, otherwise hide
 				if (this.journal._id == currentJournal._id) {
 					this.journal = currentJournal;
 					this.showPages = true;

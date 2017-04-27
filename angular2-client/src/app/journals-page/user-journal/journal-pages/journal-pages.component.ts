@@ -23,12 +23,14 @@ export class JournalPagesComponent implements OnInit {
   ngOnInit() {
   }
 
+	// ---------------------------------------------------------------------------
+	// Handles messages emitted from the pagesService
 	private pageMessageRecieved(message: string) {
 		switch (message) {
+			// Called when the current page is updated
 			case 'updatePage': {
 				// Update local currentJournal object
 				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
-
 				break;
 			}
 		}

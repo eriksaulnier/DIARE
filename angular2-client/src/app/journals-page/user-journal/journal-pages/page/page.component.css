@@ -1,26 +1,41 @@
-:host li {
-	padding: 12px 10px;
+:host .page {
+	position: relative;
+	display: block;
+	height: 45px;
 	margin-top: -1px;
+	padding: 12px 10px;
 	color: #fff;
 	cursor: pointer;
 	font-size: 16px;
 	transition: background-color 0.3s ease-out;
 }
 
-:host li:first-of-type {
+:host .page:first-of-type {
 	margin: 0;
 }
 
-:host li:hover {
+:host .page:hover {
 	background-color: rgba(0,0,0,0.15);
 }
 
 :host li p {
 	margin: 0;
-	float:left;
+	float: left;
 }
 
-:host(.active) li {
+:host(.active) .page {
 	text-decoration: underline;
 	background-color: rgba(0,0,0,0.10);
+}
+
+:host .page .options {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	line-height: 30px;
+	font-size: 20px;
+}
+
+:host .page .options i {
+	color: #666666;
 }
