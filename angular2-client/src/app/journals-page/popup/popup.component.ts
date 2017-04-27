@@ -13,6 +13,7 @@ export class PopupComponent {
 		title: '',
 		text: '',
 		label: '',
+		defaultValue: '',
 		cancelBtn: '',
 		confirmBtn: '',
 		callback: null

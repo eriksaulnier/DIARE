@@ -72,6 +72,7 @@ export class UserJournalComponent implements OnInit {
       "Edit Journal Title",
 			"",
       "New Title",
+			this.journal.title,
       "Cancel",
       "Submit",
       this.updateTitle.bind(this)
@@ -101,6 +102,7 @@ export class UserJournalComponent implements OnInit {
       "Create New Page",
       "",
 			"Page Name",
+			"",
       "Cancel",
       "Add page to journal",
       this.addPage.bind(this)

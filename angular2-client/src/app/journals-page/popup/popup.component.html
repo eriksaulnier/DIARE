@@ -9,7 +9,7 @@
 				<p [hidden]="content.text==''" [innerHTML]="content.text"></p>
         <form [hidden]="isForm==false">
 					<div class="form-group label-floating">
-          	<input class="form-control" type="text" class="form-control" placeholder="{{content.label}}" autocomplete="off" #inputField>
+          	<input class="form-control" type="text" class="form-control" placeholder="{{content.label}}" value={{content.defaultValue}} autocomplete="off" #inputField>
 					</div>
         </form>
       </div>

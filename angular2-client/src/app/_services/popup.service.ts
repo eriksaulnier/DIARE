@@ -23,7 +23,7 @@ export class PopupService {
 	}
 
 	// ---------------------------------------------------------------------------
-	createForm(title: string = '', text: string = '', label: string = '', cancelBtn: string = '', confirmBtn: string = '', callback: Function = null) {
+	createForm(title: string = '', text: string = '', label: string = '', defaultValue: string = '', cancelBtn: string = '', confirmBtn: string = '', callback: Function = null) {
 		console.log('Creating form popup: ' + title);
 
 		// emit dialog info
@@ -31,6 +31,7 @@ export class PopupService {
 			title: title,
 			text: text,
 			label: label,
+			defaultValue: defaultValue,
 			cancelBtn: cancelBtn,
 			confirmBtn: confirmBtn,
 			callback: callback,

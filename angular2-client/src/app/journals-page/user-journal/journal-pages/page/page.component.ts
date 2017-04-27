@@ -100,6 +100,7 @@ export class PageComponent implements OnInit {
       "Edit Page Title",
 	  	"",
       "New Title",
+			this.page.title,
       "Cancel",
       "Submit",
       this.updatePageTitle.bind(this)
