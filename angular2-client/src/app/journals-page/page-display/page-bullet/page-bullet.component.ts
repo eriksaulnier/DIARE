@@ -10,7 +10,7 @@ import {BulletFocusDirective} from './../bullet-focus.directive'
 })
 export class PageBulletComponent implements OnInit {
   @Input() bullet: Bullet;
-  private editable: boolean;
+  editable: boolean;
   symbol: string;
 
   constructor(
