@@ -64,7 +64,7 @@ export class PageBulletComponent implements OnInit {
 		this.editable = !this.editable;
 	}
 	// ---------------------------------------------------------------------------
-  	// Allows us to persist user's updated bullet input 
+  	// Allows us to persist user's updated bullet input
 	onEnter(value: string){
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
 		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
