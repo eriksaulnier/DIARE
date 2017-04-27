@@ -25,17 +25,25 @@
 }
 
 :host .page-header .timestamp {
+	display: inline;
   margin: 4px 0 0;
   text-transform: uppercase;
   font-size: 14px;
   color: #9d9d9d;
 }
 
-:host .list-group {
-	margin: 0;
+:host .page-header .delete {
+	margin-left: 15px;
+	color: #f17d7d;
+  font-weight: 500;
+	cursor: pointer;
+	transition: color 0.3s ease-out;
 }
 
-:host .delete {
+:host .page-header .delete:hover {
 	color: #f03e3e;
-  font-weight: 500;
+}
+
+:host .list-group {
+	margin: 0;
 }

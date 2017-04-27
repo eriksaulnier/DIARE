@@ -4,7 +4,7 @@
 		<input *ngIf="editable" class="editTitle form-control" type="text" value="{{currentPage.title}}" (keyup.enter)="onEnter(pageTitleInput.value)" (keyup.esc)="toggleEditable()" #pageTitleInput BulletFocus>
 
 		<div class="divider"></div>
-		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p>	<span class="delete" (click)="$event.stopPropagation();confirmDeletePage()">Delete Page</span>
+		<p class="timestamp">Last saved {{currentPage.modified | date:'MM/dd h:mm a'}}</p><span class="delete" (click)="$event.stopPropagation();confirmDeletePage()">Delete Page</span>
 	</header>
 
 	<add-bullet></add-bullet>
