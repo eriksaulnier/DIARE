@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" [ngClass]="{ 'in': isIn }">
         <!-- NAV LINKS FOR WHEN USER IS LOGGED IN *****************************************************************************-->
         <ul class="nav navbar-nav navbar-right" *ngIf="isLoggedIn()">
-          <li id="search-li">
+          <!-- <li id="search-li">
             <form class="navbar-form">
               <div class="form-group form-group-lg">
                 <div class="input-group">
@@ -25,7 +25,8 @@
                 </div>
               </div>
             </form>
-          </li>
+          </li>-->
+					<li [ngClass]="{'active': searchActive()}" id="search-li"><a routerLink="/search" routerLinkActive="active" (click)="toggleState()"><i class="material-icons">search</i> Search</a></li>
           <li [ngClass]="{'active': journalsActive()}"><a routerLink="/journals" routerLinkActive="active" (click)="toggleState()">Journals</a></li>
           <li [ngClass]="{'active': aboutActive()}"><a routerLink="/about" (click)="toggleState()">About</a></li>
 

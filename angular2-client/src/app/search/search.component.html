@@ -1,17 +1,25 @@
-<form class="form-inline">
-	<div class="form-group label-floating">
-		<label for="search" class="control-label">Search</label>
-		<input type="text" class="form-control" id="search" #keywordInput autocomplete>
-	</div>
-	<button class="btn btn-raised btn-primary" (click)="search(keywordInput)">Search</button>
-</form>
+<div class="main">
+	<div class="main-container">
+		<div class="header">
+			<h1>Search</h1>
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" class="form-control" id="search" placeholder="Keywords or #Tags" #keywordInput>
+				</div>
+				<button class="btn btn-raised btn-primary" (click)="search(keywordInput)">Search</button>
+			</form>
+			<div class="divider"></div>
+		</div>
 
-<div *ngIf="!hasSearchResults()">
-	<p>No results found</p>
-</div>
-<div class="list-group" *ngIf="hasSearchResults()">
-	<search-bullet
-	*ngFor="let bullet of searchResults"
-	[bullet]="bullet">
-	</search-bullet>
+		<div *ngIf="!hasSearchResults()">
+			<p>No results found</p>
+		</div>
+
+		<div class="list-group" *ngIf="hasSearchResults()">
+			<search-bullet
+			*ngFor="let bullet of searchResults"
+			[bullet]="bullet">
+			</search-bullet>
+		</div>
+	</div>
 </div>
