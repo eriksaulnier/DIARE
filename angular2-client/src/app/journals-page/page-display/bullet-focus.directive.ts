@@ -4,7 +4,7 @@ import { Directive ,ElementRef, Input  } from '@angular/core';
   selector: '[BulletFocus]'
 })
 export class BulletFocusDirective {
-	
+	//Directive to have the element focus after construction
    constructor(private el: ElementRef) {
        
     }

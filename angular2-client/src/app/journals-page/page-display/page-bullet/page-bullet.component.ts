@@ -10,7 +10,7 @@ import {BulletFocusDirective} from './../bullet-focus.directive'
 })
 export class PageBulletComponent implements OnInit {
   @Input() bullet: Bullet;
-  editable: boolean;
+  private editable: boolean;
   symbol: string;
 
   constructor(
@@ -40,7 +40,7 @@ export class PageBulletComponent implements OnInit {
 		}
   }
   	// ---------------------------------------------------------------------------
-  
+  	// Allows us to delete the bullet
 	deleteBullet() {
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
 		let currentPage = JSON.parse(localStorage.getItem('currentPage'));
@@ -59,12 +59,12 @@ export class PageBulletComponent implements OnInit {
         });
 	}
 	// ---------------------------------------------------------------------------
-  	// Need to be able to toggle between editing and non editing
+  	// Lets us toggle between editing and non editing
 	toggleEditable(){
 		this.editable = !this.editable;
 	}
 	// ---------------------------------------------------------------------------
-  	// Need to persist user's input
+  	// Allows us to persist user's updated bullet input 
 	onEnter(value: string){
 		let journal = JSON.parse(localStorage.getItem('currentJournal'));
 		let currentPage = JSON.parse(localStorage.getItem('currentPage'));

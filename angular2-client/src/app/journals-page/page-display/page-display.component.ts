@@ -8,9 +8,9 @@ import { Page, Journal } from '../../_models/index';
   styleUrls: ['./page-display.component.css']
 })
 export class PageDisplayComponent implements OnInit {
-  currentJournal: Journal;
-  currentPage: Page;
-  editable: boolean;
+  private currentJournal: Journal;
+  private currentPage: Page;
+  private editable: boolean;
 
   constructor(
 	private pagesService: PagesService,
@@ -36,6 +36,8 @@ export class PageDisplayComponent implements OnInit {
 
   }
 
+	// ---------------------------------------------------------------------------
+  // Some existence function for use outside component
   pageExists() {
     if (this.currentPage) {
       return true;
@@ -51,6 +53,9 @@ export class PageDisplayComponent implements OnInit {
       return false;
     }
   }
+
+  	// ---------------------------------------------------------------------------
+  // message cases from services emissions
 
 	private journalMessageRecieved(message: string) {
 		switch (message) {
@@ -83,7 +88,7 @@ export class PageDisplayComponent implements OnInit {
 		this.editable = !this.editable;
 	}
 	// ---------------------------------------------------------------------------
-  	// Need to persist user's input
+  	// allows us to persist user's updated page title input
 	onEnter(value: string){	
 
 		this.pagesService.update(this.currentJournal._id, this.currentPage._id, {"title": value})

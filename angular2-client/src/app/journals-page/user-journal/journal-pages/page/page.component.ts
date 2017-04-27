@@ -31,6 +31,9 @@ export class PageComponent implements OnInit {
   ngOnInit() {
   }
 
+
+	//----------------------------------------------------------------------------
+   // Tell the service to set this page as the curentPage
 	selectPage(event) {
 		this.pagesService.selectPage(this.page._id);
 	}
@@ -81,7 +84,6 @@ export class PageComponent implements OnInit {
   }
 
 	//--------------------------------------------------------
-
   // Spawns a popup for editing this page title
   editPageTitle() {
     this.popupService.createForm(
@@ -93,6 +95,8 @@ export class PageComponent implements OnInit {
       this.updatePageTitle.bind(this)
     );
   }
+
+  	//--------------------------------------------------------
 
     private journalsMessageRecieved(message: string) {
 		switch (message) {
@@ -106,6 +110,8 @@ export class PageComponent implements OnInit {
 		}
 	
 	}
+	
+	//--------------------------------------------------------
     // Update this pages's title
 	private updatePageTitle(value: string) {
 	let currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
