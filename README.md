@@ -33,3 +33,18 @@ While we are very happy with the way the application turned out, we also realize
 - Customizable Hotkey Shortcuts:  Our site is meant to be as easy and efficient as possible for people to use, and some users would have a more efficient site experience if they were able to customize hotkeys. We believe that hotkeys would play to the needs of site superusers.
 
 This list of improvements is not all encompassing, as there is always room for new ideas and improvements.
+
+## How To Start Working On The Project: 
+This is a private repository, so you must first ask the project team to grant you access.
+
+Make sure you have angular-cli installed. Angular CLI is discussed in the readme of the angular2-client directory
+
+`git clone https://github.com/SirAlternate/DIARE.git`
+
+`npm install` from the top level directory to install the necessary packages for the Node server; `npm start` from this directory to run this server on port 4000
+
+`cd angular2-client` and then `npm install` to install the necessary packages for the Angular 2 client side of the application; assuming that you have Angular CLI installed, `ng serve --dev` to run a development server on port 4200 and `ng build --prod --aot` to generate a production build of the project
+
+All of the important code for the front end is in angular2-client/src/app. The directories that start with a _ in this folder provide support functionality, while the directories that don’t start with a _ in this folder represent pages of the site. The directories that represent site pages contain more directories which hold individual Angular 2 components.
+
+All of the code for the backend is in expressjs-server . The server.js file holds all of the base server functionality. The controllers folder define server routes and link those routes to services. The services folder holds the aforementioned services, which provide server functionality and perform actions on MongoDB data.
