@@ -1,40 +1,129 @@
-<h2>About DIARE</h2>
+<div class="container" id="aboutDiv">
+  <div class="row">
+    <div class="col col-lg-8 col-xl-8 col-lg-offset-2 col-xl-offset-2">
 
-<div id="section1" class="section">
-  <h3>Overview</h3>
-  <p>DIARE stands for "Digital Interpretation of Analog Rapid-logging Entries". We know, it's a mouthful. The site is based off the
-    <a href="http://bulletjournal.com/" target="_blank">Bullet Journal</a> framework, which was created by
-    <a href="http://www.rydercarroll.com/" target="_blank">Ryder Carroll</a>. Bullet Journal prides itself on being an analog system
-    for rapidly logging data entries, and this website is the digital interpretation of that system.
-    DIARE, and the framework that it is based on, aim to simplify and speed up the traditional note-taking and journaling process.
-    We hope that our application enables you to live a more efficient lifestyle!
-  </p>
-</div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2 class="h2Styling">About DIARE</h2>
 
-<div id="section2" class="section">
-  <h3>Getting Started</h3>
-  <p>Have you never used the Bullet Journal framework before, or just have never used DIARE? That's okay, we have your back! Follow
-  the steps below to get up and running.</p>
+          <div id="section1" class="section">
+            <h3 class="h3Styling">Overview</h3>
+            <p>DIARE stands for "Digital Interpretation of Analog Rapid-logging Entries". We know, it's a mouthful. The site is based off the
+              <a href="http://bulletjournal.com/" target="_blank">Bullet Journal</a> framework, which was created by
+              <a href="http://www.rydercarroll.com/" target="_blank">Ryder Carroll</a>. Bullet Journal prides itself on being an analog system
+              for rapidly logging data entries, and this website is the digital interpretation of that system.
+              DIARE, and the framework that it is based on, aim to simplify and speed up the traditional note-taking and journaling process.
+              We hope that our application enables you to live a more efficient lifestyle!
+            </p>
+          </div>
 
-  <h4>Creating A New Account </h4>
-  <p>If you haven't created an account with DIARE yet, head on over to the <a href="https://diare.herokuapp.com/register" target="_blank">
-    Registration</a> page to sign up. You only need two things in order to sign up for an account: a valid email address and a password.
-  Click the submit button once you've filled the registration form out. If your account was successfully created, you'll be taken to this
-  About page. If something went wrong, you'll see an error message letting you know what happened.</p>
+          <div id="section2" class="section">
+            <h3 class="h3Styling">Getting Started</h3>
+            <p>
+              Have you never used the Bullet Journal framework before, or just have never used DIARE? That's okay, we have your back! Follow
+              the steps below to get up and running.
+            </p>
 
-  <h4>Logging In</h4>
-  <p>To login to DIARE, go <a href="https://diare.herokuapp.com/home" target="_blank">here</a>. Fill out your account email address
-  and password, and then click the submit button. If your login was successful, you'll be taken to your Journals page. Otherwise,
-  you'll be shown an error message explaining what went wrong.</p>
+            <div *ngIf="!isLoggedIn()">
+              <h4 class="h4Styling">Creating A New Account </h4>
+              <p>
+                If you haven't created an account with DIARE yet, head on over to the <a href="https://diare.herokuapp.com/register" target="_blank">
+                Registration</a> page to sign up. You only need two things in order to sign up for an account: a valid email address and a password.
+                Click the submit button once you've filled the registration form out. If your account was successfully created, you'll be taken to this
+                About page. If something went wrong, you'll see an error message letting you know what happened.
+              </p>
 
-  <h4>Modifying or Deleting Your Account</h4>
+              <h4 class="h4Styling">Logging In</h4>
+              <p>
+                To login to DIARE, go <a href="https://diare.herokuapp.com/home" target="_blank">here</a>. Fill out your account email address
+                and password, and then click the submit button. If your login was successful, you'll be taken to your Journals page. Otherwise,
+                you'll be shown an error message explaining what went wrong.</p>
+            </div>
 
-  <h4>Creating, Modifiying, and Deleting Journals</h4>
+            <h4 class="h4Styling">Modifying or Deleting Your Account</h4>
+            <p>
+              Once you've logged into your account, click on the Account tab in the site navigation bar. A dropdown menu will appear. Click
+              the Settings option in the dropdown, which will take you to the account Settings page. There are two forms on the settings page:
+              the first allows you to change your email address and the second allows you to change your password.
+            </p>
 
-  <h4>Creating, Modifying, and Deleting Pages</h4>
+            <p>
+              In order to delete your account, scroll down to the bottom of the settings page and click the red Delete Your Account button.
+              A confirm dialog will pop up. If you click the Cancel button in this dialog, no changes will be made. If you click the
+              "Yes, Delete My Account" option, all of your journal data and account data will be completely wiped from our database. We do not
+              keep any of your data when you remove your account.
+            </p>
 
-  <h4>Creating, Modifying, and Deleting Bullets</h4>
+            <h4 class="h4Styling">Creating, Modifiying, and Deleting Journals</h4>
+            <p>
+              Journals can be created, modified, and deleted from the Journals page, which is the first page you see when you log into the site.
+              The My Journals sidebar can be used to create a new journal. Type in a title for your new journal in the Journal Title textfield,
+              and then either hit your Enter key or press the Create Journal button to create the journal.
+            </p>
 
-  <h4>Performing a Search</h4>
+            <p>
+              In order to edit the title of your journal, first locate the journal that you'd like to modify in the My Journals sidebar. Next,
+              click on the button that looks like three vertical dots, which will bring up a menu of journal actions that can be performed.
+              Click on the Edit Title option, which will display a popup form with a text field for entering the new title. Fill this field out,
+              and then click the Submit button to make the change. If you change your mind about editing the journal title, you can hit the Cancel
+              button or the "x" in the top right corner of the dialog to cancel any changes. If you go through with changing your journal title,
+              you will see the journal title automatically change in the My Journals sidebar upon submission.
+            </p>
 
+            <p>
+              If you'd like to delete your entire journal and all of its contents first open the menu for that journal, as discussed
+              in the paragraph above. Click on the Delete option of the menu, which will ask you if you really want to delete the journal.
+              If you click the Cancel button, no changes will be made. If you click "Yes, Delete The Journal," your journal will be completely
+              removed from the database, and you will see the journal disappear from the sidebar.
+            </p>
+
+            <h4 class="h4Styling">Creating, Modifying, and Deleting Pages</h4>
+            <p>
+              To create a page, click on the menu for the journal you want to add it to (the button with the three vertical dots), and
+              then click on the Add Page option. A pop up dialog form will appear, allowing you to enter a page title. Upon clicking the
+              submit button, the page will automatically be created and displayed in your My Journals sidebar.
+            </p>
+
+            <p>
+              You have two options when it comes to editing a page title. You can either click on a page title edit directly in the page
+              or you can edit it via the page's menu in the sidebar. To edit the page title directly from the page, simply click on title
+              text, change it, and then hit enter. To change it from the page's sidebar menu, click the Edit Title option, fill out the form
+              that pops up, and click the Submit button. The page title will immediately update for either workflow you choose.
+            </p>
+
+            <p>
+              To delete a page, click on the page's menu and then select the Delete Page option. A confirmation dialog will appear,
+              and you can either approve the deletion or cancel it. If you approve the deletion, the page will automatically be deleted
+              and it will disappear from your display.
+            </p>
+
+            <h4 class="h4Styling">Creating, Modifying, and Deleting Bullets</h4>
+            <p>
+              To create a new bullet, simply use the toolbar at the top of the page that you're on. You can decide wether to favorite
+              the bullet or not, what type of bullet it will be, and what the text of the bullet will say. When you're done filling out
+              the bullet form, you can either hit the Enter key or click the Add Bullet button. You will immediately see the bullet on the page.
+            </p>
+
+            <p>
+              To edit a bullet, click on the bullet's text. You can then change the bullet content and hit enter to save your changes. Right
+              now you cannot edit the bullet type or whether the bullet is a favorite or not. This will be added in future iterations.
+            </p>
+
+            <p>
+              To delete a bullet, hover over the grey DELETE button to the right of the bullet's text. The DELETE button will turn
+              red. If you then click on the button, the bullet will be removed, without any prior confirmation dialog. We chose not
+              to provide a confirmation dialog for deleting a bullet in order to keep bullet actions a quick as possible.
+            </p>
+
+            <h4 class="h4Styling">Performing a Search</h4>
+            <p>
+              Currently, you can perform a search across all of your bullets, from all journals. The search will take your query
+              parameter and find all of your bullets that contain that parameter. You can access the search feature from the Search tab
+              in the site's navigation bar. The search page will be expanded in the future so that more advanced searches can be performed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

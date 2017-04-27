@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-
+  isLoggedIn() {
+    if (localStorage.getItem('currentUser'))
+      return true;
+    else
+      return false;
+  }
 }

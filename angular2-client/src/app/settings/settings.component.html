@@ -24,6 +24,18 @@
 			<!-- Submit Button *************************************************************************************************-->
 			<button class="btn btn-raised btn-primary" type="submit" [disabled]="!changeEmailForm.valid || !emailsMatch">Update Email</button>
 		</form>
+		<!-- Alert for when some kind of error happened *********************************************************************-->
+		<div *ngIf="emailErrorMessage" class="alert alert-dismissible alert-danger">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>Oh snap! </strong> <span>{{ emailErrorMessage }}</span>
+		</div>
+
+		<!-- Alert for when updating email succeeded ******************************************************************************-->
+		<div *ngIf="emailSuccessMessage" class="alert alert-dismissible alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>Aw yeah! </strong> <span>{{ emailSuccessMessage }}</span>
+		</div>
+
 	</div>
 	<div class="section">
 		<h3>Change Password</h3>
@@ -55,6 +67,17 @@
 			<!-- Submit Button ************************************************************************************************-->
 			<button class="btn btn-raised btn-primary" type="submit" [disabled]="!changePswdForm.valid || !passwordsMatch">Update Password</button>
 		</form>
+		<!-- Alert for when some kind of error happened *********************************************************************-->
+		<div *ngIf="passwordErrorMessage" class="alert alert-dismissible alert-danger">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>Oh snap! </strong> <span>{{ passwordErrorMessage }}</span>
+		</div>
+		<!-- Alert for when updating password succeeded **********************************************************************-->
+		<div *ngIf="passwordSuccessMessage" class="alert alert-dismissible alert-success">
+  		<button type="button" class="close" data-dismiss="alert">×</button>
+  		<strong>Aw yeah! </strong> <span>{{ passwordSuccessMessage }}</span>
+		</div>
+
 	</div>
 	<div class="section">
 		<h3 style="color: #f44336">Delete Account</h3>

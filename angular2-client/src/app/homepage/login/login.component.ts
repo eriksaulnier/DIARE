@@ -16,6 +16,7 @@ const emailValidator = Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\
 
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  public loginErrorMessage: string;
   //------------------------------------------------------------------------------------------------------------------------------
   constructor(
     private fb: FormBuilder,
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
   // Submit the login data. Either take user to journals page on success, or handle error
 
   onSubmit() {
+    this.loginErrorMessage = "";
     let email: string = this.loginForm.value.email;
     email = email.toLowerCase();
 
@@ -62,8 +64,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/journals']);
         },
         error => {
-          // On error, print to console
-          console.log("Login failed:  " + error._body);
+          // On error, output alert
+          this.loginErrorMessage = error._body;
         });
   }
   //------------------------------------------------------------------------------------------------------------------------------

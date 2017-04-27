@@ -35,6 +35,13 @@
               <button class="btn btn-raised btn-primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
             </div>
           </form>
+
+          <!-- Alert for when some kind of error happened *********************************************************************-->
+          <div *ngIf="loginErrorMessage" class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Oh snap!</strong> <span>{{ loginErrorMessage }}</span>
+          </div>
+
         </div>
 
         <!-- New User Footer **********************************************************************************************-->
