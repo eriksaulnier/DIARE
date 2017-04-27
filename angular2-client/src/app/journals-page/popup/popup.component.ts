@@ -21,6 +21,7 @@ export class PopupComponent {
   constructor(
 		private popupService: PopupService
 	) {
+		// Subscribe to the popupService emitter so that the popup can be triggered
 		this.popupService.emitter.subscribe(
 			content => {
 				this.content = content;

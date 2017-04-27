@@ -77,13 +77,26 @@
 :host .main {
 	height: 100%;
 	padding: 10px;
-	background-color: #eff0f4;
 	overflow-x: hidden;
 	overflow-y: auto;
+	background-color: #eff0f4;
+}
+
+/* Extra large screens */
+@media only screen and (min-width : 1199px) {
+	:host .main {
+		padding-top: 30px;
+		padding-bottom: 0;
+		padding-right: 15%;
+	}
 }
 
 :host .main .main-container {
 	min-height: 100%;
+	max-width: 800px;
 	padding: 15px;
+	margin: 0 auto;
 	background-color: #ffffff;
+	-webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }

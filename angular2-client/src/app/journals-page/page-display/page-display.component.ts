@@ -29,7 +29,8 @@ export class PageDisplayComponent implements OnInit {
     this.pagesService.emitter.subscribe(
       message => { this.pageMessageRecieved(message) }
     )
-   }
+  }
+
 
 	// ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
@@ -37,8 +38,9 @@ export class PageDisplayComponent implements OnInit {
 
   }
 
+
 	// ---------------------------------------------------------------------------
-  // Some existence function for use outside component
+  // Returns true or false depending on if there is currently a page selected
   pageExists() {
     if (this.currentPage) {
       return true;
@@ -47,6 +49,9 @@ export class PageDisplayComponent implements OnInit {
     }
   }
 
+
+	// ---------------------------------------------------------------------------
+	// Returns true or false depending on if there are bullets in the current page
   bulletsExist() {
     if (this.currentPage && this.currentPage.bullets && this.currentPage.bullets.length > 0) {
       return true;
@@ -55,65 +60,42 @@ export class PageDisplayComponent implements OnInit {
     }
   }
 
-  	// ---------------------------------------------------------------------------
-  // message cases from services emissions
 
-	private journalMessageRecieved(message: string) {
-		switch (message) {
-			case 'updateJournal': {
-				// Update local currentJournal object
-				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
-
-				// If this journal has more than 1 page set the current page to the first one
-				this.pagesService.selectPage();
-
-				break;
-			}
-		}
-	}
-
-  private pageMessageRecieved(message: string) {
-		switch (message) {
-			case 'updatePage': {
-				// Update local currentJournal object
-				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
-
-				break;
-			}
-		}
-  }
-
-  	// ---------------------------------------------------------------------------
-  	// Need to be able to toggle between editing and non editing
+	// ---------------------------------------------------------------------------
+	// Toggles between editable and non-editable state of the page title
 	toggleEditable(){
 		this.editable = !this.editable;
 	}
-	// ---------------------------------------------------------------------------
-  	// allows us to persist user's updated page title input
-	onEnter(value: string){	
 
+
+	// ---------------------------------------------------------------------------
+  // Allows us to persist user's updated page title input
+	onEnter(value: string){
 		this.pagesService.update(this.currentJournal._id, this.currentPage._id, {"title": value})
-		.subscribe(
-			 data => {
+			.subscribe(
+				data => {
 					console.log("Successfully updated page " + this.currentPage._id);
 
 					// Update the current page data
 					this.pagesService.updatePage();
 
-					this.journalsService.getJournal(this.currentJournal._id).subscribe(
-					data => {
-						console.log("Successfully set currentJournal to " + this.currentJournal._id);
-					},
-					error => {
-						console.log("Setting currentJournal failed: " + error.body);
-					})
-	        },
-	        error => {
-						console.log("Deleting page failed:  " + error._body);
-	        });
-	this.toggleEditable();
-	}
+					// Use the journals service to set refresh the journal list
+					this.journalsService.getJournal(this.currentJournal._id)
+						.subscribe(
+							data => {
+								console.log("Successfully set currentJournal to " + this.currentJournal._id);
+							},
+							error => {
+								console.log("Setting currentJournal failed: " + error.body);
+							})
+	       },
+        error => {
+					console.log("Deleting page failed:  " + error._body);
+        });
 
+		// Toggles out of the editable state
+		this.toggleEditable();
+	}
 
 
 	// ---------------------------------------------------------------------------
@@ -128,30 +110,63 @@ export class PageDisplayComponent implements OnInit {
 		);
 	}
 
-// ---------------------------------------------------------------------------
-	  // Deletes this page
-	private deletePage() {
+
+	// ---------------------------------------------------------------------------
+	// Deletes this page
+	deletePage() {
 		// Delete this page through the pages service
-				
     this.pagesService.delete(this.currentJournal._id, this.currentPage._id)
       .subscribe(
         data => {
-				console.log("Successfully deleted page " + this.currentPage._id);
+					console.log("Successfully deleted page " + this.currentPage._id);
 
-			// Update the current page data
-				this.pagesService.updatePage();
+					// Update the current page data
+					this.pagesService.updatePage();
 
-				this.journalsService.getJournal(this.currentJournal._id).subscribe(
-				data => {
-					console.log("Successfully set currentJournal to " + this.currentJournal._id);
-				},
-				error => {
-					console.log("Setting currentJournal failed: " + error.body);
-				})
+					this.journalsService.getJournal(this.currentJournal._id)
+						.subscribe(
+							data => {
+								console.log("Successfully set currentJournal to " + this.currentJournal._id);
+							},
+							error => {
+								console.log("Setting currentJournal failed: " + error.body);
+							})
         },
         error => {
 					console.log("Deleting page failed:  " + error._body);
         });
   }
 
+
+	// ---------------------------------------------------------------------------
+	// Handles recieving and routing messages from the journalsService
+	private journalMessageRecieved(message: string) {
+		switch (message) {
+			// Called when the current journal is updated
+			case 'updateJournal': {
+				// Update local currentJournal object
+				this.currentJournal = JSON.parse(localStorage.getItem('currentJournal'));
+
+				// If this journal has more than 1 page set the current page to the first one
+				this.pagesService.selectPage();
+
+				break;
+			}
+		}
+	}
+
+
+	// ---------------------------------------------------------------------------
+	// Handles recieving and routing messages from the pagessService
+	private pageMessageRecieved(message: string) {
+		switch (message) {
+			// Called weh nthe current page is updated
+			case 'updatePage': {
+				// Update local currentJournal object
+				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
+
+				break;
+			}
+		}
+	}
 }

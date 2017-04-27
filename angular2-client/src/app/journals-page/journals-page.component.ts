@@ -45,6 +45,7 @@ export class JournalsPageComponent implements OnInit {
 		)
 	}
 
+
 	// ---------------------------------------------------------------------------
   // Runs functions as soon as the page starts to load. but after the constructor
   ngOnInit() {
@@ -54,6 +55,7 @@ export class JournalsPageComponent implements OnInit {
 		// Fetch the last modified journal
 		this.getLastModified();
   }
+
 
 	// ---------------------------------------------------------------------------
   // Gets all of the journals tied to a specified userID, if no id is specified
@@ -68,6 +70,7 @@ export class JournalsPageComponent implements OnInit {
           console.log("Getting journals failed:  " + error._body);
         });
   }
+
 
 	// ---------------------------------------------------------------------------
   // Get the journal that was last modified by the user
@@ -94,6 +97,7 @@ export class JournalsPageComponent implements OnInit {
 		this.sidebar.currentIcon = this.sidebar.icons[this.sidebar.state];
 	}
 
+
 	// ---------------------------------------------------------------------------
 	// Triggered on resize event from window, used for checking if sidebar should
 	// be toggle-able or not
@@ -104,6 +108,7 @@ export class JournalsPageComponent implements OnInit {
 			this.sidebar.currentIcon = this.sidebar.icons['out'];
 		}
 	}
+
 
 	// ---------------------------------------------------------------------------
 	// Handles recieving and routing messages from the journalsService
@@ -126,6 +131,7 @@ export class JournalsPageComponent implements OnInit {
 			}
 		}
 	}
+
 
   // ---------------------------------------------------------------------------
   currentJournalExists() {
