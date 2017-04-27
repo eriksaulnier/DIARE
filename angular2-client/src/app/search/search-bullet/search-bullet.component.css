@@ -1,7 +1,9 @@
 :host .list-group-item {
 	position: relative;
 	padding: 0;
+	margin-bottom: 10px;
 	min-height: 32px;
+	overflow: visible;
 }
 
 :host p {
@@ -46,7 +48,18 @@
 
 :host .content .text {
 	display: inline-block;
-	min-height: 32px;
 	margin-left: 4px;
 	margin-top: 5px;
+}
+
+:host .content .journalLocation {
+	margin-left: 4px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+:host .content .journalLocation i {
+	vertical-align: middle;
+	font-size: 15px;
+	color: #636363;
 }

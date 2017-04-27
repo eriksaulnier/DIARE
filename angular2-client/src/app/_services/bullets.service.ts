@@ -64,10 +64,13 @@ export class BulletsService {
         if (data && data.length > 0) {
           // store array of bullet objects in local storage
           localStorage.setItem('searchResults', JSON.stringify(data));
+        } else {
+					// clear search results
+          localStorage.setItem('searchResults', null);
+				}
 
-          // emit update message
-          this.emitterSource.next('updateSearchResults');
-        }
+				// emit update message
+				this.emitterSource.next('updateSearchResults');
       });
   }
 

@@ -10,6 +10,7 @@ import { Bullet } from '../_models/index';
 })
 export class SearchComponent implements OnInit {
 	private userid: string;
+	searchTerms: string;
 	searchResults: Bullet[];
 
   constructor(
@@ -28,16 +29,22 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+
+	// ---------------------------------------------------------------------------
+	// Searches bullets for the given keywords
 	search(keywordInput: HTMLInputElement) {
 		let keywords = keywordInput.value.replace(/\s+$/, '');
 		if (keywords == '')
 			return;
 
+		// Use bullets service to search bullets for keywords
 		let query = {"content": keywords};
-
 		this.bulletsService.search(this.userid, query)
 			.subscribe(
 				data => {
+					// Save search terms on local variable
+					this.searchTerms = keywords;
+					
 					console.log("Successfully searched bullets for '" + keywords + "'");
 				},
 				error => {
@@ -45,9 +52,13 @@ export class SearchComponent implements OnInit {
 				});
 	}
 
+
+	// ---------------------------------------------------------------------------
+	// Returns true or false depending on if there are search results
 	hasSearchResults() {
 		return (this.searchResults != null && this.searchResults.length > 0);
 	}
+
 
 	// ---------------------------------------------------------------------------
 	// Handles recieving and routing messages from the bulletsService
@@ -55,7 +66,6 @@ export class SearchComponent implements OnInit {
 		switch (message) {
 			case 'updateSearchResults': {
 				this.searchResults = JSON.parse(localStorage.getItem('searchResults'));
-				console.log(this.searchResults);
 				break;
 			}
 		}

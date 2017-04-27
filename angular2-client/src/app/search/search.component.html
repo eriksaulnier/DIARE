@@ -12,7 +12,9 @@
 		</div>
 
 		<div *ngIf="!hasSearchResults()">
-			<p>No results found</p>
+			<div *ngIf="searchTerms">
+				<p>No results found for "{{searchTerms}}"</p>
+			</div>
 		</div>
 
 		<div class="list-group" *ngIf="hasSearchResults()">

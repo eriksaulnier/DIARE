@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BulletsService } from '../../_services/index';
-import { Bullet } from '../../_models/index';
 
 @Component({
   selector: 'search-bullet',
@@ -8,7 +7,7 @@ import { Bullet } from '../../_models/index';
   styleUrls: ['./search-bullet.component.css']
 })
 export class SearchBulletComponent implements OnInit {
-	@Input() bullet: Bullet;
+	@Input() bullet: any;
 	editable: boolean;
 	symbol: string;
 
@@ -34,5 +33,4 @@ export class SearchBulletComponent implements OnInit {
 			}
 		}
 	}
-
 }
