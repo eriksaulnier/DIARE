@@ -36,3 +36,9 @@
 :host .list-group {
 	margin: 0;
 }
+
+:host .delete{
+ color: #f03e3e;
+  font-weight: 500;
+
+};

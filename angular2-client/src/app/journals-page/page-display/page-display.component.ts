@@ -108,5 +108,29 @@ export class PageDisplayComponent implements OnInit {
 	this.toggleEditable();
 	}
 
+	  // Deletes this page
+	private deletePage() {
+		// Delete this page through the pages service
+				
+    this.pagesService.delete(this.currentJournal._id, this.currentPage._id)
+      .subscribe(
+        data => {
+				console.log("Successfully deleted page " + this.currentPage._id);
+
+			// Update the current page data
+				this.pagesService.updatePage();
+
+				this.journalsService.getJournal(this.currentJournal._id).subscribe(
+				data => {
+					console.log("Successfully set currentJournal to " + this.currentJournal._id);
+				},
+				error => {
+					console.log("Setting currentJournal failed: " + error.body);
+				})
+        },
+        error => {
+					console.log("Deleting page failed:  " + error._body);
+        });
+  }
 
 }
