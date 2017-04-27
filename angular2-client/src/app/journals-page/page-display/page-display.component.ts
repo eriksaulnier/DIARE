@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PagesService, JournalsService } from '../../_services/index';
+import { PagesService, JournalsService, PopupService  } from '../../_services/index';
 import { Page, Journal } from '../../_models/index';
 
 @Component({
@@ -14,7 +14,8 @@ export class PageDisplayComponent implements OnInit {
 
   constructor(
 	private pagesService: PagesService,
-    private journalsService: JournalsService
+    private journalsService: JournalsService,
+    private popupService: PopupService
   ) {
 
   	this.editable = false;
@@ -113,6 +114,21 @@ export class PageDisplayComponent implements OnInit {
 	this.toggleEditable();
 	}
 
+
+
+	// ---------------------------------------------------------------------------
+	// Spawns a popup and upon confirmation deletes this page
+	confirmDeletePage() {
+		this.popupService.createDialog(
+			"Confirm Delete",
+			"Are you sure you want to delete <b>" + this.currentPage.title + "</b>?",
+			"Cancel",
+			"Yes, delete the page",
+			this.deletePage.bind(this)
+		);
+	}
+
+// ---------------------------------------------------------------------------
 	  // Deletes this page
 	private deletePage() {
 		// Delete this page through the pages service
