@@ -5,8 +5,8 @@ Heroku URL: https://diare.herokuapp.com/
 BugTrackingURL: https://github.com/SirAlternate/DIARE/issues
 
 
-### Project Description:
-DIARE, *or Digital Interpretation of Analog Rapid-logging Entries*, is a digital implementation of the Bullet Journal productivity framework designed by Ryder Carroll. For a more detailed description of the project please refer to the proposal document in this repro.
+### Project Overview:
+DIARE, *or Digital Interpretation of Analog Rapid-logging Entries*, is a digital implementation of the Bullet Journal productivity framework designed by Ryder Carroll. For a more detailed description of the project please refer to the Project Summary below.
 
 
 ### Team Members:
@@ -15,3 +15,21 @@ Natasha Ragubir,
 Erica Braunschweig,
 Solomon Mori,
 Graigor Pierre-Noel
+
+### Project Summary: 
+For this project our team was inspired by the productivity framework Bullet Journal. Bullet Journal is an analog system (a physical notebook) designed to be a to-do list, diary, notebook, and sketchbook. However, this system does not efficiently utilize time, materials, or space. It costs money to purchase materials, requires time to set up the journal, is limited to the size of the journal, and can be a hassle to carry around. We believe a digital interpretation of this analog system would create a powerful online tool.
+
+Our solution was to create a well-designed, production-ready web application based on the Bullet Journal’s analog system. Our goal was to allow users to have enhanced features to boost their productivity. These include: search functionality, ability to prioritize tasks and notes, easily create and edit Journals, Pages, and Bullets, as well as have up to data content. Along with these features we outlined four non-functional requirements: usability, scalability, performance, and a mobile-friendly design. In order to execute our solution well, we had to develop a high performance application that efficiently accommodates different workflows, supports a large number of simultaneous users, and is highly usable on mobile devices. Overall, we wanted to preserve the main features of Bullet Journal, while modernizing the system. Our modified features and design choices reflect these decisions.
+
+We used the Agile methodology to complete this project. Our sprints were one week long. We had meetings weekly on Wednesdays to prioritize and assign task, and testing was conducted as new features were added. Additionally, we effectively used GitHub issues for tracking and collaboration. Utilizing both Agile and Github allowed us to work well together as a team, and as a result our project was developed smoothly. 
+
+### Future Improvements:
+While we are very happy with the way the application turned out, we also realize that the site is not perfect. There are several improvements that we would like to make to DIARE in the future:
+
+- Enhanced Search Capabilities: Right now, a user can search through all of their bullets (across all journals) to find bullets that contain a specified query string. In the future, we’d like to add more options to the search functionality. For example, a user would be able to search on bullets of a certain type, or only from specific journals.
+
+- Smart Journal Pages: Right now, the only pages that exist in a journal are the ones that a user manually creates. In the future, we’d like to establish some default, auto-generated pages for the user. For example, there would be an Events page that displays all event bullets for a given journal, and a Favorites page which would display all starred bullets from a journal.
+
+- Customizable Hotkey Shortcuts:  Our site is meant to be as easy and efficient as possible for people to use, and some users would have a more efficient site experience if they were able to customize hotkeys. We believe that hotkeys would play to the needs of site superusers.
+
+This list of improvements is not all encompassing, as there is always room for new ideas and improvements.
