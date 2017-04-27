@@ -17,7 +17,8 @@
 	font-size: 30px;
 	margin-top: -2px;
 	margin-bottom: 5px;
-	background-color: #e2e2e2;
+	background-color: #eeeeee;
+	border-radius: 3px;
 }
 
 :host .page-header .divider {

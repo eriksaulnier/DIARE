@@ -80,7 +80,8 @@
 	margin: 0;
 	margin-bottom: 5px;
 	padding: 0 5px;
-	background-color: #e2e2e2;
+	background-color: #eeeeee;
+	border-radius: 3px;
 }
 /*
 :host .content .edit .delete {
