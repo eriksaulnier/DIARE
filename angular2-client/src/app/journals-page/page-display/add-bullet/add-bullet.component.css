@@ -1,6 +1,5 @@
 :host .form-inline {
 	max-width: 750px;
-	min-height: 38px;
 	margin: 10px 0;
 }
 
@@ -10,7 +9,6 @@
 :host #bulletType,
 :host #bulletText {
 	display: inline-block;
-	float: left;
 	margin: 0;
 	padding: 0;
 	vertical-align: middle;

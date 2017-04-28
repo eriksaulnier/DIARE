@@ -16,3 +16,9 @@
 		</page-bullet>
 	</div>
 </div>
+
+<div class="content" *ngIf="!pageExists()">
+	<header class="page-header">
+		<p>This journal currently has no pages</p>
+	</header>
+</div>
