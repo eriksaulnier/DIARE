@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JournalsService } from '../../_services/index';
+import { JournalsService, PagesService } from '../../_services/index';
 
 @Component({
   selector: 'add-journal',
@@ -10,7 +10,8 @@ export class AddJournalComponent {
 	private userid: string;
 
   constructor(
-    private journalsService: JournalsService,
+		private journalsService: JournalsService,
+    private pagesService: PagesService,
   ) {
 		// Fetch the current userid and update variable
 		let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -29,13 +30,34 @@ export class AddJournalComponent {
     this.journalsService.create(this.userid, value)
       .subscribe(
         data => {
-					console.log("Successfully created new journal " + data.id);
+					let journalId = data.id;
+
+					console.log("Successfully created new journal " + journalId);
 
 					// Reset title input field
 					titleInput.value = null;
 
-          // update journals in local storage
-          this.getJournals();
+					// update journals in local storage
+					this.getJournals();
+
+					// Create blank page by default
+					this.pagesService.create(journalId, "New Page")
+						.subscribe(
+							data => {
+								console.log("Successfully added new page to " + journalId);
+
+								// Fetch the journal we just created
+								this.journalsService.getJournal(journalId)
+								.subscribe(
+									data => {
+									},
+									error => {
+										console.log("Failed fetching journal:  " + error._body);
+									});
+							},
+							error => {
+								console.log("Adding page to journal failed:  " + error._body);
+							});
         },
         error => {
           console.log("Adding journal failed:  " + error._body);

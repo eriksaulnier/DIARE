@@ -57,10 +57,13 @@ export class JournalsService {
 				if (data && data._id) {
 					// Store journal object in local storage
 					localStorage.setItem('currentJournal', JSON.stringify(data));
-
-					// Emit message to update
-					this.emitterSource.next('updateJournal');
+				} else {
+					// store journal object in local storage
+					localStorage.removeItem('currentJournal');
 				}
+
+				// emit update message
+				this.emitterSource.next('updateJournal');
 			});
 	}
 
@@ -73,10 +76,13 @@ export class JournalsService {
 				if (data && data._id) {
 					// store journal object in local storage
 					localStorage.setItem('currentJournal', JSON.stringify(data));
-
-					// emit update message
-					this.emitterSource.next('updateJournal');
+				} else {
+					// store journal object in local storage
+					localStorage.removeItem('currentJournal');
 				}
+
+				// emit update message
+				this.emitterSource.next('updateJournal');
 			});
 	}
 

@@ -160,7 +160,7 @@ export class PageDisplayComponent implements OnInit {
 	// Handles recieving and routing messages from the pagessService
 	private pageMessageRecieved(message: string) {
 		switch (message) {
-			// Called weh nthe current page is updated
+			// Called when the current page is updated
 			case 'updatePage': {
 				// Update local currentJournal object
 				this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
