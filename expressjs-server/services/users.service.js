@@ -90,14 +90,26 @@ function update(userid, data) {
 
   //Update user's email address
   if (data.email) {
-    db.users.update(
-      { _id: ObjectId(userid)},
-      { $set: {email: data.email} },
-      function (err, doc) {
+
+    // Check to make that account with provided email address is not already in use
+    db.users.findOne({ email: data.email }, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
-        deferred.resolve({message: 'Email address successfully updated.'});
-      }
-    );
+
+        if (user) {
+          // Email is already in use, return error message
+          deferred.reject('Email "' + data.email + '" is already in use');
+        } else {
+          // Email is not already in use, update the email
+          db.users.update(
+            { _id: ObjectId(userid)},
+            { $set: {email: data.email} },
+            function (err, doc) {
+              if (err) deferred.reject(err.name + ': ' + err.message);
+              deferred.resolve({message: 'Email address successfully updated.'});
+            }
+          );
+        }
+    });
   }
 
   //Update user's password
