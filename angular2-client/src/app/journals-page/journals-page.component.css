@@ -39,6 +39,7 @@
 @media (max-width: 991px) {
 	:host .sidebar {
 		width: 280px;
+		z-index: 1;
 	}
 
 	:host .sidebar .sidebar-container {
@@ -93,7 +94,7 @@
 @media only screen and (min-width : 1199px) {
 	:host .main {
 		padding-top: 30px;
-		padding-right: 15%;
+		padding-right: 10%;
 	}
 }
 
@@ -101,8 +102,13 @@
 @media (max-width: 767px) {
 	:host .main {
 		position: absolute;
+		padding-bottom: 10px;
 		width: 100%;
-		z-index: -1;
+	}
+
+	:host .main:after {
+		content: '';
+		clear: both;
 	}
 }
 

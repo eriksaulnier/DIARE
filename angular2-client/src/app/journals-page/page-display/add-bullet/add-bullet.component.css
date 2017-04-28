@@ -1,6 +1,7 @@
 :host .form-inline {
 	max-width: 750px;
 	margin: 10px 0;
+	overflow: hidden;
 }
 
 :host #isStarred,
